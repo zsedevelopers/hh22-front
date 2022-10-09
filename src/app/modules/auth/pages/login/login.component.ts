@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import LoginRequest from 'src/app/core/models/login-request';
 import { AuthService } from 'src/app/core/services/auth.service';
 @Component({
   selector: 'app-login',
@@ -17,10 +18,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onLoginFormSubmit() {
-    if(this.loginForm.invalid){
+    if (this.loginForm.invalid) {
       return;
     }
 
-    this.authService.login(this.loginForm.value.pesel!, this.loginForm.value.password!)
+    const requestData: LoginRequest = {
+      PESEL: this.loginForm.value.pesel!,
+      password: this.loginForm.value.password!,
+    };
+
+    this.authService.login(requestData);
   }
 }
