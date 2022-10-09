@@ -1,0 +1,9 @@
+<p>login works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
+    <input type="text" placeholder="pesel" formControlName="pesel">
+    <input type="password" placeholder="haslo" formControlName="password">
+    <input type="submit" value="prześlij">
+</form>
+
+<h3>Don't have an account?</h3>
+<a routerLink="/auth/register">Register!</a>
