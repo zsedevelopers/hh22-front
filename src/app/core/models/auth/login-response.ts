@@ -1,4 +1,4 @@
-import UserDto from "./user-dto";
+import UserDto from "../common/user-dto";
 
 export default interface LoginResponse{
     access_token:string;
