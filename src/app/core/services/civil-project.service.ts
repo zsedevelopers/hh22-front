@@ -10,4 +10,16 @@ export class CivilProjectService {
   addCivilProject(data: AddCivilProjectRequest) {
     return this.apiService.addCivilProject(data);
   }
+
+  getCivilProjectsByCity(city: string) {
+    return this.apiService.getCivilProjectsByCity(city);
+  }
+
+  getCivilProjectByTitle(title: string) {
+    return this.apiService.getCivilProjectByTitle(title);
+  }
+
+  likeCivilProject(title: string) {
+    return this.apiService.likeCivilProject(title);
+  }
 }
