@@ -34,7 +34,7 @@ export class RegisterComponent implements OnInit {
       surname: this.registerForm.value.surname!,
       email: this.registerForm.value.email!,
       city: this.registerForm.value.city!,
-      PESEL: this.registerForm.value.pesel!,
+      pesel: this.registerForm.value.pesel!,
       phoneNumber: parseInt(this.registerForm.value.phoneNumber!),
       password: this.registerForm.value.password!,
     };

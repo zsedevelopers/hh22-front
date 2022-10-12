@@ -3,7 +3,7 @@ export default interface RegisterRequest {
   surname: string;
   email: string;
   city: string;
-  PESEL: string;
+  pesel: string;
   phoneNumber: number;
   password: string;
 }

@@ -13,10 +13,12 @@ export class ApiService {
 
   //#region Auth
   login(data: LoginRequest) {
+    console.log(data)
     return this.http.post<LoginResponse>(`${this.baseUrl}/api/v1/user`, data);
   }
 
   register(data: RegisterRequest) {
+    console.log(data)
     return this.http.post(`${this.baseUrl}/api/v1/user/new`, data);
   }
 

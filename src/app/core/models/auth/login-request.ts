@@ -1,4 +1,4 @@
 export default interface LoginRequest{
-    PESEL:string;
+    pesel:string;
     password:string;
 }

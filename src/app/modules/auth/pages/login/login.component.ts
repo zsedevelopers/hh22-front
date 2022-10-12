@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     }
 
     const requestData: LoginRequest = {
-      PESEL: this.loginForm.value.pesel!,
+      pesel: this.loginForm.value.pesel!,
       password: this.loginForm.value.password!,
     };
 
