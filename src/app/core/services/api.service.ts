@@ -13,36 +13,51 @@ export class ApiService {
 
   //#region Auth
   login(data: LoginRequest) {
-    console.log(data)
     return this.http.post<LoginResponse>(`${this.baseUrl}/api/v1/user`, data);
   }
 
   register(data: RegisterRequest) {
-    console.log(data)
     return this.http.post(`${this.baseUrl}/api/v1/user/new`, data);
   }
 
-  getRefreshToken(){
+  getRefreshToken() {
     return this.http.get(`${this.baseUrl}/api/user/token/refresh`);
   }
   //#endregion
 
-  addCivilProject(data: AddCivilProjectRequest) {
-    return this.http.post(`${this.baseUrl}/api/v1/civilproject`, data);
+  addCivilProject(data: AddCivilProjectRequest, token: string) {
+    return this.http.post(`${this.baseUrl}/api/v1/civilproject`, data, {
+      headers: {
+        Authorization: token,
+      },
+    });
   }
 
-  getCivilProjectsByCity(city: string) {
-    return this.http.get(`${this.baseUrl}/api/v1/civilproject/city/${city}`);
+  getCivilProjectsByCity(city: string, token: string) {
+    return this.http.get(`${this.baseUrl}/api/v1/civilproject/city/${city}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
   }
 
-  getCivilProjectByTitle(title: string) {
-    return this.http.get(`${this.baseUrl}/api/v1/civilproject/title/${title}`);
+  getCivilProjectByTitle(title: string, token: string) {
+    return this.http.get(`${this.baseUrl}/api/v1/civilproject/title/${title}`, {
+      headers: {
+        Authorization: token,
+      },
+    });
   }
 
-  likeCivilProject(title: string) {
+  likeCivilProject(title: string, token: string) {
     return this.http.post(
       `${this.baseUrl}/api/v1/civilproject/favourite/title/${title}`,
-      {}
+      {},
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
     );
   }
 }
