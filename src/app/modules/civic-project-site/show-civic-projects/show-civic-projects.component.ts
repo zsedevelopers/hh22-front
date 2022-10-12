@@ -14,7 +14,7 @@ export class ShowCivicProjectsComponent implements OnInit {
   city:string = 'olsztyn'
 
   getProjectsByCity(){
-    console.log(this.data.getCivilProjectsByCity(this.city).subscribe(x=>{console.log(x.city)}))
+    this.data.getCivilProjectsByCity(this.city).subscribe(x=>{console.log(x.city)})
   }
 
   ngOnInit(): void {

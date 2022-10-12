@@ -15,6 +15,7 @@ export class CivilProjectService {
   ) {}
 
   addCivilProject(data: AddCivilProjectRequest):Observable<Object> {
+    console.log('nietoperz')
     return this.apiService.addCivilProject(data, this.authService.getJwt()!);
   }
 
