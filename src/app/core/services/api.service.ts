@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import LoginRequest from '../models/auth/login-request';
 import RegisterRequest from '../models/auth/register-request';
 import LoginResponse from '../models/auth/login-response';
 import AddCivilProjectRequest from '../models/civil projects/add-civil-project-request';
+import {Observable} from "rxjs";
+import CivilProjectDto from "../models/civil projects/civil-project-dto";
 @Injectable({
   providedIn: 'root',
 })
@@ -33,8 +35,8 @@ export class ApiService {
     });
   }
 
-  getCivilProjectsByCity(city: string, token: string) {
-    return this.http.get(`${this.baseUrl}/api/v1/civilproject/city/${city}`, {
+  getCivilProjectsByCity(city: string, token: string):Observable<CivilProjectDto> {
+    return this.http.get<CivilProjectDto>(`${this.baseUrl}/api/v1/civilproject/city/${city}`, {
       headers: {
         Authorization: token,
       },

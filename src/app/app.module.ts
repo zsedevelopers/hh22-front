@@ -7,18 +7,20 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HomepageModule} from "./modules/homepage/homepage.module";
+import {CivicProjectSiteModule} from "./modules/civic-project-site/civic-project-site.module";
 
 @NgModule({
   declarations: [
     AppComponent
-  ],
+   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AuthModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    HomepageModule
+    HomepageModule,
+    CivicProjectSiteModule
   ],
   providers: [],
   bootstrap: [AppComponent]
