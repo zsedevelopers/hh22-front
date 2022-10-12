@@ -1,11 +1,10 @@
 <mat-grid-list cols="100" gutterSize="0" [rowHeight]="height">
-  <mat-grid-tile rowspan="1" colspan="10"></mat-grid-tile>
-  <mat-grid-tile rowspan="1" colspan="10"><button mat-flat-button>Kontakt</button></mat-grid-tile>
-  <mat-grid-tile rowspan="1" colspan="5"></mat-grid-tile>
+  <mat-grid-tile rowspan="1" colspan="25"></mat-grid-tile>
+<!--  <mat-grid-tile rowspan="1" colspan="10"><button class="contact" mat-flat-button >Kontakt</button></mat-grid-tile>-->
   <mat-grid-tile rowspan="1" colspan="25" [style.color]="'white'" [style.font-size]="'60px'">ProjectName</mat-grid-tile>
   <mat-grid-tile rowspan="1" colspan="20"></mat-grid-tile><!--logo-->
-  <mat-grid-tile rowspan="1" colspan="10"><button mat-flat-button routerLink="auth/login">Zaloguj się</button></mat-grid-tile>
+  <mat-grid-tile rowspan="1" colspan="10"><button class="login" mat-flat-button routerLink="auth/login">Zaloguj się</button></mat-grid-tile>
   <mat-grid-tile rowspan="1" colspan="3"></mat-grid-tile>
-  <mat-grid-tile rowspan="1" colspan="10"><button [style.font-size]="'25px'" [style.background-color]="'#a61212'" mat-flat-button routerLink="auth/register">Zarejestruj sie</button></mat-grid-tile>
+  <mat-grid-tile rowspan="1" colspan="10"><button  class="register" mat-flat-button routerLink="auth/register">Zarejestruj sie</button></mat-grid-tile>
   <mat-grid-tile rowspan="1" colspan="5"></mat-grid-tile>
 </mat-grid-list>
