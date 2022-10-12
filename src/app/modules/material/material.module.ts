@@ -7,6 +7,6 @@ import {MatButtonModule} from "@angular/material/button";
 @NgModule({
   declarations: [],
   exports:[MatGridListModule,
-            MatButtonModule,]
+            MatButtonModule]
 })
 export class MaterialModule { }
