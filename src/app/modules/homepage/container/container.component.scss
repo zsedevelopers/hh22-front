@@ -1,0 +1,27 @@
+:host{
+  background-color: #212020;
+  display: block;
+}
+.bright{
+  background-color:#278FAF;
+  height:100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+}
+.dark{
+  background-color:#1E7D9B;
+  height:100%;
+  width: 100%;
+  -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 1);
+  -moz-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 1);
+  box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+}
