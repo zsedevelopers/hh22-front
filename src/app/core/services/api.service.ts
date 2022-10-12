@@ -17,11 +17,11 @@ export class ApiService {
   }
 
   register(data: RegisterRequest) {
-    return this.http.post(`${this.baseUrl}/api/user/new`, data);
+    return this.http.post(`${this.baseUrl}/api/v1/user/new`, data);
   }
 
   getRefreshToken(){
-    return this.http.get(`${this.baseUrl}/api/v1/user/token/refresh`);
+    return this.http.get(`${this.baseUrl}/api/user/token/refresh`);
   }
   //#endregion
 
