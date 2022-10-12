@@ -21,7 +21,7 @@ export class ApiService {
   }
 
   getRefreshToken(){
-    return this.http.get(`${this.baseUrl}/api/user/token/refresh`);
+    return this.http.get(`${this.baseUrl}/api/v1/user/token/refresh`);
   }
   //#endregion
 
