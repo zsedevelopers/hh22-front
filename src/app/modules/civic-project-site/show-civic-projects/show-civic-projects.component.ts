@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import CivilProjectDto from '../../../core/models/civil projects/civil-project-dto';
 import { CivilProjectService } from '../../../core/services/civil-project.service';
 
@@ -8,16 +9,27 @@ import { CivilProjectService } from '../../../core/services/civil-project.servic
   styleUrls: ['./show-civic-projects.component.scss'],
 })
 export class ShowCivicProjectsComponent implements OnInit {
-  constructor(private data: CivilProjectService) {}
+  constructor(
+    private civilProjectService: CivilProjectService,
+    fb: FormBuilder
+  ) {}
 
-  city: string = 'olsztyn';
+  selectedCity: string = '';
+  cities: string[] = ['OLSZTYN', 'RADOM', 'SOSNOWIEC'];
   projects: CivilProjectDto[] = [];
 
-  getProjectsByCity() {
-    this.data
-      .getCivilProjectsByCity(this.city)
+  onCitySelectChange() {
+    this.loadProjects(this.selectedCity)
+  }
+
+  loadProjects(city: string) {
+    this.civilProjectService
+      .getCivilProjectsByCity(city)
       .subscribe((data) => (this.projects = data));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.selectedCity = this.cities[0];
+    this.loadProjects(this.selectedCity)
+  }
 }
