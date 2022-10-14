@@ -10,21 +10,8 @@ import { CivilProjectService } from '../../../core/services/civil-project.servic
 export class ShowCivicProjectsComponent implements OnInit {
   constructor(private data: CivilProjectService) {}
 
-<<<<<<< HEAD
-  constructor(private data:CivilProjectService) { }
-
-  city:string = 'olsztyn'
-
-  getProjectsByCity(){
-    this.data.getCivilProjectsByCity(this.city).subscribe(x=>{console.log(x)})
-  }
-
-  ngOnInit(): void {
-
-=======
   city: string = 'olsztyn';
   projects: CivilProjectDto[] = [];
->>>>>>> 5b231273448ead6e3f087687639566e764eccac6
 
   getProjectsByCity() {
     this.data
