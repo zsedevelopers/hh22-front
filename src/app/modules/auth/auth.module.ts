@@ -5,6 +5,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { AuthComponent } from './auth.component';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MaterialModule} from "../material/material.module";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ]
 })
 export class AuthModule { }
