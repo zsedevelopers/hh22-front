@@ -5,6 +5,7 @@ import { AddCivicProjectComponent } from './add-civic-project/add-civic-project.
 import { ShowCivicProjectsComponent } from './show-civic-projects/show-civic-projects.component';
 import { MaterialModule } from '../material/material.module';
 import { AppRoutingModule } from '../../app-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,11 @@ import { AppRoutingModule } from '../../app-routing.module';
     AddCivicProjectComponent,
     ShowCivicProjectsComponent,
   ],
-  imports: [CommonModule, MaterialModule, AppRoutingModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    AppRoutingModule,
+    ReactiveFormsModule,
+  ],
 })
 export class CivicProjectSiteModule {}

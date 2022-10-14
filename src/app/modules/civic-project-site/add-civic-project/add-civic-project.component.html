@@ -1,2 +1,52 @@
 <p>add-civic-project works!</p>
-<button (click)="addProject()">Dzialaj plsikam</button>
+<div class="container" [formGroup]="addProjectForm">
+    <form style="display: flex; flex-direction:column; width:300px; margin-left:10px">
+        <label style="margin-top: 10px;">title</label>
+        <input type="text" placeholder="title" formControlName="title">
+
+        <label style="margin-top: 10px;">city</label>
+        <input type="text" placeholder="city" formControlName="city">
+
+        <label style="margin-top: 10px;">description</label>
+        <input type="text" placeholder="description" formControlName="description">
+
+        <label style="margin-top: 10px;">justification</label>
+        <input type="text" placeholder="justification" formControlName="justification">
+
+        <label style="margin-top: 10px;">estimate title</label>
+        <input type="text" placeholder="estimateTitle" formControlName="estimateTitle">
+
+        <label style="margin-top: 10px;">estimate description</label>
+        <input type="text" placeholder="estimateDescription" formControlName="estimateDescription">
+
+        <label style="margin-top: 10px;">estimate cost</label>
+        <input type="number" min="1.00" step="0.01" placeholder="estimateCost" formControlName="estimateCost">
+
+        <button (click)="onFormSubmit()">prześlij</button>
+    </form>
+
+    <div class="schedule-container">
+        <div>
+            <span>Schedule</span>
+            <button (click)="addSchedule()">add new</button>
+        </div>
+        <ng-container formArrayName="schedules">
+            <ng-container *ngFor="let scheduleForm of schedules.controls; let i=index" class="schedule-block">
+                <div [formGroup]="scheduleForm">
+                    <h3>schedule {{i+1}}</h3>
+                    <label>title</label>
+                    <input type="text" formControlName="title" />
+
+                    <label>description</label>
+                    <input type="text" formControlName="description" />
+
+                    <label>year</label>
+                    <input type="number" formControlName="year" />
+                    <button (click)="deleteSchedule(i)">X</button>
+                    <hr>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+</div>
+<button (click)="addProject()">dummy data</button>
