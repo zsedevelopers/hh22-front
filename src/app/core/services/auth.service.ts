@@ -12,7 +12,11 @@ import { ApiService } from './api.service';
 export class AuthService {
   userData: UserDto | null = null;
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(private apiService: ApiService, private router: Router) {
+    if(this.getJwt() != null){
+      this.logout();
+    }
+  }
 
   login(requestData: LoginRequest) {
     this.apiService.login(requestData).subscribe((res: LoginResponse) => {
