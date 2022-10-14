@@ -14,7 +14,9 @@ export class CivilProjectService {
     private authService: AuthService
   ) {}
 
-  addCivilProject(data: AddCivilProjectRequest): Observable<HttpResponse<null>> {
+  addCivilProject(
+    data: AddCivilProjectRequest
+  ): Observable<HttpResponse<null>> {
     console.log('nietoperz');
     return this.apiService.addCivilProject(data, this.authService.getJwt()!);
   }
@@ -39,5 +41,9 @@ export class CivilProjectService {
 
   likeCivilProject(title: string) {
     return this.apiService.likeCivilProject(title, this.authService.getJwt()!);
+  }
+
+  verifyCivilProject(title: string, token: string) {
+    return this.apiService.verifyCivilProject(title, token);
   }
 }
