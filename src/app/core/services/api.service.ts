@@ -43,10 +43,7 @@ export class ApiService {
     });
   }
 
-  getCivilProjectsByCity(
-    city: string,
-    token: string
-  ): Observable<CivilProjectDto[]> {
+  getCivilProjectsByCity(city: string, token: string): Observable<CivilProjectDto[]> {
     return this.http.get<CivilProjectDto[]>(
       `${this.baseUrl}/api/v1/civicproject/city/${city}`,
       {

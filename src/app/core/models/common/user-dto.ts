@@ -3,6 +3,6 @@ export default interface UserDto{
     surname:string;
     email:string;
     phoneNumber:number;
-    PESEL:string;
+    pesel:string;
     city:string;
 }
