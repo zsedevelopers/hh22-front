@@ -2,14 +2,29 @@
   ProjectName
 </div>
 <div class="body">
-  <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
-    <input type="text" placeholder="pesel" formControlName="pesel">
-    <input type="password" placeholder="haslo" formControlName="password">
-    <input type="submit" value="prześlij">
-  </form>
+  <div class="login-tile">
+    <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
+        <mat-form-field appearance="standard">
+          <mat-label>Pesel</mat-label>
+          <input matInput placeholder="01010101011" type="text" formControlName="pesel">
+        </mat-form-field>
 
-  <h3>Don't have an account?</h3>
-  <a routerLink="/auth/register">Register!</a>
-  <a routerLink="">Wroc na strone glowna</a>
+        <mat-form-field appearance="standard">
+          <mat-label>Haslo</mat-label>
+          <input matInput type="password" placeholder="dobryObywatel12" formControlName="password">
+        </mat-form-field>
+
+
+        <input type="submit" value="prześlij">
+
+
+
+    </form>
+  </div>
+
+  <div class="texts">
+    <a routerLink="/auth/register">Nie masz konta? <a [style.text-decoration]="'underline'">Zarejestruj się!</a></a><br><br><br>
+    <a routerLink="">Wróć na stronę główna</a>
+  </div>
 </div>
 
