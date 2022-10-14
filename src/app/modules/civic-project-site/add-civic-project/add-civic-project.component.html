@@ -1,6 +1,6 @@
 <p>add-civic-project works!</p>
 <div class="container" [formGroup]="addProjectForm">
-    <form style="display: flex; flex-direction:column; width:300px; margin-left:10px">
+    <form [formGroup]="addProjectForm" style="display: flex; flex-direction:column; width:300px; margin-left:10px">
         <label style="margin-top: 10px;">title</label>
         <input type="text" placeholder="title" formControlName="title">
 
