@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpResponse} from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import LoginRequest from '../models/auth/login-request';
 import RegisterRequest from '../models/auth/register-request';
 import LoginResponse from '../models/auth/login-response';
 import AddCivilProjectRequest from '../models/civil projects/add-civil-project-request';
-import {Observable} from "rxjs";
-import CivilProjectDto from "../models/civil projects/civil-project-dto";
+import { Observable } from 'rxjs';
+import CivilProjectDto from '../models/civil projects/civil-project-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -23,41 +23,77 @@ export class ApiService {
   }
 
   getRefreshToken() {
-    return this.http.get(`${this.baseUrl}/api/user/token/refresh`);
+    return this.http.get(`${this.baseUrl}/api/v1/user/token/refresh`);
   }
   //#endregion
 
+<<<<<<< HEAD
   addCivilProject(data: AddCivilProjectRequest, token: string) {
-    return this.http.post(`${this.baseUrl}/api/v1/civilproject`, data, {
+    return this.http.post(`${this.baseUrl}/api/v1/civicproject`, data, {
+=======
+  addCivilProject(data: AddCivilProjectRequest, token: string):Observable<HttpResponse<null>> {
+    return this.http.post<HttpResponse<null>>(`${this.baseUrl}/api/v1/civicproject`, data, {
+>>>>>>> 5b231273448ead6e3f087687639566e764eccac6
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
   }
 
-  getCivilProjectsByCity(city: string, token: string):Observable<CivilProjectDto> {
-    return this.http.get<CivilProjectDto>(`${this.baseUrl}/api/v1/civilproject/city/${city}`, {
+<<<<<<< HEAD
+  getCivilProjectsByCity(city: string, token: string) {
+    return this.http.get(`${this.baseUrl}/api/v1/civicproject/city/${city}`, {
+=======
+  getAllCivilProjects(token: string):Observable<CivilProjectDto[]> {
+    return this.http.get<CivilProjectDto[]>(`${this.baseUrl}/api/v1/civicproject`, {
+>>>>>>> 5b231273448ead6e3f087687639566e764eccac6
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
   }
 
-  getCivilProjectByTitle(title: string, token: string) {
-    return this.http.get(`${this.baseUrl}/api/v1/civilproject/title/${title}`, {
+  getCivilProjectsByCity(
+    city: string,
+    token: string
+  ): Observable<CivilProjectDto[]> {
+    return this.http.get<CivilProjectDto[]>(
+      `${this.baseUrl}/api/v1/civicproject/city/${city}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+
+  getCivilProjectByTitle(title: string, token: string):Observable<CivilProjectDto> {
+    return this.http.get<CivilProjectDto>(`${this.baseUrl}/api/v1/civicproject/title/${title}`, {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
   }
 
   likeCivilProject(title: string, token: string) {
     return this.http.post(
-      `${this.baseUrl}/api/v1/civilproject/favourite/title/${title}`,
+      `${this.baseUrl}/api/v1/civicproject/favourite/title/${title}`,
       {},
       {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+
+  verifyCivilProject(title: string, token: string) {
+    return this.http.post(
+      `${this.baseUrl}/api/v1/civicproject/management/verify/${title}`,
+      null,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
       }
     );
