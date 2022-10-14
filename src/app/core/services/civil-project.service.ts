@@ -15,19 +15,13 @@ export class CivilProjectService {
   ) {}
 
 <<<<<<< HEAD
-<<<<<<< HEAD
   addCivilProject(data: AddCivilProjectRequest) {
     console.log('nietoperz')
 =======
-=======
->>>>>>> 5b231273448ead6e3f087687639566e764eccac6
   addCivilProject(
     data: AddCivilProjectRequest
   ): Observable<HttpResponse<null>> {
     console.log('nietoperz');
-<<<<<<< HEAD
->>>>>>> 5b231273448ead6e3f087687639566e764eccac6
-=======
 >>>>>>> 5b231273448ead6e3f087687639566e764eccac6
     return this.apiService.addCivilProject(data, this.authService.getJwt()!);
   }

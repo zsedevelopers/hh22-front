@@ -28,13 +28,8 @@ export class ApiService {
   //#endregion
 
 <<<<<<< HEAD
-<<<<<<< HEAD
   addCivilProject(data: AddCivilProjectRequest, token: string) {
     return this.http.post(`${this.baseUrl}/api/v1/civicproject`, data, {
-=======
-  addCivilProject(data: AddCivilProjectRequest, token: string):Observable<HttpResponse<null>> {
-    return this.http.post<HttpResponse<null>>(`${this.baseUrl}/api/v1/civicproject`, data, {
->>>>>>> 5b231273448ead6e3f087687639566e764eccac6
 =======
   addCivilProject(data: AddCivilProjectRequest, token: string):Observable<HttpResponse<null>> {
     return this.http.post<HttpResponse<null>>(`${this.baseUrl}/api/v1/civicproject`, data, {
@@ -46,13 +41,8 @@ export class ApiService {
   }
 
 <<<<<<< HEAD
-<<<<<<< HEAD
   getCivilProjectsByCity(city: string, token: string) {
     return this.http.get(`${this.baseUrl}/api/v1/civicproject/city/${city}`, {
-=======
-  getAllCivilProjects(token: string):Observable<CivilProjectDto[]> {
-    return this.http.get<CivilProjectDto[]>(`${this.baseUrl}/api/v1/civicproject`, {
->>>>>>> 5b231273448ead6e3f087687639566e764eccac6
 =======
   getAllCivilProjects(token: string):Observable<CivilProjectDto[]> {
     return this.http.get<CivilProjectDto[]>(`${this.baseUrl}/api/v1/civicproject`, {

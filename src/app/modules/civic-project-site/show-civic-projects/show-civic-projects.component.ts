@@ -11,7 +11,6 @@ export class ShowCivicProjectsComponent implements OnInit {
   constructor(private data: CivilProjectService) {}
 
 <<<<<<< HEAD
-<<<<<<< HEAD
   constructor(private data:CivilProjectService) { }
 
   city:string = 'olsztyn'
@@ -22,10 +21,6 @@ export class ShowCivicProjectsComponent implements OnInit {
 
   ngOnInit(): void {
 
-=======
-  city: string = 'olsztyn';
-  projects: CivilProjectDto[] = [];
->>>>>>> 5b231273448ead6e3f087687639566e764eccac6
 =======
   city: string = 'olsztyn';
   projects: CivilProjectDto[] = [];
