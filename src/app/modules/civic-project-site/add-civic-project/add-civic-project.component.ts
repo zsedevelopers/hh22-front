@@ -4,6 +4,7 @@ import UserDto from '../../../core/models/common/user-dto';
 import AddEstimateDto from '../../../core/models/civil projects/add-estimate-dto';
 import CreateScheduleDto from '../../../core/models/civil projects/create-schedule-dto';
 import { CivilProjectService } from '../../../core/services/civil-project.service';
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-add-civic-project',
@@ -32,12 +33,16 @@ export class AddCivicProjectComponent implements OnInit {
   };
 
   addProject() {
-    this.service
+    if(!this.authService.isLogged()){
+      console.warn(`you're not logged in`)
+      return
+    }
+    this.civilProjectService
       .addCivilProject(this.dummyData)
       .subscribe((data) => console.log(data));
   }
 
-  constructor(private service: CivilProjectService) {}
+  constructor(private civilProjectService: CivilProjectService, private authService:AuthService) {}
 
   ngOnInit(): void {}
 }
