@@ -13,18 +13,21 @@ export class AuthService {
   userData: UserDto | null = null;
 
   constructor(private apiService: ApiService, private router: Router) {
-    if(this.getJwt() != null){
+    if (this.getJwt() != null) {
       this.logout();
     }
   }
 
   login(requestData: LoginRequest) {
-    return this.apiService.login(requestData).subscribe((res: LoginResponse) => {
-      this.setJwt(res.access_token);
-      this.userData = res.user;
-      console.log(`user data: `);
-      console.log(this.userData)
-    });
+    return this.apiService
+      .login(requestData)
+      .subscribe((res: LoginResponse) => {
+        this.setJwt(res.access_token);
+        this.userData = res.user;
+        console.log(`zalogowano jako:`);
+        console.log(this.userData);
+        this.router.navigate(['/']);
+      });
   }
 
   register(requestData: RegisterRequest) {
@@ -36,14 +39,14 @@ export class AuthService {
   logout() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('refreshToken');
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 
   isLogged(): boolean {
     if (this.getJwt() != null && this.userData != null) {
       return true;
     } else {
-      if(this.getJwt() != null){
+      if (this.getJwt() != null) {
         this.logout();
       }
       return false;
