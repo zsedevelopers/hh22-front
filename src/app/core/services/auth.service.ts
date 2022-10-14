@@ -19,7 +19,7 @@ export class AuthService {
   }
 
   login(requestData: LoginRequest) {
-    this.apiService.login(requestData).subscribe((res: LoginResponse) => {
+    return this.apiService.login(requestData).subscribe((res: LoginResponse) => {
       this.setJwt(res.access_token);
       this.userData = res.user;
       console.log(`user data: `);
