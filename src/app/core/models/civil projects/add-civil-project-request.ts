@@ -3,11 +3,12 @@ import AddEstimateDto from './add-estimate-dto';
 import CreateScheduleDto from './create-schedule-dto';
 
 export default interface AddCivilProjectRequest {
+  title: string;
   city: string;
   description: string;
   justification: string;
   authors: string[];
-  likedBy: UserDto;
+  likedBy: UserDto[];
   estimate: AddEstimateDto;
   schedulesOfActivities: CreateScheduleDto[];
 }

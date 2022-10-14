@@ -27,16 +27,16 @@ export class ApiService {
   }
   //#endregion
 
-  addCivilProject(data: AddCivilProjectRequest, token: string) {
-    return this.http.post(`${this.baseUrl}/api/v1/civicproject`, data, {
+  addCivilProject(data: AddCivilProjectRequest, token: string):Observable<HttpResponse<null>> {
+    return this.http.post<HttpResponse<null>>(`${this.baseUrl}/api/v1/civicproject`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
   }
 
-  getAllCivilProjects(token: string) {
-    return this.http.get(`${this.baseUrl}/api/v1/civicproject`, {
+  getAllCivilProjects(token: string):Observable<CivilProjectDto[]> {
+    return this.http.get<CivilProjectDto[]>(`${this.baseUrl}/api/v1/civicproject`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -46,8 +46,8 @@ export class ApiService {
   getCivilProjectsByCity(
     city: string,
     token: string
-  ): Observable<CivilProjectDto> {
-    return this.http.get<CivilProjectDto>(
+  ): Observable<CivilProjectDto[]> {
+    return this.http.get<CivilProjectDto[]>(
       `${this.baseUrl}/api/v1/civicproject/city/${city}`,
       {
         headers: {
@@ -57,8 +57,8 @@ export class ApiService {
     );
   }
 
-  getCivilProjectByTitle(title: string, token: string) {
-    return this.http.get(`${this.baseUrl}/api/v1/civicproject/title/${title}`, {
+  getCivilProjectByTitle(title: string, token: string):Observable<CivilProjectDto> {
+    return this.http.get<CivilProjectDto>(`${this.baseUrl}/api/v1/civicproject/title/${title}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
