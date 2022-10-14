@@ -18,7 +18,7 @@ export class AddCivicProjectComponent implements OnInit {
   dummySchedule:CreateScheduleDto[] = [{title:'scheduleTytul',description:'scheduleOpis',date:20}]
 
   dummyUser:UserDto = {name:'marek',surname:'marucha',email:'milosz@gmail.com',
-    phoneNumber:123123123,PESEL:'12345678901',city:'olsztyn'}
+    phoneNumber:123123123,pesel:'12345678901',city:'olsztyn'}
 
 
   dummyData: AddCivilProjectRequest = {
