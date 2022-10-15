@@ -1,5 +1,6 @@
 export default interface UserDto{
-    name:string;
+    firstName:string;
+    secondName: string | null;
     surname:string;
     email:string;
     phoneNumber:number;

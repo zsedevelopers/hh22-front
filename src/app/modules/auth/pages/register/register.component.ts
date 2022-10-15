@@ -10,7 +10,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   registerForm = new FormGroup({
-    name: new FormControl('', Validators.required),
+    firstName: new FormControl('', Validators.required),
+    secondName: new FormControl('', Validators.required),
     surname: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),
@@ -30,7 +31,8 @@ export class RegisterComponent implements OnInit {
     }
 
     const requestData: RegisterRequest = {
-      name: this.registerForm.value.name!,
+      firstName: this.registerForm.value.firstName!,
+      secondName: this.registerForm.value.secondName!,
       surname: this.registerForm.value.surname!,
       email: this.registerForm.value.email!,
       city: this.registerForm.value.city!,
