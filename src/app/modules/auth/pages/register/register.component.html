@@ -1,19 +1,65 @@
-<p>register works!</p>
-<form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit()">
-    <input type="text" placeholder="name" formControlName="name">
-    <input type="text" placeholder="surname" formControlName="surname">
+<div class="navbar">
+  ProjectName
+</div>
+<div class="body">
+  <div class="login-tile">
+    <p class="login-header">Zarejestruj się</p>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit()">
 
-    <input type="email" placeholder="email" formControlName="email">
-    <input type="text" placeholder="city" formControlName="city">
+      <mat-form-field class="halfInput">
+        <mat-label>Imię</mat-label>
+        <input matInput type="text" placeholder="name" formControlName="name">
+      </mat-form-field>
 
-    <input type="text" placeholder="pesel" formControlName="pesel">
-    <input type="text" placeholder="phone number" formControlName="phoneNumber">
+      <mat-form-field class="halfInputRight">
+        <mat-label>Nazwisko</mat-label>
+        <input matInput type="text" placeholder="surname" formControlName="surname">
+      </mat-form-field>
 
-    <input type="password" placeholder="password" formControlName="password">
-    <input type="password" placeholder="confirm password" formControlName="passwordConfirm">
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput type="email" placeholder="email" formControlName="email">
+      </mat-form-field>
 
-    <input type="submit" value="prześlij">
-</form>
-<h3>Already have an account?</h3>
-<a routerLink="/auth/login">Log in!</a>
-<a routerLink="">Wroc na strone glowna</a>
+      <mat-form-field class="halfInput">
+        <mat-label>Miejscowość</mat-label>
+        <input matInput type="text" placeholder="city" formControlName="city">
+      </mat-form-field>
+
+      <mat-form-field class="halfInputRight">
+        <mat-label>numer telefonu</mat-label>
+        <input matInput type="text" placeholder="phone number" formControlName="phoneNumber">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Pesel</mat-label>
+        <input matInput type="text" placeholder="pesel" formControlName="pesel">
+      </mat-form-field>
+
+
+
+      <mat-form-field>
+        <mat-label>Hasło:</mat-label>
+        <input matInput type="password" placeholder="password" formControlName="password">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Powtórz hasło</mat-label>
+        <input matInput type="password" placeholder="confirm password" formControlName="passwordConfirm">
+      </mat-form-field>
+
+
+
+
+
+
+
+      <button mat-raised-button type="submit" color="primary" value="prześlij">Zarejestruj się</button>
+    </form>
+  </div>
+
+  <div class="texts">
+    <a routerLink="/auth/register">Masz konto? <a [style.text-decoration]="'underline'">Zaloguj się!</a></a><br><br><br>
+    <a routerLink="">Wróć na stronę główna</a>
+  </div>
+</div>
