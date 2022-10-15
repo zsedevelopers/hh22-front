@@ -121,7 +121,7 @@ export class AddCivicProjectComponent implements OnInit {
 
     const formData = this.addProjectForm.value;
 
-    if (formData.city != this.authService.userData?.city) {
+    if (formData.city?.toUpperCase() != this.authService.userData?.city.toUpperCase()) {
       console.warn(`input city doesn't match user's city`);
       return;
     }
