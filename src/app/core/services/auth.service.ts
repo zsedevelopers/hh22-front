@@ -5,6 +5,8 @@ import LoginResponse from '../models/auth/login-response';
 import RegisterRequest from '../models/auth/register-request';
 import UserDto from '../models/common/user-dto';
 import { ApiService } from './api.service';
+import jwtDecode from 'jwt-decode';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,18 +15,29 @@ export class AuthService {
   userData: UserDto | null = null;
 
   constructor(private apiService: ApiService, private router: Router) {
-    if(this.getJwt() != null){
-      this.logout();
+    if (this.getJwt() != null) {
+      if (this.isJwtExpired()) {
+        this.logout();
+      } else {
+        if (this.userData == null) {
+          this.getUserData().subscribe((data: UserDto) => {
+            this.userData = data;
+          });
+        }
+      }
     }
   }
 
   login(requestData: LoginRequest) {
-    return this.apiService.login(requestData).subscribe((res: LoginResponse) => {
-      this.setJwt(res.access_token);
-      this.userData = res.user;
-      console.log(`user data: `);
-      console.log(this.userData)
-    });
+    return this.apiService
+      .login(requestData)
+      .subscribe((res: LoginResponse) => {
+        this.setJwt(res.access_token);
+        this.userData = res.user;
+        console.log(`zalogowano jako:`);
+        console.log(this.userData);
+        this.router.navigate(['/']);
+      });
   }
 
   register(requestData: RegisterRequest) {
@@ -36,18 +49,26 @@ export class AuthService {
   logout() {
     localStorage.removeItem('jwt');
     localStorage.removeItem('refreshToken');
-    this.router.navigate(['/'])
+    this.router.navigate(['/']);
   }
 
   isLogged(): boolean {
-    if (this.getJwt() != null && this.userData != null) {
+    if (
+      this.getJwt() != null &&
+      this.userData != null &&
+      !this.isJwtExpired()
+    ) {
       return true;
     } else {
-      if(this.getJwt() != null){
+      if (this.getJwt() != null) {
         this.logout();
       }
       return false;
     }
+  }
+
+  getUserData(): Observable<UserDto> {
+    return this.apiService.getUserData(this.getJwt()!);
   }
 
   //#region Jwt
@@ -57,6 +78,19 @@ export class AuthService {
 
   getJwt(): string | null {
     return localStorage.getItem('jwt');
+  }
+
+  isJwtExpired(): boolean {
+    const jwt = this.getJwt();
+
+    const decoded: any = jwtDecode(jwt!);
+    let expirationDate = new Date(Date.UTC(1970, 0, 1));
+    expirationDate.setSeconds(decoded.exp);
+
+    if (expirationDate < new Date(Date.now())) {
+      return true;
+    }
+    return false;
   }
   //#endregion
 
