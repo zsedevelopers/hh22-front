@@ -8,6 +8,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HomepageModule} from "./modules/homepage/homepage.module";
 import {CivicProjectSiteModule} from "./modules/civic-project-site/civic-project-site.module";
+import { DigitalDocumentSiteModule } from './modules/digital-document-site/digital-document-site.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {CivicProjectSiteModule} from "./modules/civic-project-site/civic-project
     HttpClientModule,
     BrowserAnimationsModule,
     HomepageModule,
-    CivicProjectSiteModule
+    CivicProjectSiteModule,
+    DigitalDocumentSiteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

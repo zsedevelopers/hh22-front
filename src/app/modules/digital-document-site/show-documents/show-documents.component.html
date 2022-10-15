@@ -1,0 +1,4 @@
+Your documents:
+<div *ngFor="let document of documents">
+    {{document.name}} <button [routerLink]="['details/', document.name]">Info</button>
+</div>
