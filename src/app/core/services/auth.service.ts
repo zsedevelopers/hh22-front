@@ -6,6 +6,7 @@ import RegisterRequest from '../models/auth/register-request';
 import UserDto from '../models/common/user-dto';
 import { ApiService } from './api.service';
 import jwtDecode from 'jwt-decode';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +18,11 @@ export class AuthService {
     if (this.getJwt() != null) {
       if (this.isJwtExpired()) {
         this.logout();
-      }else{
-        if(this.userData == null){
-          //TODO:
-          //userData = fetchUserData()
+      } else {
+        if (this.userData == null) {
+          this.getUserData().subscribe((data: UserDto) => {
+            this.userData = data;
+          });
         }
       }
     }
@@ -51,7 +53,11 @@ export class AuthService {
   }
 
   isLogged(): boolean {
-    if (this.getJwt() != null && this.userData != null && !this.isJwtExpired()) {
+    if (
+      this.getJwt() != null &&
+      this.userData != null &&
+      !this.isJwtExpired()
+    ) {
       return true;
     } else {
       if (this.getJwt() != null) {
@@ -59,6 +65,10 @@ export class AuthService {
       }
       return false;
     }
+  }
+
+  getUserData(): Observable<UserDto> {
+    return this.apiService.getUserData(this.getJwt()!);
   }
 
   //#region Jwt
