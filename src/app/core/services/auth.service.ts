@@ -5,6 +5,7 @@ import LoginResponse from '../models/auth/login-response';
 import RegisterRequest from '../models/auth/register-request';
 import UserDto from '../models/common/user-dto';
 import { ApiService } from './api.service';
+import jwtDecode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,14 @@ export class AuthService {
 
   constructor(private apiService: ApiService, private router: Router) {
     if (this.getJwt() != null) {
-      this.logout();
+      if (this.isJwtExpired()) {
+        this.logout();
+      }else{
+        if(this.userData == null){
+          //TODO:
+          //userData = fetchUserData()
+        }
+      }
     }
   }
 
@@ -43,7 +51,7 @@ export class AuthService {
   }
 
   isLogged(): boolean {
-    if (this.getJwt() != null && this.userData != null) {
+    if (this.getJwt() != null && this.userData != null && !this.isJwtExpired()) {
       return true;
     } else {
       if (this.getJwt() != null) {
@@ -60,6 +68,19 @@ export class AuthService {
 
   getJwt(): string | null {
     return localStorage.getItem('jwt');
+  }
+
+  isJwtExpired(): boolean {
+    const jwt = this.getJwt();
+
+    const decoded: any = jwtDecode(jwt!);
+    let expirationDate = new Date(Date.UTC(1970, 0, 1));
+    expirationDate.setSeconds(decoded.exp);
+
+    if (expirationDate < new Date(Date.now())) {
+      return true;
+    }
+    return false;
   }
   //#endregion
 
