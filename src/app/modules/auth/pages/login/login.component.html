@@ -3,6 +3,7 @@
 </div>
 <div class="body">
   <div class="login-tile">
+    <p class="login-header">Zaloguj się</p>
     <form [formGroup]="loginForm" (ngSubmit)="onLoginFormSubmit()">
         <mat-form-field appearance="standard">
           <mat-label>Pesel</mat-label>
@@ -15,7 +16,7 @@
         </mat-form-field>
 
 
-        <input type="submit" value="prześlij">
+      <button mat-raised-button color="primary" type="submit" value="prześlij">Zaloguj się</button>
 
 
 
