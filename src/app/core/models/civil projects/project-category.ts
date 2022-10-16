@@ -1,0 +1,11 @@
+export enum ProjectCategory {
+  SPORT,
+  EDUCATION,
+  CULTURE,
+  HEALTH,
+  ENVIRONMENT,
+  INFRASTRUCTURE,
+  NATURE,
+  COMMUNITY,
+  OTHER
+}
