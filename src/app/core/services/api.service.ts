@@ -7,6 +7,7 @@ import AddCivilProjectRequest from '../models/civil projects/add-civil-project-r
 import { Observable } from 'rxjs';
 import CivilProjectDto from '../models/civil projects/civil-project-dto';
 import UserDto from '../models/common/user-dto';
+import CreateIdentityCardDto from '../models/digital documents/create-identity-card-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -27,7 +28,7 @@ export class ApiService {
     return this.http.get(`${this.baseUrl}/api/v1/user/token/refresh`);
   }
 
-  getUserData(token:string):Observable<UserDto> {
+  getUserData(token: string): Observable<UserDto> {
     return this.http.get<UserDto>(`${this.baseUrl}/api/v1/user/info`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -36,6 +37,7 @@ export class ApiService {
   }
   //#endregion
 
+  //#region Civil Projects
   addCivilProject(
     data: AddCivilProjectRequest,
     token: string
@@ -113,4 +115,34 @@ export class ApiService {
       }
     );
   }
+  //#endregion
+
+  //#region Digital Documents
+  createWallet(token: string): Observable<HttpResponse<null>> {
+    return this.http.post<HttpResponse<null>>(
+      `${this.baseUrl}/api/v1/wallet/new`,
+      null,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+
+  addIdentityCard(
+    data: CreateIdentityCardDto,
+    token: string
+  ): Observable<HttpResponse<null>> {
+    return this.http.post<HttpResponse<null>>(
+      `${this.baseUrl}/api/v1/identity-card/new`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+  //#endregion
 }
