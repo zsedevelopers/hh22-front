@@ -1,5 +1,5 @@
 export default interface RegisterRequest {
-  name: string;
+  firstName: string;
   surname: string;
   email: string;
   city: string;

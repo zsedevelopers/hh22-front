@@ -30,7 +30,7 @@ export class RegisterComponent implements OnInit {
     }
 
     const requestData: RegisterRequest = {
-      name: this.registerForm.value.name!,
+      firstName: this.registerForm.value.name!,
       surname: this.registerForm.value.surname!,
       email: this.registerForm.value.email!,
       city: this.registerForm.value.city!,

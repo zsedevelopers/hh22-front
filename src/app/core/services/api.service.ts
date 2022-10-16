@@ -163,7 +163,7 @@ export class ApiService {
 
   getWallet(token: string): Observable<HttpResponse<null>> {
     return this.http.get<HttpResponse<null>>(
-      `${this.baseUrl}/api/v1/document/passport`,
+      `${this.baseUrl}/api/v1/wallet`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
