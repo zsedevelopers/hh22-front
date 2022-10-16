@@ -2,7 +2,7 @@ Your documents:
 <!-- <div *ngFor="let document of documents">
     {{document.name}} <button [routerLink]="['details/', document.name]">Info</button>
 </div> -->
-<p>
+<p *ngIf="!hasWallet">
     You don't have any documents,
     add one?
 </p>

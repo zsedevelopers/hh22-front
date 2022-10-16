@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DigitalDocumentService } from 'src/app/core/services/digital-document.service';
 
 @Component({
   selector: 'app-show-documents',
@@ -6,19 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./show-documents.component.scss'],
 })
 export class ShowDocumentsComponent implements OnInit {
-  documents = [
-    {
-      name: 'cool doc1',
-    },
-    {
-      name: 'cool doc2',
-    },
-    {
-      name: 'cool doc3',
-    },
-  ];
+  hasWallet:boolean = false
 
-  constructor() {}
+  constructor(private documentService:DigitalDocumentService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.documentService.getWallet().subscribe((data) => {
+      if(data != null){
+        this.hasWallet = true;
+        console.log(data)
+      }
+    })
+  }
+
 }

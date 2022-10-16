@@ -1,4 +1,4 @@
 add component:
-<button [routerLink]="['identity-card']">dowod</button>
-<button (click)="addWallet()">dodaj portfel</button>
+<button *ngIf="!hasIdentityCard" [routerLink]="['identity-card']">dodaj dowod</button>
+<button *ngIf="!hasPassport" [routerLink]="['passport']">dodaj paszport</button>
 <router-outlet></router-outlet>

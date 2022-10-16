@@ -4,16 +4,22 @@ import { DigitalDocumentService } from 'src/app/core/services/digital-document.s
 @Component({
   selector: 'app-add-document',
   templateUrl: './add-document.component.html',
-  styleUrls: ['./add-document.component.scss']
+  styleUrls: ['./add-document.component.scss'],
 })
 export class AddDocumentComponent implements OnInit {
+  hasIdentityCard: boolean = false;
+  hasPassport: boolean = false;
 
-  constructor(private documentService:DigitalDocumentService) { }
+  constructor(private documentService: DigitalDocumentService) {}
 
   ngOnInit(): void {
-  }
-
-  addWallet(){
-    this.documentService.createWallet().subscribe()
+    this.documentService.getWallet().subscribe((data) => {
+      if (data.identityCard != null) {
+        this.hasIdentityCard = true;
+      }
+      if (data.passport != null) {
+        this.hasPassport = true;
+      }
+    });
   }
 }

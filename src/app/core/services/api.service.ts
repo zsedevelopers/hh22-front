@@ -9,6 +9,7 @@ import CivilProjectDto from '../models/civil projects/civil-project-dto';
 import UserDto from '../models/common/user-dto';
 import CreateIdentityCardDto from '../models/digital documents/create-identity-card-dto';
 import CreatePassportDto from '../models/digital documents/create-passport-dto';
+import WalletDto from '../models/digital documents/wallet-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -161,15 +162,12 @@ export class ApiService {
     );
   }
 
-  getWallet(token: string): Observable<HttpResponse<null>> {
-    return this.http.get<HttpResponse<null>>(
-      `${this.baseUrl}/api/v1/wallet`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+  getWallet(token: string): Observable<WalletDto> {
+    return this.http.get<WalletDto>(`${this.baseUrl}/api/v1/wallet`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
   }
   //#endregion
 }
