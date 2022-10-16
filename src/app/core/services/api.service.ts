@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import CivilProjectDto from '../models/civil projects/civil-project-dto';
 import UserDto from '../models/common/user-dto';
 import CreateIdentityCardDto from '../models/digital documents/create-identity-card-dto';
+import CreatePassportDto from '../models/digital documents/create-passport-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -135,8 +136,34 @@ export class ApiService {
     token: string
   ): Observable<HttpResponse<null>> {
     return this.http.post<HttpResponse<null>>(
-      `${this.baseUrl}/api/v1/identity-card/new`,
+      `${this.baseUrl}/api/v1/document/identity-card`,
       data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+
+  addPassport(
+    data: CreatePassportDto,
+    token: string
+  ): Observable<HttpResponse<null>> {
+    return this.http.post<HttpResponse<null>>(
+      `${this.baseUrl}/api/v1/document/passport`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+
+  getWallet(token: string): Observable<HttpResponse<null>> {
+    return this.http.get<HttpResponse<null>>(
+      `${this.baseUrl}/api/v1/document/passport`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
