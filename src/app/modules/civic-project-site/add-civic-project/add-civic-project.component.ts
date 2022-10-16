@@ -151,7 +151,7 @@ export class AddCivicProjectComponent implements OnInit {
       justification: formData.justification!,
       authors: [this.authService.userData?.pesel!],
       likedBy: [],
-      estimate: [],
+      estimates: [],
       //   {
       //   title: formData.estimateTitle!,
       //   description: formData.estimateDescription!,
@@ -167,7 +167,7 @@ export class AddCivicProjectComponent implements OnInit {
         description: group.value.description,
         cost: group.value.cost
       };
-      data.estimate.push(estimate);
+      data.estimates.push(estimate);
     });
 
     this.schedules.controls.forEach((group) => {

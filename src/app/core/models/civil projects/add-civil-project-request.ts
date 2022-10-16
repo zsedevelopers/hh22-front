@@ -11,7 +11,7 @@ export default interface AddCivilProjectRequest {
   justification: string;
   authors: string[];
   likedBy: UserDto[];
-  estimate: AddEstimateDto[];
+  estimates: AddEstimateDto[];
   schedulesOfActivities: CreateScheduleDto[];
   category:ProjectCategory
 }
