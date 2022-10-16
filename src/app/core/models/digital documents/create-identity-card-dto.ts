@@ -9,7 +9,7 @@ export default interface CreateIdentityCardDto {
   expiryDate: Date;
   birthDate: Date;
   sex: string;
-  CAN: string;
+  CAN: string | null;
   placeOfBirth: string;
   pesel: string;
   familyName: string;

@@ -1,4 +1,9 @@
 Your documents:
-<div *ngFor="let document of documents">
+<!-- <div *ngFor="let document of documents">
     {{document.name}} <button [routerLink]="['details/', document.name]">Info</button>
-</div>
+</div> -->
+<p>
+    You don't have any documents,
+    add one?
+</p>
+<button [routerLink]="['add']">add document</button>

@@ -10,6 +10,8 @@ import { ShowCivicProjectsComponent } from './modules/civic-project-site/show-ci
 import { DocumentContainerComponent } from './modules/digital-document-site/document-container/document-container.component';
 import { ShowDocumentsComponent } from './modules/digital-document-site/show-documents/show-documents.component';
 import { DocumentDetailsComponent } from './modules/digital-document-site/document-details/document-details.component';
+import { AddDocumentComponent } from './modules/digital-document-site/add-document/add-document.component';
+import { AddIdentityCardFormComponent } from './modules/digital-document-site/add-identity-card-form/add-identity-card-form.component';
 const routes: Routes = [
   { path: '', component: ContainerComponent },
   {
@@ -34,6 +36,13 @@ const routes: Routes = [
     children: [
       { path: '', component: ShowDocumentsComponent },
       { path: 'details/:document', component: DocumentDetailsComponent },
+      {
+        path: 'add',
+        component: AddDocumentComponent,
+        children: [
+          { path: 'identity-card', component: AddIdentityCardFormComponent },
+        ],
+      },
     ],
   },
 ];

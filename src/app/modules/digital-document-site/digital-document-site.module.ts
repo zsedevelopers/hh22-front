@@ -4,6 +4,8 @@ import { ShowDocumentsComponent } from './show-documents/show-documents.componen
 import { DocumentDetailsComponent } from './document-details/document-details.component';
 import { DocumentContainerComponent } from './document-container/document-container.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AddDocumentComponent } from './add-document/add-document.component';
+import { AddIdentityCardFormComponent } from './add-identity-card-form/add-identity-card-form.component';
 
 
 
@@ -11,7 +13,9 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
   declarations: [
     ShowDocumentsComponent,
     DocumentDetailsComponent,
-    DocumentContainerComponent
+    DocumentContainerComponent,
+    AddDocumentComponent,
+    AddIdentityCardFormComponent
   ],
   imports: [
     CommonModule,
