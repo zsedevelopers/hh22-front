@@ -14,7 +14,7 @@ import AddEstimateDto from "../../../core/models/civil projects/add-estimate-dto
 })
 export class AddCivicProjectComponent implements OnInit {
 
-
+  listOfCategories:ProjectCategory[] = [ProjectCategory.SPORT,ProjectCategory.EDUCATION,ProjectCategory.CULTURE,ProjectCategory.HEALTH,ProjectCategory.ENVIRONMENT,ProjectCategory.INFRASTRUCTURE,ProjectCategory.NATURE,ProjectCategory.COMMUNITY,ProjectCategory.OTHER]
 
   addProjectForm = this.fb.group({
     title: this.fb.control('', Validators.required),

@@ -7,32 +7,42 @@
         <label style="margin-top: 10px;">city</label>
         <input type="text" placeholder="city" formControlName="city">
 
+        <label style="margin-top: 10px;">krotki opis</label>
+        <input type="text" placeholder="description" formControlName="shortDescription">
+
         <label style="margin-top: 10px;">description</label>
         <input type="text" placeholder="description" formControlName="description">
 
         <label style="margin-top: 10px;">justification</label>
         <input type="text" placeholder="justification" formControlName="justification">
 
-        <label style="margin-top: 10px;">estimate title</label>
-        <input type="text" placeholder="estimateTitle" formControlName="estimateTitle">
+      <mat-form-field appearance="fill">
+        <mat-label>Kategoria</mat-label>
+        <mat-select formControlName="category">
+          <mat-option [value]=listOfCategories[0]>Sport</mat-option>
+          <mat-option [value]=listOfCategories[1]>Edukacja</mat-option>
+          <mat-option [value]=listOfCategories[2]>Kultura</mat-option>
+          <mat-option [value]=listOfCategories[3]>Zdrowie</mat-option>
+          <mat-option [value]=listOfCategories[4]>Środowisko</mat-option>
+          <mat-option [value]=listOfCategories[5]>Infrastruktura</mat-option>
+          <mat-option [value]=listOfCategories[6]>Natura</mat-option>
+          <mat-option [value]=listOfCategories[7]>Społeczność</mat-option>
+          <mat-option [value]=listOfCategories[8]>Inne</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-        <label style="margin-top: 10px;">estimate description</label>
-        <input type="text" placeholder="estimateDescription" formControlName="estimateDescription">
-
-        <label style="margin-top: 10px;">estimate cost</label>
-        <input type="number" min="1.00" step="0.01" placeholder="estimateCost" formControlName="estimateCost">
 
         <button (click)="onFormSubmit()">prześlij</button>
     </form>
 
     <div class="schedule-container">
         <div>
-            <span>Schedule</span>
-            <button (click)="addSchedule()">add new</button>
+            <span>Estimate</span>
+            <button (click)="addEstimate()">add new</button>
         </div>
-        <ng-container formArrayName="schedules">
-            <ng-container *ngFor="let scheduleForm of schedules.controls; let i=index" class="schedule-block">
-                <div [formGroup]="scheduleForm">
+        <ng-container formArrayName="estimates">
+            <ng-container *ngFor="let estimateForm of estimates.controls; let i=index" class="estimate-block">
+                <div [formGroup]="estimateForm">
                     <h3>schedule {{i+1}}</h3>
                     <label>title</label>
                     <input type="text" formControlName="title" />
@@ -41,12 +51,36 @@
                     <input type="text" formControlName="description" />
 
                     <label>year</label>
-                    <input type="number" formControlName="year" />
-                    <button (click)="deleteSchedule(i)">X</button>
+                    <input type="number" formControlName="cost" />
+                    <button (click)="deleteEstimate(i)">X</button>
                     <hr>
                 </div>
             </ng-container>
         </ng-container>
     </div>
+
+  <div class="estimates-container">
+    <div>
+      <span>Schedule</span>
+      <button (click)="addSchedule()">add new</button>
+    </div>
+    <ng-container formArrayName="schedules">
+      <ng-container *ngFor="let scheduleForm of schedules.controls; let i=index" class="schedule-block">
+        <div [formGroup]="scheduleForm">
+          <h3>schedule {{i+1}}</h3>
+          <label>title</label>
+          <input type="text" formControlName="title" />
+
+          <label>description</label>
+          <input type="text" formControlName="description" />
+
+          <label>year</label>
+          <input type="month" formControlName="date" />
+          <button (click)="deleteSchedule(i)">X</button>
+          <hr>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
 </div>
 <button (click)="addProject()">dummy data</button>
