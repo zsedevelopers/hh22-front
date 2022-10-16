@@ -1,3 +1,5 @@
+import { Sex } from "./enums/sex";
+
 export default interface CreatePassportDto {
   picture: string;
   frontOfDocumentImage: string;
@@ -9,7 +11,7 @@ export default interface CreatePassportDto {
   documentNumber: string;
   expiryDate: Date;
   birthDate: Date;
-  sex: string;
+  sex: Sex;
   placeOfBirth: string;
   pesel: string;
   issuingAuthority: string;

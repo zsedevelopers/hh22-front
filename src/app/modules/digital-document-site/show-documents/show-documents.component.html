@@ -6,4 +6,12 @@ Your documents:
     You don't have any documents,
     add one?
 </p>
-<button [routerLink]="['add']">add document</button>
+
+<p *ngIf="wallet?.identityCard != null">
+    Dowod
+</p>
+
+<p *ngIf="wallet?.passport != null">
+    Paszport
+</p>
+<button [routerLink]="['add']">dodaj nowy dokument</button>

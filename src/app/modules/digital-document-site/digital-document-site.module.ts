@@ -6,6 +6,7 @@ import { DocumentContainerComponent } from './document-container/document-contai
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AddDocumentComponent } from './add-document/add-document.component';
 import { AddIdentityCardFormComponent } from './add-identity-card-form/add-identity-card-form.component';
+import { AddPassportFormComponent } from './add-passport-form/add-passport-form.component';
 
 
 
@@ -15,7 +16,8 @@ import { AddIdentityCardFormComponent } from './add-identity-card-form/add-ident
     DocumentDetailsComponent,
     DocumentContainerComponent,
     AddDocumentComponent,
-    AddIdentityCardFormComponent
+    AddIdentityCardFormComponent,
+    AddPassportFormComponent
   ],
   imports: [
     CommonModule,

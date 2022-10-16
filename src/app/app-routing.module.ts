@@ -12,6 +12,7 @@ import { ShowDocumentsComponent } from './modules/digital-document-site/show-doc
 import { DocumentDetailsComponent } from './modules/digital-document-site/document-details/document-details.component';
 import { AddDocumentComponent } from './modules/digital-document-site/add-document/add-document.component';
 import { AddIdentityCardFormComponent } from './modules/digital-document-site/add-identity-card-form/add-identity-card-form.component';
+import { AddPassportFormComponent } from './modules/digital-document-site/add-passport-form/add-passport-form.component';
 const routes: Routes = [
   { path: '', component: ContainerComponent },
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
         component: AddDocumentComponent,
         children: [
           { path: 'identity-card', component: AddIdentityCardFormComponent },
+          { path: 'passport', component: AddPassportFormComponent },
         ],
       },
     ],

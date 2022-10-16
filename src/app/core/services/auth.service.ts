@@ -15,6 +15,8 @@ export class AuthService {
   userData: UserDto | null = null;
 
   constructor(private apiService: ApiService, private router: Router) {
+    console.log('jwt')
+    console.log(this.getJwt())
     if (this.getJwt() != null) {
       if (this.isJwtExpired()) {
         this.logout();
@@ -47,6 +49,7 @@ export class AuthService {
   }
 
   logout() {
+    console.log('logged out')
     localStorage.removeItem('jwt');
     localStorage.removeItem('refreshToken');
     this.router.navigate(['/']);
@@ -60,7 +63,7 @@ export class AuthService {
     ) {
       return true;
     } else {
-      if (this.getJwt() != null) {
+      if (this.getJwt() == null) {
         this.logout();
       }
       return false;
@@ -82,11 +85,9 @@ export class AuthService {
 
   isJwtExpired(): boolean {
     const jwt = this.getJwt();
-
     const decoded: any = jwtDecode(jwt!);
     let expirationDate = new Date(Date.UTC(1970, 0, 1));
     expirationDate.setSeconds(decoded.exp);
-
     if (expirationDate < new Date(Date.now())) {
       return true;
     }

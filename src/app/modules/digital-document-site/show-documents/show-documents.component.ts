@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import IdentityCardDto from 'src/app/core/models/digital documents/identity-card-dto';
 import WalletDto from 'src/app/core/models/digital documents/wallet-dto';
+import { AuthService } from 'src/app/core/services/auth.service';
 import { DigitalDocumentService } from 'src/app/core/services/digital-document.service';
 
 @Component({
@@ -13,14 +14,15 @@ export class ShowDocumentsComponent implements OnInit {
   wallet: WalletDto | null = null;
 
   identityCard:IdentityCardDto|null = null
-  constructor(private documentService: DigitalDocumentService) {}
+
+  constructor(private documentService: DigitalDocumentService, private authService:AuthService) {}
 
   ngOnInit(): void {
+
     this.documentService.getWallet().subscribe((data) => {
       if (data != null) {
         this.wallet = data
         this.hasWallet = true;
-        console.log(data);
       }
     });
   }

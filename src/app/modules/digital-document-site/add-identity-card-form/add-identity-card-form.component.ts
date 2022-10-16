@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import CreateIdentityCardDto from 'src/app/core/models/digital documents/create-identity-card-dto';
+import { Sex } from 'src/app/core/models/digital documents/enums/sex';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DigitalDocumentService } from 'src/app/core/services/digital-document.service';
 
@@ -20,7 +21,7 @@ export class AddIdentityCardFormComponent implements OnInit {
     frontImageUrl: this.fb.control('', Validators.required),
     backImageUrl: this.fb.control('', Validators.required),
     firstName: this.fb.control('', Validators.required),
-    secondName: this.fb.control('', Validators.required),
+    secondName: this.fb.control(''),
     surname: this.fb.control('', Validators.required),
     nationality: this.fb.control('', Validators.required),
     sex: this.fb.control('', Validators.required),
@@ -56,7 +57,7 @@ export class AddIdentityCardFormComponent implements OnInit {
       documentNumber: '123456',
       expiryDate: new Date(Date.now()),
       birthDate: new Date(Date.now()),
-      sex: 'man',
+      sex: Sex.MAN, //TODO: change
       CAN: null,
       placeOfBirth: 'mozambik',
       pesel: this.authService.userData?.pesel!,

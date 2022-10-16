@@ -14,7 +14,14 @@ export class DigitalDocumentService {
   constructor(
     private apiService: ApiService,
     private authService: AuthService
-  ) {}
+  ) {
+    if(authService.isLogged()){
+      this.getWallet().subscribe((data:WalletDto) => {
+        this.wallet = data;
+      })
+    }
+  }
+  private wallet:WalletDto | null = null;
 
   createWallet(): Observable<HttpResponse<null>> {
     return this.apiService.createWallet(this.authService.getJwt()!);

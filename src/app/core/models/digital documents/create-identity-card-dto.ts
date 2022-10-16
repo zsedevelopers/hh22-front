@@ -1,3 +1,5 @@
+import { Sex } from "./enums/sex";
+
 export default interface CreateIdentityCardDto {
   frontOfDocumentImage: string;
   backOfDocumentImage: string;
@@ -8,7 +10,7 @@ export default interface CreateIdentityCardDto {
   documentNumber: string;
   expiryDate: Date;
   birthDate: Date;
-  sex: string;
+  sex: Sex;
   CAN: string | null;
   placeOfBirth: string;
   pesel: string;

@@ -10,6 +10,7 @@ import UserDto from '../models/common/user-dto';
 import CreateIdentityCardDto from '../models/digital documents/create-identity-card-dto';
 import CreatePassportDto from '../models/digital documents/create-passport-dto';
 import WalletDto from '../models/digital documents/wallet-dto';
+import { Sex } from '../models/digital documents/enums/sex';
 @Injectable({
   providedIn: 'root',
 })
@@ -138,7 +139,7 @@ export class ApiService {
   ): Observable<HttpResponse<null>> {
     return this.http.post<HttpResponse<null>>(
       `${this.baseUrl}/api/v1/document/identity-card`,
-      data,
+      { ...data, sex: Sex[data.sex] },
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -153,7 +154,7 @@ export class ApiService {
   ): Observable<HttpResponse<null>> {
     return this.http.post<HttpResponse<null>>(
       `${this.baseUrl}/api/v1/document/passport`,
-      data,
+      { ...data, sex: Sex[data.sex] },
       {
         headers: {
           Authorization: `Bearer ${token}`,
