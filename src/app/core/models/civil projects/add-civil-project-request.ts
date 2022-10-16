@@ -1,7 +1,7 @@
 import UserDto from '../common/user-dto';
 import AddEstimateDto from './add-estimate-dto';
 import CreateScheduleDto from './create-schedule-dto';
-import {ProjectCategory} from "./project-category";
+import { ProjectCategory } from './project-category';
 
 export default interface AddCivilProjectRequest {
   title: string;
@@ -13,5 +13,6 @@ export default interface AddCivilProjectRequest {
   likedBy: UserDto[];
   estimates: AddEstimateDto[];
   schedulesOfActivities: CreateScheduleDto[];
-  category:ProjectCategory
+  category: ProjectCategory;
+  images: { link: string }[];
 }

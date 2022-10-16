@@ -158,7 +158,8 @@ export class AddCivicProjectComponent implements OnInit {
       //   cost: formData.estimateCost!,
       // },
       schedulesOfActivities: [],
-      category:formData.category!
+      category:formData.category!,
+      images:[]
     };
 
     this.estimates.controls.forEach((group) => {
