@@ -9,10 +9,14 @@ import { AddCivicProjectComponent } from './modules/civic-project-site/add-civic
 import { ShowCivicProjectsComponent } from './modules/civic-project-site/show-civic-projects/show-civic-projects.component';
 import { DocumentContainerComponent } from './modules/digital-document-site/document-container/document-container.component';
 import { ShowDocumentsComponent } from './modules/digital-document-site/show-documents/show-documents.component';
-import { DocumentDetailsComponent } from './modules/digital-document-site/document-details/document-details.component';
 import { AddDocumentComponent } from './modules/digital-document-site/add-document/add-document.component';
 import { AddIdentityCardFormComponent } from './modules/digital-document-site/add-identity-card-form/add-identity-card-form.component';
 import { AddPassportFormComponent } from './modules/digital-document-site/add-passport-form/add-passport-form.component';
+import { AddDriverLicenceFormComponent } from './modules/digital-document-site/add-driver-licence-form/add-driver-licence-form.component';
+import { DetailsContainerComponent } from './modules/digital-document-site/details-container/details-container.component';
+import { DetailsDriverLicenceComponent } from './modules/digital-document-site/details-driver-licence/details-driver-licence.component';
+import { DetailsIdentityCardComponent } from './modules/digital-document-site/details-identity-card/details-identity-card.component';
+import { DetailsPassportComponent } from './modules/digital-document-site/details-passport/details-passport.component';
 const routes: Routes = [
   { path: '', component: ContainerComponent },
   {
@@ -36,13 +40,22 @@ const routes: Routes = [
     component: DocumentContainerComponent,
     children: [
       { path: '', component: ShowDocumentsComponent },
-      { path: 'details/:document', component: DocumentDetailsComponent },
+      {
+        path: 'details',
+        component: DetailsContainerComponent,
+        children: [
+          { path: 'driver-licence', component: DetailsDriverLicenceComponent },
+          { path: 'identity-card', component: DetailsIdentityCardComponent },
+          { path: 'passport', component: DetailsPassportComponent },
+        ],
+      },
       {
         path: 'add',
         component: AddDocumentComponent,
         children: [
           { path: 'identity-card', component: AddIdentityCardFormComponent },
           { path: 'passport', component: AddPassportFormComponent },
+          { path: 'driver-licence', component: AddDriverLicenceFormComponent },
         ],
       },
     ],

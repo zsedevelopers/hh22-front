@@ -13,9 +13,7 @@ export class ShowDocumentsComponent implements OnInit {
   hasWallet: boolean = false;
   wallet: WalletDto | null = null;
 
-  identityCard:IdentityCardDto|null = null
-
-  constructor(private documentService: DigitalDocumentService, private authService:AuthService) {}
+  constructor(private documentService: DigitalDocumentService) {}
 
   ngOnInit(): void {
 

@@ -9,9 +9,15 @@ Your documents:
 
 <p *ngIf="wallet?.identityCard != null">
     Dowod
+    <button [routerLink]="['details/identity-card']">info</button>
 </p>
 
 <p *ngIf="wallet?.passport != null">
     Paszport
+    <button [routerLink]="['details/passport']">info</button>
+</p>
+<p *ngIf="wallet?.driverLicence != null">
+    Prawo jazdy
+    <button [routerLink]="['details/driver-licence']">info</button>
 </p>
 <button [routerLink]="['add']">dodaj nowy dokument</button>
