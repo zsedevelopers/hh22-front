@@ -9,12 +9,13 @@ import { DigitalDocumentService } from 'src/app/core/services/digital-document.s
 export class AddDocumentComponent implements OnInit {
   hasIdentityCard: boolean = false;
   hasPassport: boolean = false;
+  hasDriverLicence: boolean = false;
 
   constructor(private documentService: DigitalDocumentService) {}
 
   ngOnInit(): void {
     this.documentService.getWallet().subscribe((data) => {
-      if(data == null){
+      if (data == null) {
         return;
       }
       if (data.identityCard != null) {
@@ -22,6 +23,9 @@ export class AddDocumentComponent implements OnInit {
       }
       if (data.passport != null) {
         this.hasPassport = true;
+      }
+      if (data.driverLicence != null) {
+        this.hasDriverLicence = true;
       }
     });
   }
