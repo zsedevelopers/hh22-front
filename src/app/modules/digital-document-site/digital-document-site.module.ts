@@ -11,6 +11,7 @@ import { MaterialModule } from '../material/material.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddDriverLicenceFormComponent } from './add-driver-licence-form/add-driver-licence-form.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AddDocumentComponent,
     AddIdentityCardFormComponent,
     AddPassportFormComponent,
+    AddDriverLicenceFormComponent,
   ],
   imports: [
     CommonModule,
