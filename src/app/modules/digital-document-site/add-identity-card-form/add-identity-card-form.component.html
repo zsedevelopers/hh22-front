@@ -1,5 +1,9 @@
 <form style="display: flex; flex-direction: column; width:400px" [formGroup]="addIdForm">
     <mat-form-field>
+        <mat-label>portrait photo link</mat-label>
+        <input matInput type="url" placeholder="image link" formControlName="pictureUrl">
+    </mat-form-field>
+    <mat-form-field>
         <mat-label>frontside link</mat-label>
         <input matInput type="url" placeholder="image link" formControlName="frontImageUrl">
     </mat-form-field>

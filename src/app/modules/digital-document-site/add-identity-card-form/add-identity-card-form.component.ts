@@ -13,13 +13,9 @@ import { DigitalDocumentService } from 'src/app/core/services/digital-document.s
 })
 export class AddIdentityCardFormComponent implements OnInit {
   userData: UserDto | null = null;
-  constructor(
-    private digitalDocumentService: DigitalDocumentService,
-    private fb: FormBuilder,
-    private authService: AuthService
-  ) {}
 
   addIdForm = this.fb.group({
+    pictureUrl: this.fb.control('', Validators.required),
     frontImageUrl: this.fb.control('', Validators.required),
     backImageUrl: this.fb.control('', Validators.required),
     firstName: this.fb.control('', Validators.required),
@@ -40,6 +36,12 @@ export class AddIdentityCardFormComponent implements OnInit {
     issueDate: this.fb.control(new Date(Date.now()), Validators.required),
   });
 
+  constructor(
+    private digitalDocumentService: DigitalDocumentService,
+    private fb: FormBuilder,
+    private authService: AuthService
+  ) {}
+
   ngOnInit(): void {
     this.authService.getUserData().subscribe((data) => {
       this.userData = data;
@@ -58,6 +60,7 @@ export class AddIdentityCardFormComponent implements OnInit {
     const formData = this.addIdForm.value;
 
     const data: CreateIdentityCardDto = {
+      picture: formData.pictureUrl!,
       frontOfDocumentImage: formData.frontImageUrl!,
       backOfDocumentImage: formData.backImageUrl!,
       firstName: formData.firstName!,
@@ -96,6 +99,7 @@ export class AddIdentityCardFormComponent implements OnInit {
     }
 
     const data: CreateIdentityCardDto = {
+      picture: 'a',
       frontOfDocumentImage: 'a',
       backOfDocumentImage: 'a',
       firstName: this.userData!.firstName!,

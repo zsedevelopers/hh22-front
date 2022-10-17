@@ -11,6 +11,7 @@ import CreateIdentityCardDto from '../models/digital documents/create-identity-c
 import CreatePassportDto from '../models/digital documents/create-passport-dto';
 import WalletDto from '../models/digital documents/wallet-dto';
 import { Sex } from '../models/digital documents/enums/sex';
+import CreateDriverLicenceDto from '../models/digital documents/create-driver-licence-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -155,6 +156,21 @@ export class ApiService {
     return this.http.post<HttpResponse<null>>(
       `${this.baseUrl}/api/v1/document/passport`,
       { ...data, sex: Sex[data.sex] },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+
+  addDriverLicence(
+    data: CreateDriverLicenceDto,
+    token: string
+  ): Observable<HttpResponse<null>> {
+    return this.http.post<HttpResponse<null>>(
+      `${this.baseUrl}/api/v1/document/driver-licence`,
+      data,
       {
         headers: {
           Authorization: `Bearer ${token}`,

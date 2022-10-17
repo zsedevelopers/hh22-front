@@ -1,6 +1,7 @@
-import { Sex } from "./enums/sex";
+import { Sex } from './enums/sex';
 
 export default interface CreateIdentityCardDto {
+  picture: string;
   frontOfDocumentImage: string;
   backOfDocumentImage: string;
   firstName: string;

@@ -1,1 +1,58 @@
-<p>add-driver-licence-form works!</p>
+<form style="display: flex; flex-direction: column; width:400px" [formGroup]="addDriverLicenceForm">
+    <mat-form-field>
+        <mat-label>portrait photo link</mat-label>
+        <input matInput type="url" placeholder="image link" formControlName="pictureUrl">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>frontside link</mat-label>
+        <input matInput type="url" placeholder="image link" formControlName="frontImageUrl">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>backside link</mat-label>
+        <input matInput type="url" placeholder="image link" formControlName="backImageUrl">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>first name</mat-label>
+        <input matInput type="text" placeholder="first name" formControlName="firstName">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>second name</mat-label>
+        <input matInput type="text" placeholder="second name" formControlName="secondName">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>surname</mat-label>
+        <input matInput type="text" placeholder="surname" formControlName="surname">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>document number</mat-label>
+        <input matInput type="text" placeholder="document number" formControlName="documentNumber">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>date of birth</mat-label>
+        <input matInput type="date" placeholder="date of birth" formControlName="dateOfBirth">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>place of birth</mat-label>
+        <input matInput type="text" placeholder="place of birth" formControlName="placeOfBirth">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>issuing authority</mat-label>
+        <input matInput type="text" placeholder="issuing authority" formControlName="issuingAuthority">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>issue date</mat-label>
+        <input matInput type="date" placeholder="issue date" formControlName="issueDate">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>permissions</mat-label> <!--TODO: add-->
+        <input matInput type="date" placeholder="issue date" formControlName="issueDate">
+    </mat-form-field>
+
+</form>
+<button (click)="submitForm()">submit</button>
+<button (click)="dummySubmit()">dummy data</button>
