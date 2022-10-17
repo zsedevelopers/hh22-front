@@ -14,6 +14,9 @@ export class AddDocumentComponent implements OnInit {
 
   ngOnInit(): void {
     this.documentService.getWallet().subscribe((data) => {
+      if(data == null){
+        return;
+      }
       if (data.identityCard != null) {
         this.hasIdentityCard = true;
       }

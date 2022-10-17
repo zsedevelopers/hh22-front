@@ -7,8 +7,10 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AddDocumentComponent } from './add-document/add-document.component';
 import { AddIdentityCardFormComponent } from './add-identity-card-form/add-identity-card-form.component';
 import { AddPassportFormComponent } from './add-passport-form/add-passport-form.component';
-
-
+import { MaterialModule } from '../material/material.module';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,11 +19,15 @@ import { AddPassportFormComponent } from './add-passport-form/add-passport-form.
     DocumentContainerComponent,
     AddDocumentComponent,
     AddIdentityCardFormComponent,
-    AddPassportFormComponent
+    AddPassportFormComponent,
   ],
   imports: [
     CommonModule,
-    AppRoutingModule
-  ]
+    AppRoutingModule,
+    MaterialModule,
+    MatInputModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+  ],
 })
-export class DigitalDocumentSiteModule { }
+export class DigitalDocumentSiteModule {}

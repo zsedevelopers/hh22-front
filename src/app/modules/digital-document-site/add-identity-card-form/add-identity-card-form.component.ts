@@ -14,7 +14,7 @@ export class AddIdentityCardFormComponent implements OnInit {
   constructor(
     private digitalDocumentService: DigitalDocumentService,
     private fb: FormBuilder,
-    private authService:AuthService
+    private authService: AuthService
   ) {}
 
   addIdForm = this.fb.group({
@@ -24,10 +24,10 @@ export class AddIdentityCardFormComponent implements OnInit {
     secondName: this.fb.control(''),
     surname: this.fb.control('', Validators.required),
     nationality: this.fb.control('', Validators.required),
-    sex: this.fb.control('', Validators.required),
+    sex: this.fb.control('MAN', Validators.required),
     documentNumber: this.fb.control('', Validators.required),
-    expirationDate: this.fb.control('', Validators.required),
-    dateOfBirth: this.fb.control('', Validators.required),
+    expirationDate: this.fb.control(new Date(Date.now()), Validators.required),
+    dateOfBirth: this.fb.control(new Date(Date.now()), Validators.required),
     CAN: this.fb.control(''),
     placeOfBirth: this.fb.control('', Validators.required),
     pesel: this.fb.control('', Validators.required),
@@ -35,16 +35,57 @@ export class AddIdentityCardFormComponent implements OnInit {
     motherName: this.fb.control('', Validators.required),
     fatherName: this.fb.control('', Validators.required),
     issuingAuthority: this.fb.control('', Validators.required),
-    issueDate: this.fb.control('', Validators.required),
+    issueDate: this.fb.control(new Date(Date.now()), Validators.required),
   });
 
   ngOnInit(): void {}
 
-  submitForm() {}
+  submitForm() {
+    if (!this.authService.isLogged()) {
+      console.warn('you have to log in');
+      return;
+    }
+    if (this.addIdForm.invalid) {
+      console.warn('invalid form data');
+    }
+
+    const formData = this.addIdForm.value;
+
+    const data: CreateIdentityCardDto = {
+      frontOfDocumentImage: formData.frontImageUrl!,
+      backOfDocumentImage: formData.backImageUrl!,
+      firstName: formData.firstName!,
+      secondName: formData.secondName!,
+      surname: formData.surname!,
+      nationality: formData.nationality!,
+      documentNumber: formData.documentNumber!,
+      expiryDate: formData.expirationDate!,
+      birthDate: formData.dateOfBirth!,
+      sex: Sex.MAN,
+      CAN: formData.CAN!,
+      placeOfBirth: formData.placeOfBirth!,
+      pesel: formData.pesel!,
+      familyName: formData.familyName!,
+      motherName: formData.motherName!,
+      fatherName: formData.fatherName!,
+      issuingAuthority: formData.issuingAuthority!,
+      dateOfIssue: formData.issueDate!,
+    };
+
+    switch (formData.sex) {
+      case 'MAN':
+        data.sex = Sex.MAN;
+        break;
+      case 'WOMAN':
+        data.sex = Sex.WOMAN;
+        break;
+    }
+    this.addIdWithWalletCheck(data);
+  }
 
   dummySubmit() {
-    if(!this.authService.isLogged()){
-      console.warn('you have to log in')
+    if (!this.authService.isLogged()) {
+      console.warn('you have to log in');
       return;
     }
     const data: CreateIdentityCardDto = {
@@ -57,7 +98,7 @@ export class AddIdentityCardFormComponent implements OnInit {
       documentNumber: '123456',
       expiryDate: new Date(Date.now()),
       birthDate: new Date(Date.now()),
-      sex: Sex.MAN, //TODO: change
+      sex: Sex.MAN,
       CAN: null,
       placeOfBirth: 'mozambik',
       pesel: this.authService.userData?.pesel!,
@@ -67,9 +108,15 @@ export class AddIdentityCardFormComponent implements OnInit {
       issuingAuthority: 'IDzD',
       dateOfIssue: new Date(Date.now()),
     };
-    // this.digitalDocumentService.createWallet().subscribe(() => {
-    // });
-    this.digitalDocumentService.addIdentityCard(data).subscribe();
-
+    this.addIdWithWalletCheck(data);
+  }
+  addIdWithWalletCheck(data: CreateIdentityCardDto) {
+    if (this.digitalDocumentService.getWallet() != null) {
+      this.digitalDocumentService.addIdentityCard(data).subscribe();
+    } else {
+      this.digitalDocumentService.createWallet().subscribe(() => {
+        this.digitalDocumentService.addIdentityCard(data).subscribe();
+      });
+    }
   }
 }
