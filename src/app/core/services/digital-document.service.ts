@@ -11,24 +11,32 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class DigitalDocumentService {
+  
+  wallet: WalletDto | null = null;
+  
   constructor(
     private apiService: ApiService,
     private authService: AuthService
   ) {
-    if(authService.isLogged()){
-      this.getWallet().subscribe((data:WalletDto) => {
+    if (authService.isLogged()) {
+      this.getWallet().subscribe((data: WalletDto) => {
         this.wallet = data;
-      })
+      });
     }
   }
-  private wallet:WalletDto | null = null;
 
   createWallet(): Observable<HttpResponse<null>> {
     return this.apiService.createWallet(this.authService.getJwt()!);
   }
+
   getWallet(): Observable<WalletDto> {
     return this.apiService.getWallet(this.authService.getJwt()!);
   }
+  
+  private refreshWallet(){
+    this.apiService.getWallet(this.authService.getJwt()!).subscribe(data => this.wallet)
+  }
+
   addIdentityCard(data: CreateIdentityCardDto): Observable<HttpResponse<null>> {
     return this.apiService.addIdentityCard(data, this.authService.getJwt()!);
   }

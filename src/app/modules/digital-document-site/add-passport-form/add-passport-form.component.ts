@@ -105,7 +105,7 @@ export class AddPassportFormComponent implements OnInit {
   }
 
   private addPassportWithWalletCheck(data: CreatePassportDto) {
-    if (this.digitalDocumentService.getWallet() != null) {
+    if (this.digitalDocumentService.wallet != null) {
       this.digitalDocumentService.addPassport(data).subscribe();
     } else {
       this.digitalDocumentService.createWallet().subscribe(() => {

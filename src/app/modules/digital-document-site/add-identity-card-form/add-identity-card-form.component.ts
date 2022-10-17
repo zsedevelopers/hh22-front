@@ -111,7 +111,7 @@ export class AddIdentityCardFormComponent implements OnInit {
     this.addIdWithWalletCheck(data);
   }
   addIdWithWalletCheck(data: CreateIdentityCardDto) {
-    if (this.digitalDocumentService.getWallet() != null) {
+    if (this.digitalDocumentService.wallet != null) {
       this.digitalDocumentService.addIdentityCard(data).subscribe();
     } else {
       this.digitalDocumentService.createWallet().subscribe(() => {
