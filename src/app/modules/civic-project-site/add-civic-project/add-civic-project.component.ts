@@ -102,7 +102,6 @@ export class AddCivicProjectComponent implements OnInit {
   }
 
   addSchedule() {
-    this.schedules.controls;
     const scheduleForm: FormGroup = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],

@@ -48,10 +48,32 @@
         <mat-label>issue date</mat-label>
         <input matInput type="date" placeholder="issue date" formControlName="issueDate">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>permissions</mat-label> <!--TODO: add-->
-        <input matInput type="date" placeholder="issue date" formControlName="issueDate">
-    </mat-form-field>
+    <div class="permission-container">
+        <div>
+            <span>Permissions</span>
+            <button (click)="addPermission()">add new</button>
+        </div>
+        <ng-container formArrayName="permissions">
+            <ng-container *ngFor="let permissionForm of permissions.controls; let i=index" class="schedule-block">
+                <div [formGroup]="permissionForm">
+                    <h3>permission {{i+1}}</h3>
+                    <mat-form-field>
+                        <mat-label>type</mat-label>
+                        <mat-select formControlName="type">
+                            <mat-option *ngFor="let type of driverLicenceTypes" [value]="type">
+                                {{type}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                    <label>issue date</label>
+                    <input type="date" formControlName="issueDate" />
+                    <button (click)="deletePermission(i)">X</button>
+                    <hr>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
 
 </form>
 <button (click)="submitForm()">submit</button>

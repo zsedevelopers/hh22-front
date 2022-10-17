@@ -1,4 +1,4 @@
-import Permission from '../permission';
+import PermissionDto from './permission-dto';
 
 export default interface CreateDriverLicenceDto {
   picture: string;
@@ -9,7 +9,7 @@ export default interface CreateDriverLicenceDto {
   surname: string;
   placeOfBirth: string;
   birthDate: Date;
-  permitions: Permission[];
+  permitions: PermissionDto[];
   documentNumber: string;
   issuingAuthority: string;
   dateOfIssue: Date;
