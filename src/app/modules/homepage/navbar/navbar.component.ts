@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,13 +6,17 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
+  constructor(private elRef:ElementRef) { }
 
-  constructor() { }
+  height:number = (window.innerHeight) * 15
 
-  @Input()
-  height:number = 0
-
-  ngOnInit(): void {
+  @HostListener('window:resize')
+  resize(){
+    this.height= (window.innerHeight/100) * 15
+    console.log(this.height)
   }
 
+  ngOnInit(): void {
+    this.resize()
+  }
 }
