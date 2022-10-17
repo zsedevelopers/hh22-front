@@ -26,7 +26,7 @@ export class AddPassportFormComponent implements OnInit {
     secondName: this.fb.control(''),
     surname: this.fb.control('', Validators.required),
     nationality: this.fb.control('', Validators.required),
-    sex: this.fb.control(Sex.MAN, Validators.required),
+    sex: this.fb.control('MAN', Validators.required),
     documentNumber: this.fb.control('', Validators.required),
     expirationDate: this.fb.control(new Date(Date.now()), Validators.required),
     dateOfBirth: this.fb.control(new Date(Date.now()), Validators.required),
@@ -60,12 +60,20 @@ export class AddPassportFormComponent implements OnInit {
       documentNumber: formData.documentNumber!,
       expiryDate: formData.expirationDate!,
       birthDate: formData.dateOfBirth!,
-      sex: formData.sex!,
+      sex: Sex.MAN,
       placeOfBirth: formData.placeOfBirth!,
       pesel: formData.pesel!,
       issuingAuthority: formData.issuingAuthority!,
       dateOfIssue: formData.issueDate!,
     };
+    switch (formData.sex) {
+      case 'MAN':
+        data.sex = Sex.MAN;
+        break;
+      case 'WOMAN':
+        data.sex = Sex.WOMAN;
+        break;
+    }
     this.addPassportWithWalletCheck(data);
   }
 
