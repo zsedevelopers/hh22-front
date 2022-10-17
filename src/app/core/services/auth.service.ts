@@ -12,20 +12,37 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  userData: UserDto | null = null;
-
+  // userData: UserDto | null = {
+  //   firstName:"A",
+  //   city:"A",
+  //   email:"A",
+  //   pesel:"s",
+  //   phoneNumber:3,
+  //   surname:"A"
+  // };
   constructor(private apiService: ApiService, private router: Router) {
-    console.log('jwt')
-    console.log(this.getJwt())
+    console.log('jwt:');
+    console.log(this.getJwt());
+    console.log('user:');
+    // console.log(this.userData);
+    console.log('expired:');
+    console.log(this.isJwtExpired());
+
     if (this.getJwt() != null) {
+      console.log('a');
       if (this.isJwtExpired()) {
         this.logout();
       } else {
-        if (this.userData == null) {
-          this.getUserData().subscribe((data: UserDto) => {
-            this.userData = data;
-          });
-        }
+        console.log('b');
+        // if (this.userData == null) {
+        //   console.log('c');
+
+        //   this.getUserData().subscribe((data: UserDto) => {
+        //     this.userData = data;
+        //     console.log('user data 2:')
+        //     console.log(this.userData)
+        //   });
+        // }
       }
     }
   }
@@ -35,9 +52,9 @@ export class AuthService {
       .login(requestData)
       .subscribe((res: LoginResponse) => {
         this.setJwt(res.access_token);
-        this.userData = res.user;
+        // this.userData = res.user;
         console.log(`zalogowano jako:`);
-        console.log(this.userData);
+        console.log(res.user);
         this.router.navigate(['/']);
       });
   }
@@ -49,7 +66,7 @@ export class AuthService {
   }
 
   logout() {
-    console.log('logged out')
+    console.log('logged out');
     localStorage.removeItem('jwt');
     localStorage.removeItem('refreshToken');
     this.router.navigate(['/']);
@@ -58,7 +75,7 @@ export class AuthService {
   isLogged(): boolean {
     if (
       this.getJwt() != null &&
-      this.userData != null &&
+      // this.userData != null &&
       !this.isJwtExpired()
     ) {
       return true;

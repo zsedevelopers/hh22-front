@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import UserDto from 'src/app/core/models/common/user-dto';
 import CreateIdentityCardDto from 'src/app/core/models/digital documents/create-identity-card-dto';
 import { Sex } from 'src/app/core/models/digital documents/enums/sex';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -11,6 +12,7 @@ import { DigitalDocumentService } from 'src/app/core/services/digital-document.s
   styleUrls: ['./add-identity-card-form.component.scss'],
 })
 export class AddIdentityCardFormComponent implements OnInit {
+  userData: UserDto | null = null;
   constructor(
     private digitalDocumentService: DigitalDocumentService,
     private fb: FormBuilder,
@@ -38,7 +40,11 @@ export class AddIdentityCardFormComponent implements OnInit {
     issueDate: this.fb.control(new Date(Date.now()), Validators.required),
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.getUserData().subscribe((data) => {
+      this.userData = data;
+    });
+  }
 
   submitForm() {
     if (!this.authService.isLogged()) {
@@ -88,12 +94,13 @@ export class AddIdentityCardFormComponent implements OnInit {
       console.warn('you have to log in');
       return;
     }
+
     const data: CreateIdentityCardDto = {
       frontOfDocumentImage: 'a',
       backOfDocumentImage: 'a',
-      firstName: this.authService.userData?.firstName!,
+      firstName: this.userData!.firstName!,
       secondName: 'dobrze',
-      surname: this.authService.userData?.surname!,
+      surname: this.userData!.surname!,
       nationality: 'arabia saudyjska',
       documentNumber: '123456',
       expiryDate: new Date(Date.now()),
@@ -101,8 +108,8 @@ export class AddIdentityCardFormComponent implements OnInit {
       sex: Sex.MAN,
       CAN: null,
       placeOfBirth: 'mozambik',
-      pesel: this.authService.userData?.pesel!,
-      familyName: this.authService.userData?.surname!,
+      pesel: this.userData?.pesel!,
+      familyName: this.userData?.surname!,
       motherName: 'ewa',
       fatherName: 'adam',
       issuingAuthority: 'IDzD',
@@ -111,6 +118,7 @@ export class AddIdentityCardFormComponent implements OnInit {
     this.addIdWithWalletCheck(data);
   }
   addIdWithWalletCheck(data: CreateIdentityCardDto) {
+    console.log(this.digitalDocumentService.wallet);
     if (this.digitalDocumentService.wallet != null) {
       this.digitalDocumentService.addIdentityCard(data).subscribe();
     } else {

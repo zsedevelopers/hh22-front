@@ -18,6 +18,9 @@ import {
   styleUrls: ['./add-civic-project.component.scss'],
 })
 export class AddCivicProjectComponent implements OnInit {
+  userData: UserDto | null = null;
+
+
   addProjectForm = this.fb.group({
     title: this.fb.control('', Validators.required),
     city: this.fb.control('', Validators.required),
@@ -65,15 +68,15 @@ export class AddCivicProjectComponent implements OnInit {
       return;
     }
 
-    this.dummyData.city = this.authService.userData?.city!;
-    this.dummyData.authors = [this.authService.userData?.pesel!];
+    this.dummyData.city = this.userData?.city!;
+    this.dummyData.authors = [this.userData?.pesel!];
 
     const data: AddCivilProjectRequest = {
       title: this.dummyData.title!,
       city: this.dummyData.city!,
       description: this.dummyData.description!,
       justification: this.dummyData.justification!,
-      authors: [this.authService.userData?.pesel!],
+      authors: [this.userData?.pesel!],
       likedBy: [],
       estimate: this.dummyEstimate,
       schedulesOfActivities: this.dummySchedule,
@@ -88,7 +91,11 @@ export class AddCivicProjectComponent implements OnInit {
     private fb: FormBuilder
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.getUserData().subscribe((data) => {
+      this.userData = data;
+    });
+  }
 
   get schedules(): FormArray<FormGroup> {
     return this.addProjectForm.controls['schedules'] as FormArray;
@@ -121,7 +128,7 @@ export class AddCivicProjectComponent implements OnInit {
 
     const formData = this.addProjectForm.value;
 
-    if (formData.city != this.authService.userData?.city) {
+    if (formData.city != this.userData?.city) {
       console.warn(`input city doesn't match user's city`);
       return;
     }
@@ -131,7 +138,7 @@ export class AddCivicProjectComponent implements OnInit {
       city: formData.city!,
       description: formData.description!,
       justification: formData.justification!,
-      authors: [this.authService.userData?.pesel!],
+      authors: [this.userData?.pesel!],
       likedBy: [],
       estimate: {
         title: formData.estimateTitle!,

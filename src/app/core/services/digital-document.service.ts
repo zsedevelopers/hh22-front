@@ -18,6 +18,8 @@ export class DigitalDocumentService {
     private apiService: ApiService,
     private authService: AuthService
   ) {
+    console.log('is logged: ')
+    console.log(authService.isLogged())
     if (authService.isLogged()) {
       this.getWallet().subscribe((data: WalletDto) => {
         this.wallet = data;

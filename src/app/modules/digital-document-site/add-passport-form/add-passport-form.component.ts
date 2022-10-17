@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import UserDto from 'src/app/core/models/common/user-dto';
 import CreateIdentityCardDto from 'src/app/core/models/digital documents/create-identity-card-dto';
 import CreatePassportDto from 'src/app/core/models/digital documents/create-passport-dto';
 import { Sex } from 'src/app/core/models/digital documents/enums/sex';
@@ -18,6 +19,7 @@ export class AddPassportFormComponent implements OnInit {
     private authService: AuthService
   ) {}
 
+  userData: UserDto | null = null;
   addPassportForm = this.fb.group({
     picture: this.fb.control('', Validators.required),
     frontImageUrl: this.fb.control('', Validators.required),
@@ -36,7 +38,11 @@ export class AddPassportFormComponent implements OnInit {
     issueDate: this.fb.control(new Date(Date.now()), Validators.required),
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.authService.getUserData().subscribe((data) => {
+      this.userData = data;
+    });
+  }
 
   submitForm() {
     if (!this.authService.isLogged()) {
@@ -86,16 +92,16 @@ export class AddPassportFormComponent implements OnInit {
       picture: 'a',
       frontOfDocumentImage: 'a',
       backOfDocumentImage: 'a',
-      firstName: this.authService.userData?.firstName!,
+      firstName: this.userData?.firstName!,
       secondName: 'dobrze',
-      surname: this.authService.userData?.surname!,
+      surname: this.userData?.surname!,
       nationality: 'arabia saudyjska',
       documentNumber: '123456',
       expiryDate: new Date(Date.now()),
       birthDate: new Date(Date.now()),
       sex: Sex.MAN,
       placeOfBirth: 'mozambik',
-      pesel: this.authService.userData?.pesel!,
+      pesel: this.userData?.pesel!,
       issuingAuthority: 'IDzD',
       dateOfIssue: new Date(Date.now()),
     };
