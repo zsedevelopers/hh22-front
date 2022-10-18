@@ -19,6 +19,9 @@ import { CivicProjectContainerComponent } from './modules/civic-project-site/civ
 import { ShowCivicProjectsComponent } from './modules/civic-project-site/show-civic-projects/show-civic-projects.component';
 import { MiddlebarComponent } from './modules/homepage/middlebar/middlebar.component';
 
+import { AdminPanelContainerComponent } from './modules/admin-panel/admin-panel-container/admin-panel-container.component';
+import { CivicProjectPanelComponent } from './modules/admin-panel/civic-project-panel/civic-project-panel.component';
+import { DigitalDocumentPanelComponent } from './modules/admin-panel/digital-document-panel/digital-document-panel.component';
 const routes: Routes = [
   { path: '', component: MiddlebarComponent },
   {
@@ -59,6 +62,22 @@ const routes: Routes = [
           { path: 'passport', component: AddPassportFormComponent },
           { path: 'driver-licence', component: AddDriverLicenceFormComponent },
         ],
+      },
+    ],
+  },
+  {
+    path: 'admin',
+    component: AdminPanelContainerComponent,
+    children: [
+      {
+        path: 'civic-projects',
+        component: CivicProjectPanelComponent,
+        // children: [{'details/:id', component:}],
+      },
+      {
+        path: 'documents',
+        component: DigitalDocumentPanelComponent,
+        // children: [{'details/:documentNumber', component:}],
       },
     ],
   },
