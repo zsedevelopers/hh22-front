@@ -1,15 +1,13 @@
-.container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-}
-.navbar{
+:host{
   width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.schedule-container{
-    width: fit-content;
-}
-
-.estimates-container{
-  width: fit-content;
+.container{
+  width: 95%;
+  height: 95%;
+  border: 2px solid black;
+  box-sizing: border-box;
 }

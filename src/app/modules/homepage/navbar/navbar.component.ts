@@ -1,4 +1,5 @@
 import {Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -6,7 +7,7 @@ import {Component, ElementRef, HostListener, Input, OnInit} from '@angular/core'
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  constructor(private elRef:ElementRef) { }
+  constructor(private elRef:ElementRef, public  router:Router) { }
 
   height:number = (window.innerHeight) * 15
 

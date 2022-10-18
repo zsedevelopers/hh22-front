@@ -1,11 +1,10 @@
-<p>add-civic-project works!</p>
 <div class="container" [formGroup]="addProjectForm">
     <form [formGroup]="addProjectForm" style="display: flex; flex-direction:column; width:300px; margin-left:10px">
         <label style="margin-top: 10px;">title</label>
         <input type="text" placeholder="title" formControlName="title">
 
-        <label style="margin-top: 10px;">city</label>
-        <input type="text" placeholder="city" formControlName="city">
+        <label style="margin-top: 10px;">Miasto: (zablokowane do miasta zalogowanego uzytkownika)</label>
+        <input type="text" placeholder="city" formControlName="city" value="">
 
         <label style="margin-top: 10px;">krotki opis</label>
         <input type="text" placeholder="description" formControlName="shortDescription">
@@ -83,4 +82,3 @@
     </ng-container>
   </div>
 </div>
-<button (click)="addProject()">dummy data</button>

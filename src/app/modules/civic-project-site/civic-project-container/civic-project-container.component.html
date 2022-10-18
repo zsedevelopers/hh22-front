@@ -1,3 +1,6 @@
-<button mat-button routerLink="add">Dodaj projekt</button>
-<button mat-raised-button color="primary" routerLink="show">Pokaz projekty obywatelskie</button>
-<router-outlet></router-outlet>
+<div class="container">
+  <div class="add-link" [ngClass]="router.url=='/civicProject/add'?'active':''"  routerLink="add">Zaproponuj projekt obywatelski</div>
+  <div class="show-link" [ngClass]="router.url=='/civicProject/show'?'active':''" routerLink="show">Pokaż projekty obywatelskie</div>
+  <router-outlet></router-outlet>
+</div>
+

@@ -83,7 +83,7 @@ export class AddCivicProjectComponent implements OnInit {
   constructor(
     private civilProjectService: CivilProjectService,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {}
 
   ngOnInit(): void {}

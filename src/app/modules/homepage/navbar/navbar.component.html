@@ -1,12 +1,14 @@
 <div class="container" [style.height]="height">
-  <mat-grid-list cols="100" gutterSize="0" [rowHeight]="height">
-    <mat-grid-tile rowspan="1" colspan="25"></mat-grid-tile>
-    <!--  <mat-grid-tile rowspan="1" colspan="10"><button class="contact" mat-flat-button >Kontakt</button></mat-grid-tile>-->
-    <mat-grid-tile rowspan="1" colspan="25" [style.color]="'white'" [style.font-size]="'60px'">ProjectName</mat-grid-tile>
-    <mat-grid-tile rowspan="1" colspan="20"></mat-grid-tile><!--logo-->
-    <mat-grid-tile rowspan="1" colspan="10"><button class="login" mat-flat-button routerLink="auth/login">Zaloguj się</button></mat-grid-tile>
-    <mat-grid-tile rowspan="1" colspan="3"></mat-grid-tile>
-    <mat-grid-tile rowspan="1" colspan="10"><button  class="register" mat-flat-button routerLink="auth/register">Zarejestruj sie</button></mat-grid-tile>
-    <mat-grid-tile rowspan="1" colspan="5"></mat-grid-tile>
+  <mat-grid-list cols="100" gutterSize="0" [rowHeight]="height/10">
+    <mat-grid-tile rowspan="8" colspan="25"></mat-grid-tile>
+    <mat-grid-tile rowspan="8" colspan="25" routerLink="" [style.color]="'white'" [style.font-size]="'60px'"><a class="logo">ProjectName</a></mat-grid-tile>
+    <mat-grid-tile rowspan="8" colspan="15"></mat-grid-tile><!--logo-->
+    <mat-grid-tile rowspan="8" colspan="10"><button class="login" mat-flat-button routerLink="auth/login">Zaloguj się</button></mat-grid-tile>
+    <mat-grid-tile rowspan="8" colspan="2"></mat-grid-tile>
+    <mat-grid-tile rowspan="8" colspan="10"><button  class="register" mat-flat-button routerLink="auth/register">Zarejestruj sie</button></mat-grid-tile>
+    <mat-grid-tile rowspan="8" colspan="5"></mat-grid-tile>
+    <mat-grid-tile *ngIf="router.url=='/'" rowspan="2" colspan="100"></mat-grid-tile>
+    <mat-grid-tile *ngIf="router.url!='/'" rowspan="2" colspan="25"></mat-grid-tile>
+    <mat-grid-tile *ngIf="router.url!='/'" rowspan="2" colspan="50"><div class="nav-buttons"><a>Feautere</a><a>e dowod</a><a>Przypominajka</a></div></mat-grid-tile>
   </mat-grid-list>
 </div>

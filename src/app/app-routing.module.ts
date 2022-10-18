@@ -12,7 +12,7 @@ import {MiddlebarComponent} from "./modules/homepage/middlebar/middlebar.compone
 
 
 const routes: Routes = [
-    {path:'mid', component:MiddlebarComponent},
+    {path:'', component:MiddlebarComponent},
     {path:'civicProject', component:CivicProjectContainerComponent, children:[
         {path: 'add', component:AddCivicProjectComponent},
         {path: 'show', component:ShowCivicProjectsComponent}]},
