@@ -1,84 +1,120 @@
 <div class="container" [formGroup]="addProjectForm">
-    <form [formGroup]="addProjectForm" style="display: flex; flex-direction:column; width:300px; margin-left:10px">
-        <label style="margin-top: 10px;">title</label>
-        <input type="text" placeholder="title" formControlName="title">
+    <form [formGroup]="addProjectForm"  class="formStyle">
+      <div class="shortInputs">
+        <mat-form-field class="white" appearance="fill">
+          <mat-label>Tytuł projektu</mat-label>
+          <input matInput type="text" placeholder="Np. Skatepark w {lokalizacja}" formControlName="title">
+        </mat-form-field>
 
-        <label style="margin-top: 10px;">Miasto: (zablokowane do miasta zalogowanego uzytkownika)</label>
-        <input type="text" placeholder="city" formControlName="city" value="">
+        <mat-form-field>
+          <mat-label>Miasto: (zablokowane do miasta zalogowanego uzytkownika)</mat-label>
+          <input matInput type="text" placeholder="Np. Warszawa" formControlName="city" [value]="userCity">
+        </mat-form-field>
 
-        <label style="margin-top: 10px;">krotki opis</label>
-        <input type="text" placeholder="description" formControlName="shortDescription">
+        <mat-form-field appearance="outline">
+          <mat-label>Krótki opis widoczny na ikonce projektu</mat-label>
+          <textarea class="short-desc" matInput type="text" placeholder="Szybkie wprowadzenie" formControlName="shortDescription"></textarea>
+        </mat-form-field>
 
-        <label style="margin-top: 10px;">description</label>
-        <input type="text" placeholder="description" formControlName="description">
+        <mat-form-field appearance="fill">
+          <mat-label>Kategoria</mat-label>
+          <mat-select formControlName="category">
+            <mat-option [value]=listOfCategories[0]>Sport</mat-option>
+            <mat-option [value]=listOfCategories[1]>Edukacja</mat-option>
+            <mat-option [value]=listOfCategories[2]>Kultura</mat-option>
+            <mat-option [value]=listOfCategories[3]>Zdrowie</mat-option>
+            <mat-option [value]=listOfCategories[4]>Środowisko</mat-option>
+            <mat-option [value]=listOfCategories[5]>Infrastruktura</mat-option>
+            <mat-option [value]=listOfCategories[6]>Natura</mat-option>
+            <mat-option [value]=listOfCategories[7]>Społeczność</mat-option>
+            <mat-option [value]=listOfCategories[8]>Inne</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="longInputs">
+        <mat-form-field appearance="outline">
+          <mat-label>Opis całego projektu</mat-label>
+          <textarea class="long-desc" matInput type="text" placeholder="Pełny opis" formControlName="description"></textarea>
+        </mat-form-field>
 
-        <label style="margin-top: 10px;">justification</label>
-        <input type="text" placeholder="justification" formControlName="justification">
-
-      <mat-form-field appearance="fill">
-        <mat-label>Kategoria</mat-label>
-        <mat-select formControlName="category">
-          <mat-option [value]=listOfCategories[0]>Sport</mat-option>
-          <mat-option [value]=listOfCategories[1]>Edukacja</mat-option>
-          <mat-option [value]=listOfCategories[2]>Kultura</mat-option>
-          <mat-option [value]=listOfCategories[3]>Zdrowie</mat-option>
-          <mat-option [value]=listOfCategories[4]>Środowisko</mat-option>
-          <mat-option [value]=listOfCategories[5]>Infrastruktura</mat-option>
-          <mat-option [value]=listOfCategories[6]>Natura</mat-option>
-          <mat-option [value]=listOfCategories[7]>Społeczność</mat-option>
-          <mat-option [value]=listOfCategories[8]>Inne</mat-option>
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Uzasadnienie całego projektu</mat-label>
+          <textarea class="long-desc" matInput type="text" placeholder="Tutaj zamieść uzasadnienie dla projektu" formControlName="justification"></textarea>
+        </mat-form-field>
+      </div>
 
 
-        <button (click)="onFormSubmit()">prześlij</button>
     </form>
 
-    <div class="schedule-container">
-        <div>
-            <span>Estimate</span>
-            <button (click)="addEstimate()">add new</button>
-        </div>
+  <div class="listContainer" id="listContainers">
+    <mat-expansion-panel style="width: 100%">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Harmonogram</mat-panel-title>
+        <mat-panel-description>Harmonogram realizacji projektu</mat-panel-description>
+      </mat-expansion-panel-header>
+
         <ng-container formArrayName="estimates">
-            <ng-container *ngFor="let estimateForm of estimates.controls; let i=index" class="estimate-block">
-                <div [formGroup]="estimateForm">
-                    <h3>schedule {{i+1}}</h3>
-                    <label>title</label>
-                    <input type="text" formControlName="title" />
+          <ng-container *ngFor="let estimateForm of estimates.controls; let i=index" >
+            <div [formGroup]="estimateForm" class="estimate-block">
+              <mat-form-field class="scheduleTitle" appearance="fill">
+                <mat-label>Tytul</mat-label>
+                <input matInput type="text" formControlName="title"/>
+              </mat-form-field>
 
-                    <label>description</label>
-                    <input type="text" formControlName="description" />
+              <mat-form-field class="scheduleDesc" appearance="fill">
+                <mat-label>Opis</mat-label>
+                <input matInput type="text" formControlName="description"/>
+              </mat-form-field>
 
-                    <label>year</label>
-                    <input type="number" formControlName="cost" />
-                    <button (click)="deleteEstimate(i)">X</button>
-                    <hr>
-                </div>
-            </ng-container>
+              <mat-form-field class="scheduleThird" appearance="fill">
+                <mat-label>Koszt</mat-label>
+                <input matInput type="number" formControlName="cost"/>
+              </mat-form-field>
+
+              <button mat-raised-button color="warn" class="scheduleDelete" (click)="deleteEstimate(i)">Usuń</button>
+            </div>
+          </ng-container>
         </ng-container>
-    </div>
 
-  <div class="estimates-container">
-    <div>
-      <span>Schedule</span>
-      <button (click)="addSchedule()">add new</button>
-    </div>
-    <ng-container formArrayName="schedules">
-      <ng-container *ngFor="let scheduleForm of schedules.controls; let i=index" class="schedule-block">
-        <div [formGroup]="scheduleForm">
-          <h3>schedule {{i+1}}</h3>
-          <label>title</label>
-          <input type="text" formControlName="title" />
-
-          <label>description</label>
-          <input type="text" formControlName="description" />
-
-          <label>year</label>
-          <input type="month" formControlName="date" />
-          <button (click)="deleteSchedule(i)">X</button>
-          <hr>
-        </div>
-      </ng-container>
-    </ng-container>
+    </mat-expansion-panel>
+    <button class="addButton" mat-raised-button color="primary" (click)="addEstimate()">Nowy</button>
   </div>
-</div>
+
+
+  <div class="listContainer">
+    <mat-expansion-panel style="width: 100%">
+      <mat-expansion-panel-header>
+        <mat-panel-title>Kosztorys</mat-panel-title>
+        <mat-panel-description>Kosztorys projektu</mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <ng-container formArrayName="schedules">
+        <ng-container *ngFor="let scheduleForm of schedules.controls; let i=index">
+          <div [formGroup]="scheduleForm" class="estimate-block">
+            <mat-form-field class="scheduleTitle" appearance="fill">
+              <mat-label>Tytuł</mat-label>
+              <input matInput type="text" formControlName="title" />
+            </mat-form-field>
+
+            <mat-form-field class="scheduleDesc" appearance="fill">
+              <mat-label>Opis</mat-label>
+              <input matInput type="text" formControlName="description" />
+            </mat-form-field>
+
+            <mat-form-field class="scheduleThird" appearance="fill">
+              <mat-label>Data</mat-label>
+              <input matInput type="month" formControlName="date" />
+            </mat-form-field>
+
+            <button mat-raised-button color="warn" class="scheduleDelete" (click)="deleteSchedule(i)">Usuń</button>
+          </div>
+        </ng-container>
+      </ng-container>
+    </mat-expansion-panel>
+    <button class="addButton" mat-raised-button color="primary" (click)="addSchedule()">Nowy</button>
+  </div>
+
+
+  <div class="submitButtonContainer"><button mat-raised-button color="primary" class="submitButton" (click)="onFormSubmit()">Prześlij</button>
+  </div>
+  </div>

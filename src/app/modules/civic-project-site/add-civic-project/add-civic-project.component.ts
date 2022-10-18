@@ -6,11 +6,13 @@ import {AuthService} from 'src/app/core/services/auth.service';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
 import {ProjectCategory} from "../../../core/models/civil projects/project-category";
 import AddEstimateDto from "../../../core/models/civil projects/add-estimate-dto";
+import {ApiService} from "../../../core/services/api.service";
+import UserDto from "../../../core/models/common/user-dto";
 
 @Component({
   selector: 'app-add-civic-project',
   templateUrl: './add-civic-project.component.html',
-  styleUrls: ['./add-civic-project.component.scss'],
+  styleUrls: ['./add-civic-project.component.scss']
 })
 export class AddCivicProjectComponent implements OnInit {
 
@@ -18,7 +20,7 @@ export class AddCivicProjectComponent implements OnInit {
 
   addProjectForm = this.fb.group({
     title: this.fb.control('', Validators.required),
-    city: this.fb.control('', Validators.required),
+    city: new FormControl<string>({ value: '', disabled:true }),
     shortDescription: this.fb.control('', Validators.required),
     description: this.fb.control('', Validators.required),
     justification: this.fb.control('', Validators.required),
@@ -27,64 +29,16 @@ export class AddCivicProjectComponent implements OnInit {
     category: new FormControl<ProjectCategory>(ProjectCategory.OTHER, {nonNullable: true})
   });
 
-  // dummyEstimate: AddEstimateDto = {
-  //   title: 'estimatedTytul',
-  //   description: 'estimatedDescription',
-  //   cost: 69,
-  // };
-  //
-  // dummySchedule: CreateScheduleDto[] = [
-  //   { title: 'scheduleTytul', description: 'scheduleOpis', date: 20 },
-  // ];
-
-  // // dummyUser: UserDto = {
-  // //   name: 'marek',
-  // //   surname: 'marucha',
-  // //   email: 'milosz@gmail.com',
-  // //   phoneNumber: 123123123,
-  // //   PESEL: '12345678901',
-  // //   city: 'olsztyn',
-  // // };
-
-  // dummyData: AddCivilProjectRequest = {
-  //   title: 'titel',
-  //   city: 'a',
-  //   description: 'gowno',
-  //   justification: 'chec kupy',
-  //   authors: ['jelitogrube'],
-  //   likedBy: [],
-  //   estimate: this.dummyEstimate,
-  //   schedulesOfActivities: this.dummySchedule,
-  // };
-
-  addProject() {
-    if (!this.authService.isLogged()) {
-      console.warn(`you're not logged in`);
-      return;
-    }
-
-    // this.dummyData.city = this.authService.userData?.city!;
-    // this.dummyData.authors = [this.authService.userData?.pesel!];
-
-    // const data: AddCivilProjectRequest = {
-    //   title: this.dummyData.title!,
-    //   city: this.dummyData.city!,
-    //   description: this.dummyData.description!,
-    //   justification: this.dummyData.justification!,
-    //   authors: [this.authService.userData?.pesel!],
-    //   likedBy: [],
-    //   estimate: this.dummyEstimate,
-    //   schedulesOfActivities: this.dummySchedule,
-    // };
-
-    //this.civilProjectService.addCivilProject(data).subscribe(()=>{});
-  }
 
   constructor(
     private civilProjectService: CivilProjectService,
     private authService: AuthService,
     private fb: FormBuilder,
+    private userData:AuthService
   ) {}
+
+  userCity:string = ''
+  user = this.userData.getUserData().subscribe(x=>{this.userCity = x.city.toLowerCase()})
 
   ngOnInit(): void {}
 

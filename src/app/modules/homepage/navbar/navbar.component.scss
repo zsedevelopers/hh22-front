@@ -1,3 +1,6 @@
+:host{
+
+}
 button{
   font-size: 30px;
   background-color: #ecc351;
@@ -11,13 +14,13 @@ button{
   color:white;
 }
 .register{
-  background-color: #2c91e5;
   font-size:25px
 }
 .container{
   background-color: #131313;
   width: 100%;
-
+  border-bottom: 2px solid white;
+  box-sizing: border-box;
 }
 .nav-buttons{
   width: 100%;
@@ -34,6 +37,7 @@ a{
   border-radius: 5px;
   font-size: 20px;
   padding-top: 5px;
+
 }
 a:hover{
   background-color: rgba(44,145,229,0.95);

@@ -1,13 +1,86 @@
 :host{
   width: 100%;
-  height: 100%;
+  height: 95%;
+  display: flex;
+  margin-top: 20px;
+
+}
+#listContainers{
+  .mat-form-field-underline{
+    background-color: #ecc351!important;
+  }
+}
+
+.container{
+  width: 98%;
+  height: 95%;
+  box-sizing: border-box;
+
+}
+.formStyle{
+  display: flex;
+  width:100%;
+  flex-wrap: wrap;
+  margin-left:10px
+}
+.mat-form-field{
+  width: 90%;
+}
+input{
+  width: 90%;
+}
+.short-desc{
+  height: 50px;
+}
+.long-desc{
+  height: 100px;
+}
+.shortInputs{
+  width: 40%;
+}
+.longInputs{
+  width: 60%;
+}
+.listContainer{
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  margin-left: 2.5%;
+}
+.addButton{
+  width:10%;
+  height: 48px;
+}
+.estimate-block{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  box-sizing: border-box;
+
+}
+.scheduleTitle{
+  width: 25%;
+}
+.scheduleDesc{
+  width: 50%;
+}
+.scheduleThird{
+  width: 10%;
+}
+.scheduleDelete{
+  height: fit-content;
+}
+.submitButtonContainer{
+  width: 100%;
+  height: auto;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
-.container{
-  width: 95%;
-  height: 95%;
-  border: 2px solid black;
-  box-sizing: border-box;
+.submitButton{
+  width: 10%;
+  font-size: 20px;
+  padding: 5px;
+  margin-bottom: 20px;
 }
