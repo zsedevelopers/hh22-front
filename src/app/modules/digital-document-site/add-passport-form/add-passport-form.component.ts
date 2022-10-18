@@ -4,6 +4,7 @@ import UserDto from 'src/app/core/models/common/user-dto';
 import CreateIdentityCardDto from 'src/app/core/models/digital documents/create-identity-card-dto';
 import CreatePassportDto from 'src/app/core/models/digital documents/create-passport-dto';
 import { Sex } from 'src/app/core/models/digital documents/enums/sex';
+import WalletDto from 'src/app/core/models/digital documents/wallet-dto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DigitalDocumentService } from 'src/app/core/services/digital-document.service';
 
@@ -20,6 +21,8 @@ export class AddPassportFormComponent implements OnInit {
   ) {}
 
   userData: UserDto | null = null;
+  wallet: WalletDto | null = null;
+
   addPassportForm = this.fb.group({
     picture: this.fb.control('', Validators.required),
     frontImageUrl: this.fb.control('', Validators.required),
@@ -41,6 +44,9 @@ export class AddPassportFormComponent implements OnInit {
   ngOnInit(): void {
     this.authService.getUserData().subscribe((data) => {
       this.userData = data;
+    });
+    this.digitalDocumentService.getWallet().subscribe((data) => {
+      this.wallet = data;
     });
   }
 
@@ -111,7 +117,7 @@ export class AddPassportFormComponent implements OnInit {
   }
 
   private addPassportWithWalletCheck(data: CreatePassportDto) {
-    if (this.digitalDocumentService.wallet != null) {
+    if (this.wallet != null) {
       this.digitalDocumentService.addPassport(data).subscribe();
     } else {
       this.digitalDocumentService.createWallet().subscribe(() => {

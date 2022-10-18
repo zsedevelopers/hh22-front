@@ -6,6 +6,7 @@ import CreateIdentityCardDto from 'src/app/core/models/digital documents/create-
 import { DriverLicenceType } from 'src/app/core/models/digital documents/enums/driver-licence-type';
 import { Sex } from 'src/app/core/models/digital documents/enums/sex';
 import PermissionDto from 'src/app/core/models/digital documents/permission-dto';
+import WalletDto from 'src/app/core/models/digital documents/wallet-dto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DigitalDocumentService } from 'src/app/core/services/digital-document.service';
 
@@ -16,6 +17,7 @@ import { DigitalDocumentService } from 'src/app/core/services/digital-document.s
 })
 export class AddDriverLicenceFormComponent implements OnInit {
   userData: UserDto | null = null;
+  wallet: WalletDto | null = null;
   driverLicenceTypes = [
     'AM',
     'A1',
@@ -60,7 +62,11 @@ export class AddDriverLicenceFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.digitalDocumentService
+      .getWallet()
+      .subscribe((data) => (this.wallet = data));
+  }
 
   submitForm() {
     if (!this.authService.isLogged()) {
@@ -128,13 +134,16 @@ export class AddDriverLicenceFormComponent implements OnInit {
       placeOfBirth: 'a',
       issuingAuthority: 'a',
       dateOfIssue: new Date(Date.now()),
-      permitions: [],
+      permitions: [
+        { type: DriverLicenceType.A, dateOfIssue: new Date(Date.now()) },
+        { type: DriverLicenceType.B, dateOfIssue: new Date(Date.now()) },
+      ],
     };
     this.digitalDocumentService.addDriverLicence(data).subscribe();
   }
 
   addDriverLicenceWithWalletCheck(data: CreateDriverLicenceDto) {
-    if (this.digitalDocumentService.wallet != null) {
+    if (this.wallet != null) {
       this.digitalDocumentService.addDriverLicence(data).subscribe();
     } else {
       this.digitalDocumentService.createWallet().subscribe(() => {

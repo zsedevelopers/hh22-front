@@ -12,19 +12,19 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class DigitalDocumentService {
-  wallet: WalletDto | null = null;
+  // wallet: WalletDto | null = null;
 
   constructor(
     private apiService: ApiService,
     private authService: AuthService
   ) {
-    console.log('is logged: ');
-    console.log(authService.isLogged());
-    if (authService.isLogged()) {
-      this.getWallet().subscribe((data: WalletDto) => {
-        this.wallet = data;
-      });
-    }
+    // console.log('is logged: ');
+    // console.log(authService.isLogged());
+    // if (authService.isLogged()) {
+      // this.getWallet().subscribe((data: WalletDto) => {
+        // this.wallet = data;
+      // });
+    // }
   }
 
   createWallet(): Observable<HttpResponse<null>> {
@@ -35,11 +35,11 @@ export class DigitalDocumentService {
     return this.apiService.getWallet(this.authService.getJwt()!);
   }
 
-  private refreshWallet() {
-    return this.apiService
-      .getWallet(this.authService.getJwt()!)
-      .subscribe((data) => this.wallet);
-  }
+  // private refreshWallet() {
+  //   return this.apiService
+  //     .getWallet(this.authService.getJwt()!)
+  //     .subscribe((data) => this.wallet);
+  // }
 
   addIdentityCard(data: CreateIdentityCardDto): Observable<HttpResponse<null>> {
     return this.apiService.addIdentityCard(data, this.authService.getJwt()!);

@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import UserDto from 'src/app/core/models/common/user-dto';
 import CreateIdentityCardDto from 'src/app/core/models/digital documents/create-identity-card-dto';
 import { Sex } from 'src/app/core/models/digital documents/enums/sex';
+import WalletDto from 'src/app/core/models/digital documents/wallet-dto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DigitalDocumentService } from 'src/app/core/services/digital-document.service';
 
@@ -13,7 +14,7 @@ import { DigitalDocumentService } from 'src/app/core/services/digital-document.s
 })
 export class AddIdentityCardFormComponent implements OnInit {
   userData: UserDto | null = null;
-
+  wallet: WalletDto | null = null;
   addIdForm = this.fb.group({
     pictureUrl: this.fb.control('', Validators.required),
     frontImageUrl: this.fb.control('', Validators.required),
@@ -46,6 +47,9 @@ export class AddIdentityCardFormComponent implements OnInit {
     this.authService.getUserData().subscribe((data) => {
       this.userData = data;
     });
+    this.digitalDocumentService
+      .getWallet()
+      .subscribe((data) => (this.wallet = data));
   }
 
   submitForm() {
@@ -122,8 +126,8 @@ export class AddIdentityCardFormComponent implements OnInit {
     this.addIdWithWalletCheck(data);
   }
   addIdWithWalletCheck(data: CreateIdentityCardDto) {
-    console.log(this.digitalDocumentService.wallet);
-    if (this.digitalDocumentService.wallet != null) {
+    console.log(this.wallet);
+    if (this.wallet != null) {
       this.digitalDocumentService.addIdentityCard(data).subscribe();
     } else {
       this.digitalDocumentService.createWallet().subscribe(() => {
