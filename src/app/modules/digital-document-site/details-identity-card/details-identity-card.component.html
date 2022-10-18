@@ -1,1 +1,14 @@
-<p>details-identity-card works!</p>
+<p>Dowód osobisty</p>
+<h3>Dane:</h3>
+<ul>
+    <li>Status: {{identityCard?.documentStatus}}</li>
+    <li>imie: {{identityCard?.firstName}} {{identityCard?.secondName}}</li>
+    <li>nazwisko: {{identityCard?.surname}}</li>
+    <li>zdjecie:
+        <img [src]="identityCard?.picture" alt="zdjecie">
+    </li>
+    <li>data urodzenia: {{identityCard?.birthDate}}</li>
+    <li>miejsce urodzienia: {{identityCard?.placeOfBirth}}</li>
+    <li>wydane przez: {{identityCard?.issuingAuthority}}</li>
+    <li>dnia: {{identityCard?.dateOfIssue}}</li>
+</ul>

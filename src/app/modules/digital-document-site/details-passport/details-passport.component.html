@@ -1,1 +1,14 @@
-<p>details-passport works!</p>
+<p>Paszport</p>
+<h3>Dane:</h3>
+<ul>
+    <li>Status: {{passport?.documentStatus}}</li>
+    <li>imie: {{passport?.firstName}} {{passport?.secondName}}</li>
+    <li>nazwisko: {{passport?.surname}}</li>
+    <li>zdjecie:
+        <img [src]="passport?.picture" alt="zdjecie">
+    </li>
+    <li>data urodzenia: {{passport?.birthDate}}</li>
+    <li>miejsce urodzienia: {{passport?.placeOfBirth}}</li>
+    <li>wydane przez: {{passport?.issuingAuthority}}</li>
+    <li>dnia: {{passport?.dateOfIssue}}</li>
+</ul>

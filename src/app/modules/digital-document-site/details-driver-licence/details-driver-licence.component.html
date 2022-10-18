@@ -1,7 +1,15 @@
 <p>Prawo jazdy</p>
 <h3>Dane:</h3>
 <ul>
+    <li>Status: {{driverLicence?.documentStatus}}</li>
     <li>imie: {{driverLicence?.firstName}} {{driverLicence?.secondName}}</li>
     <li>nazwisko: {{driverLicence?.surname}}</li>
-    <li>kategoria: <span *ngFor="let permission of driverLicence?.permissions">{{permission.type}} </span></li>
+    <li>zdjecie:
+        <img [src]="driverLicence?.picture" alt="zdjecie">
+    </li>
+    <li>zezwolenia: <span *ngFor="let permission of driverLicence?.permissions">{{permission.driverLicenceType}} </span></li>
+    <li>data urodzenia: {{driverLicence?.birthDate}}</li>
+    <li>miejsce urodzienia: {{driverLicence?.placeOfBirth}}</li>
+    <li>wydane przez: {{driverLicence?.issuingAuthority}}</li>
+    <li>dnia: {{driverLicence?.dateOfIssue}}</li>
 </ul>
