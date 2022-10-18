@@ -91,15 +91,15 @@ export class AddDriverLicenceFormComponent implements OnInit {
       placeOfBirth: formData.placeOfBirth!,
       issuingAuthority: formData.issuingAuthority!,
       dateOfIssue: formData.issueDate!,
-      permitions: [],
+      permissions: [],
     };
 
     this.permissions.controls.forEach((group) => {
       const permission: PermissionDto = {
-        type: group.value.type,
+        driverLicenceType: group.value.type,
         dateOfIssue: group.value.issueDate,
       };
-      data.permitions.push(permission);
+      data.permissions.push(permission);
     });
 
     this.addDriverLicenceWithWalletCheck(data);
@@ -134,9 +134,9 @@ export class AddDriverLicenceFormComponent implements OnInit {
       placeOfBirth: 'a',
       issuingAuthority: 'a',
       dateOfIssue: new Date(Date.now()),
-      permitions: [
-        { type: DriverLicenceType.A, dateOfIssue: new Date(Date.now()) },
-        { type: DriverLicenceType.B, dateOfIssue: new Date(Date.now()) },
+      permissions: [
+        { driverLicenceType: DriverLicenceType.A, dateOfIssue: new Date(Date.now()) },
+        { driverLicenceType: DriverLicenceType.B, dateOfIssue: new Date(Date.now()) },
       ],
     };
     this.digitalDocumentService.addDriverLicence(data).subscribe();

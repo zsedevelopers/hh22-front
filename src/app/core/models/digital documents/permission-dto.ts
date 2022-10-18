@@ -1,6 +1,6 @@
 import { DriverLicenceType } from "./enums/driver-licence-type";
 
 export default interface PermissionDto {
-  type: DriverLicenceType;
+  driverLicenceType: DriverLicenceType;
   dateOfIssue: Date;
 }

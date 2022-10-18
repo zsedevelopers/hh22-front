@@ -3,6 +3,5 @@
 <ul>
     <li>imie: {{driverLicence?.firstName}} {{driverLicence?.secondName}}</li>
     <li>nazwisko: {{driverLicence?.surname}}</li>
-    <li>kategoria: {{driverLicence!.permittions[0].type}}</li>
-    <li>imie: </li>
+    <li>kategoria: <span *ngFor="let permission of driverLicence?.permissions">{{permission.type}} </span></li>
 </ul>

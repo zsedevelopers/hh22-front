@@ -9,7 +9,7 @@ export default interface CreateDriverLicenceDto {
   surname: string;
   placeOfBirth: string;
   birthDate: Date;
-  permitions: PermissionDto[];
+  permissions: PermissionDto[];
   documentNumber: string;
   issuingAuthority: string;
   dateOfIssue: Date;

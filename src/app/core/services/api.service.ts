@@ -169,18 +169,9 @@ export class ApiService {
     data: CreateDriverLicenceDto,
     token: string
   ): Observable<HttpResponse<null>> {
-
     return this.http.post<HttpResponse<null>>(
       `${this.baseUrl}/api/v1/document/driver-licence`,
-      {
-        ...data,
-        permitions: data.permitions.map((p) => {
-          return {
-            dateOfIssue: p.dateOfIssue,
-            type: DriverLicenceType[p.type],
-          };
-        }),
-      },
+      data,
       {
         headers: {
           Authorization: `Bearer ${token}`,
