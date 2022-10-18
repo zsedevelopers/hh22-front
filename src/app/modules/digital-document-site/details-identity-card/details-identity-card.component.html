@@ -4,6 +4,10 @@
     <li>Status: {{identityCard?.documentStatus}}</li>
     <li>imie: {{identityCard?.firstName}} {{identityCard?.secondName}}</li>
     <li>nazwisko: {{identityCard?.surname}}</li>
+    <li>imie matki: {{identityCard?.motherName}}</li>
+    <li>imie ojca: {{identityCard?.fatherName}}</li>
+    <li>nazwisko rodowe: {{identityCard?.familyName}}</li>
+
     <li>zdjecie:
         <img [src]="identityCard?.picture" alt="zdjecie">
     </li>
@@ -12,3 +16,4 @@
     <li>wydane przez: {{identityCard?.issuingAuthority}}</li>
     <li>dnia: {{identityCard?.dateOfIssue}}</li>
 </ul>
+<button [routerLink]="['../../']" >wróć</button>

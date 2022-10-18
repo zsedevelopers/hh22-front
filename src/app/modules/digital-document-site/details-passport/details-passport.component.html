@@ -7,8 +7,10 @@
     <li>zdjecie:
         <img [src]="passport?.picture" alt="zdjecie">
     </li>
+    <li>narodowosc: {{passport?.nationality}}</li>
     <li>data urodzenia: {{passport?.birthDate}}</li>
     <li>miejsce urodzienia: {{passport?.placeOfBirth}}</li>
     <li>wydane przez: {{passport?.issuingAuthority}}</li>
     <li>dnia: {{passport?.dateOfIssue}}</li>
 </ul>
+<button [routerLink]="['../../']" >wróć</button>
