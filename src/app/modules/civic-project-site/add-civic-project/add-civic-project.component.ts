@@ -16,11 +16,15 @@ import UserDto from "../../../core/models/common/user-dto";
 })
 export class AddCivicProjectComponent implements OnInit {
 
+
+  userCity:string = 'olsztyn'
+  user = this.userData.getUserData().subscribe(x=>{this.userCity = x.city})
+
   listOfCategories:ProjectCategory[] = [ProjectCategory.SPORT,ProjectCategory.EDUCATION,ProjectCategory.CULTURE,ProjectCategory.HEALTH,ProjectCategory.ENVIRONMENT,ProjectCategory.INFRASTRUCTURE,ProjectCategory.NATURE,ProjectCategory.COMMUNITY,ProjectCategory.OTHER]
 
   addProjectForm = this.fb.group({
     title: this.fb.control('', Validators.required),
-    city: new FormControl<string>({ value: '', disabled:true }),
+    city: this.fb.control('', Validators.required),
     shortDescription: this.fb.control('', Validators.required),
     description: this.fb.control('', Validators.required),
     justification: this.fb.control('', Validators.required),
@@ -37,8 +41,6 @@ export class AddCivicProjectComponent implements OnInit {
     private userData:AuthService
   ) {}
 
-  userCity:string = ''
-  user = this.userData.getUserData().subscribe(x=>{this.userCity = x.city.toLowerCase()})
 
   ngOnInit(): void {}
 

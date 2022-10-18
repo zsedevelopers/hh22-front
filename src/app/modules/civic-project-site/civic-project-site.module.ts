@@ -7,19 +7,21 @@ import { MaterialModule } from '../material/material.module';
 import { AppRoutingModule } from '../../app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
+import {HomepageModule} from "../homepage/homepage.module";
 @NgModule({
   declarations: [
     CivicProjectContainerComponent,
     AddCivicProjectComponent,
     ShowCivicProjectsComponent,
   ],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    AppRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatSelectModule
-  ],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatSelectModule,
+        HomepageModule
+    ],
 })
 export class CivicProjectSiteModule {}

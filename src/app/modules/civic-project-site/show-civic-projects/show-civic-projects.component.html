@@ -1,16 +1,13 @@
-<p>show-civic-projects works!</p>
+<div class="container"></div>
 <mat-form-field appearance="fill">
     <mat-label>Miasto</mat-label>
     <mat-select [(ngModel)]="selectedCity" (selectionChange)="onCitySelectChange()">
         <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
     </mat-select>
 </mat-form-field>
-<br>
 <span>Projekty dla miasta {{selectedCity}}</span>
-<br>
-<div *ngFor="let project of projects">
-    <h3>tytuł:{{project.title}}</h3>
-    <h3>opis:{{project.description}}</h3>
-    <hr>
-</div>
-<!-- <button mat-flat-button (click)="getProjectsByCity()">pokaz projekty</button> -->
+<mat-card class="card" *ngFor="let project of projects">
+    <mat-card-title>{{project.title}}</mat-card-title>
+    <mat-card-content>opis:{{project.description}}</mat-card-content>
+</mat-card>
+ <button mat-flat-button (click)="getProjectsByCity()">pokaz projekty</button>
