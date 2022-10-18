@@ -11,9 +11,9 @@
     <li>zdjecie:
         <img [src]="identityCard?.picture" alt="zdjecie">
     </li>
-    <li>data urodzenia: {{identityCard?.birthDate}}</li>
+    <li>data urodzenia: {{birthDate}}</li>
     <li>miejsce urodzienia: {{identityCard?.placeOfBirth}}</li>
     <li>wydane przez: {{identityCard?.issuingAuthority}}</li>
-    <li>dnia: {{identityCard?.dateOfIssue}}</li>
+    <li>dnia: {{issueDate}}</li>
 </ul>
 <button [routerLink]="['../../']" >wróć</button>

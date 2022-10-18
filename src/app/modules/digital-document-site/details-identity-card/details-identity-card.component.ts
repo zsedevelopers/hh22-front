@@ -19,7 +19,16 @@ export class DetailsIdentityCardComponent implements OnInit {
       this.wallet = data;
       if (this.wallet != null) {
         this.identityCard = this.wallet?.identityCard;
+        this.identityCard.birthDate = new Date(this.identityCard.birthDate);
+        this.identityCard.dateOfIssue = new Date(this.identityCard.dateOfIssue);
       }
     });
+  }
+
+  get birthDate() {
+    return this.identityCard?.birthDate.toLocaleString().split(',')[0]!;
+  }
+  get issueDate() {
+    return this.identityCard?.dateOfIssue.toLocaleString().split(',')[0]!;
   }
 }

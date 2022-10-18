@@ -19,7 +19,15 @@ export class DetailsPassportComponent implements OnInit {
       this.wallet = data;
       if (this.wallet != null) {
         this.passport = this.wallet?.identityCard;
+        this.passport.birthDate = new Date(this.passport.birthDate);
+        this.passport.dateOfIssue = new Date(this.passport.dateOfIssue);
       }
     });
+  }
+  get birthDate() {
+    return this.passport?.birthDate.toLocaleString().split(',')[0]!;
+  }
+  get issueDate() {
+    return this.passport?.dateOfIssue.toLocaleString().split(',')[0]!;
   }
 }

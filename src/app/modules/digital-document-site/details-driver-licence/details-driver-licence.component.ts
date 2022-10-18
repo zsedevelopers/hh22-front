@@ -19,7 +19,17 @@ export class DetailsDriverLicenceComponent implements OnInit {
       this.wallet = data;
       if (this.wallet != null) {
         this.driverLicence = this.wallet?.driverLicence;
+        this.driverLicence.birthDate = new Date(this.driverLicence.birthDate);
+        this.driverLicence.dateOfIssue = new Date(
+          this.driverLicence.dateOfIssue
+        );
       }
     });
+  }
+  get birthDate() {
+    return this.driverLicence?.birthDate.toLocaleString().split(',')[0]!;
+  }
+  get issueDate() {
+    return this.driverLicence?.dateOfIssue.toLocaleString().split(',')[0]!;
   }
 }

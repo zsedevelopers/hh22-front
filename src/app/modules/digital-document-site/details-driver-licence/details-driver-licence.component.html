@@ -8,9 +8,9 @@
         <img [src]="driverLicence?.picture" alt="zdjecie">
     </li>
     <li>zezwolenia: <span *ngFor="let permission of driverLicence?.permissions">{{permission.driverLicenceType}} </span></li>
-    <li>data urodzenia: {{driverLicence?.birthDate}}</li>
+    <li>data urodzenia: {{birthDate}}</li>
     <li>miejsce urodzienia: {{driverLicence?.placeOfBirth}}</li>
     <li>wydane przez: {{driverLicence?.issuingAuthority}}</li>
-    <li>dnia: {{driverLicence?.dateOfIssue}}</li>
+    <li>dnia: {{issueDate}}</li>
 </ul>
 <button [routerLink]="['../../']" >wróć</button>
