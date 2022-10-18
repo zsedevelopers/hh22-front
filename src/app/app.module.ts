@@ -10,6 +10,7 @@ import { HomepageModule } from './modules/homepage/homepage.module';
 import { CivicProjectSiteModule } from './modules/civic-project-site/civic-project-site.module';
 import { DigitalDocumentSiteModule } from './modules/digital-document-site/digital-document-site.module';
 import { MaterialModule } from './modules/material/material.module';
+import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,6 +24,7 @@ import { MaterialModule } from './modules/material/material.module';
     CivicProjectSiteModule,
     DigitalDocumentSiteModule,
     MaterialModule,
+    AdminPanelModule
   ],
   providers: [],
   bootstrap: [AppComponent],
