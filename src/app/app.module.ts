@@ -6,14 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthModule } from './modules/auth/auth.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {HomepageModule} from "./modules/homepage/homepage.module";
-import {CivicProjectSiteModule} from "./modules/civic-project-site/civic-project-site.module";
+import { HomepageModule } from './modules/homepage/homepage.module';
+import { CivicProjectSiteModule } from './modules/civic-project-site/civic-project-site.module';
 import { DigitalDocumentSiteModule } from './modules/digital-document-site/digital-document-site.module';
+import { MaterialModule } from './modules/material/material.module';
 
 @NgModule({
-  declarations: [
-    AppComponent
-   ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -22,9 +21,10 @@ import { DigitalDocumentSiteModule } from './modules/digital-document-site/digit
     BrowserAnimationsModule,
     HomepageModule,
     CivicProjectSiteModule,
-    DigitalDocumentSiteModule
+    DigitalDocumentSiteModule,
+    MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

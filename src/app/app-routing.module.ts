@@ -61,6 +61,24 @@ const routes: Routes = [
     ],
   },
 ];
+import {CivicProjectContainerComponent} from "./modules/civic-project-site/civic-project-container/civic-project-container.component";
+import {AddCivicProjectComponent} from "./modules/civic-project-site/add-civic-project/add-civic-project.component";
+import {
+  ShowCivicProjectsComponent
+} from "./modules/civic-project-site/show-civic-projects/show-civic-projects.component";
+import {MiddlebarComponent} from "./modules/homepage/middlebar/middlebar.component";
+
+
+const routes: Routes = [
+    {path:'', component:MiddlebarComponent},
+    {path:'civicProject', component:CivicProjectContainerComponent, children:[
+        {path: 'add', component:AddCivicProjectComponent},
+        {path: 'show', component:ShowCivicProjectsComponent}]},
+
+  { path: 'auth', component: AuthComponent, children:[
+    {path: 'login', component:LoginComponent},
+    {path: 'register', component:RegisterComponent},
+]}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

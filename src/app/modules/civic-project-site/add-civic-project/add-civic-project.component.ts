@@ -1,97 +1,69 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import AddCivilProjectRequest from '../../../core/models/civil projects/add-civil-project-request';
-import UserDto from '../../../core/models/common/user-dto';
-import AddEstimateDto from '../../../core/models/civil projects/add-estimate-dto';
 import CreateScheduleDto from '../../../core/models/civil projects/create-schedule-dto';
-import { CivilProjectService } from '../../../core/services/civil-project.service';
-import { AuthService } from 'src/app/core/services/auth.service';
-import {
-  FormGroup,
-  Validators,
-  FormArray,
-  FormBuilder,
-} from '@angular/forms';
+import {CivilProjectService} from '../../../core/services/civil-project.service';
+import {AuthService} from 'src/app/core/services/auth.service';
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
+import {ProjectCategory} from "../../../core/models/civil projects/project-category";
+import AddEstimateDto from "../../../core/models/civil projects/add-estimate-dto";
+import {ApiService} from "../../../core/services/api.service";
+import UserDto from "../../../core/models/common/user-dto";
 
 @Component({
   selector: 'app-add-civic-project',
   templateUrl: './add-civic-project.component.html',
-  styleUrls: ['./add-civic-project.component.scss'],
+  styleUrls: ['./add-civic-project.component.scss']
 })
 export class AddCivicProjectComponent implements OnInit {
+
   userData: UserDto | null = null;
+
+  userCity:string = 'olsztyn'
+  user = this.authService.getUserData().subscribe(x=>{this.userCity = x.city})
+
+  listOfCategories:ProjectCategory[] = [ProjectCategory.SPORT,ProjectCategory.EDUCATION,ProjectCategory.CULTURE,ProjectCategory.HEALTH,ProjectCategory.ENVIRONMENT,ProjectCategory.INFRASTRUCTURE,ProjectCategory.NATURE,ProjectCategory.COMMUNITY,ProjectCategory.OTHER]
+
 
 
   addProjectForm = this.fb.group({
     title: this.fb.control('', Validators.required),
     city: this.fb.control('', Validators.required),
+    shortDescription: this.fb.control('', Validators.required),
     description: this.fb.control('', Validators.required),
     justification: this.fb.control('', Validators.required),
-    estimateTitle: this.fb.control('', Validators.required),
-    estimateDescription: this.fb.control('', Validators.required),
-    estimateCost: this.fb.control(0, Validators.required),
+    estimates: this.fb.array([]),
     schedules: this.fb.array([]),
+    category: new FormControl<ProjectCategory>(ProjectCategory.OTHER, {nonNullable: true})
   });
 
-  dummyEstimate: AddEstimateDto = {
-    title: 'estimatedTytul',
-    description: 'estimatedDescription',
-    cost: 69,
-  };
-
-  dummySchedule: CreateScheduleDto[] = [
-    { title: 'scheduleTytul', description: 'scheduleOpis', date: 20 },
-  ];
-
-  // // dummyUser: UserDto = {
-  // //   name: 'marek',
-  // //   surname: 'marucha',
-  // //   email: 'milosz@gmail.com',
-  // //   phoneNumber: 123123123,
-  // //   PESEL: '12345678901',
-  // //   city: 'olsztyn',
-  // // };
-
-  dummyData: AddCivilProjectRequest = {
-    title: 'titel',
-    city: 'a',
-    description: 'gowno',
-    justification: 'chec kupy',
-    authors: ['jelitogrube'],
-    likedBy: [],
-    estimate: this.dummyEstimate,
-    schedulesOfActivities: this.dummySchedule,
-  };
-
-  addProject() {
-    if (!this.authService.isLogged()) {
-      console.warn(`you're not logged in`);
-      return;
-    }
-
-    this.dummyData.city = this.userData?.city!;
-    this.dummyData.authors = [this.userData?.pesel!];
-
-    const data: AddCivilProjectRequest = {
-      title: this.dummyData.title!,
-      city: this.dummyData.city!,
-      description: this.dummyData.description!,
-      justification: this.dummyData.justification!,
-      authors: [this.userData?.pesel!],
-      likedBy: [],
-      estimate: this.dummyEstimate,
-      schedulesOfActivities: this.dummySchedule,
-    };
-
-    this.civilProjectService.addCivilProject(data).subscribe(()=>{});
-  }
 
   constructor(
     private civilProjectService: CivilProjectService,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {}
 
-  ngOnInit(): void {
+
+  ngOnInit(): void {}
+
+
+  get estimates(): FormArray<FormGroup> {
+    return this.addProjectForm.controls['estimates'] as FormArray;
+  }
+
+  addEstimate() {
+    this.estimates.controls;
+    const EstimateForm: FormGroup = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      cost: [0, Validators.required],
+    });
+    this.estimates.push(EstimateForm);
+  }
+
+  deleteEstimate(index: number) {
+    this.estimates.controls.splice(index, 1);
+  
     this.authService.getUserData().subscribe((data) => {
       this.userData = data;
     });
@@ -105,7 +77,7 @@ export class AddCivicProjectComponent implements OnInit {
     const scheduleForm: FormGroup = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      year: [2000, Validators.required],
+      date: [2000, Validators.required],
     });
     this.schedules.push(scheduleForm);
   }
@@ -127,7 +99,7 @@ export class AddCivicProjectComponent implements OnInit {
 
     const formData = this.addProjectForm.value;
 
-    if (formData.city != this.userData?.city) {
+    if (formData.city?.toUpperCase() != this.userData?.city.toUpperCase()) {
       console.warn(`input city doesn't match user's city`);
       return;
     }
@@ -135,23 +107,36 @@ export class AddCivicProjectComponent implements OnInit {
     const data: AddCivilProjectRequest = {
       title: formData.title!,
       city: formData.city!,
+      shortDescription: formData.shortDescription!,
       description: formData.description!,
       justification: formData.justification!,
       authors: [this.userData?.pesel!],
       likedBy: [],
-      estimate: {
-        title: formData.estimateTitle!,
-        description: formData.estimateDescription!,
-        cost: formData.estimateCost!,
-      },
+      estimates: [],
+      //   {
+      //   title: formData.estimateTitle!,
+      //   description: formData.estimateDescription!,
+      //   cost: formData.estimateCost!,
+      // },
       schedulesOfActivities: [],
+      category:formData.category!,
+      images:[]
     };
+
+    this.estimates.controls.forEach((group) => {
+      const estimate: AddEstimateDto = {
+        title: group.value.title,
+        description: group.value.description,
+        cost: group.value.cost
+      };
+      data.estimates.push(estimate);
+    });
 
     this.schedules.controls.forEach((group) => {
       const schedule: CreateScheduleDto = {
         title: group.value.title,
         description: group.value.description,
-        date: group.value.year,
+        date: group.value.date,
       };
       data.schedulesOfActivities.push(schedule);
     });

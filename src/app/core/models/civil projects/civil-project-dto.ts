@@ -8,6 +8,6 @@ export default interface CivilProjectDto {
   justification: string;
   authors: UserDto[];
   likedBy: UserDto[];
-  estimate: any;
+  estimates: any;
   scheduleOfActivities: any;
 }
