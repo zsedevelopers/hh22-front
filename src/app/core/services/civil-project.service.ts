@@ -43,7 +43,7 @@ export class CivilProjectService {
     return this.apiService.likeCivilProject(title, this.authService.getJwt()!);
   }
 
-  verifyCivilProject(title: string, token: string) {
-    return this.apiService.verifyCivilProject(title, token);
+  verifyCivilProject(title: string) {
+    return this.apiService.verifyCivilProject(title, this.authService.getJwt()!);
   }
 }

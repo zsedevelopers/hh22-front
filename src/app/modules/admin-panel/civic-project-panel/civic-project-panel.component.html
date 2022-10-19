@@ -1,4 +1,7 @@
 <h1>Projekty:</h1>
-<div *ngFor="let project of projects">
-    <span>project.title</span>
+<div *ngFor="let project of projects; let i = index;"
+    style="color:white; border: 1px solid white;display: flex; flex-direction: column; width: 400px;">
+    <span>{{project.title}}</span>
+    <span>{{project.status}}</span>
+    <button (click)="onVerifyProject(project.title)">Verify</button>
 </div>

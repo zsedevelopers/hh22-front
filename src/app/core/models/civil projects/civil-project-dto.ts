@@ -1,4 +1,5 @@
 import UserDto from '../common/user-dto';
+import { CivilProjectStatus } from './civil-project-status';
 
 export default interface CivilProjectDto {
   id: number;
@@ -10,4 +11,5 @@ export default interface CivilProjectDto {
   likedBy: UserDto[];
   estimates: any;
   scheduleOfActivities: any;
+  status: CivilProjectStatus;
 }
