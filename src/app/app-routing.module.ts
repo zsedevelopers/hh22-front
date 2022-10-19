@@ -22,6 +22,7 @@ import { MiddlebarComponent } from './modules/homepage/middlebar/middlebar.compo
 import { AdminPanelContainerComponent } from './modules/admin-panel/admin-panel-container/admin-panel-container.component';
 import { CivicProjectPanelComponent } from './modules/admin-panel/civic-project-panel/civic-project-panel.component';
 import { DigitalDocumentPanelComponent } from './modules/admin-panel/digital-document-panel/digital-document-panel.component';
+import { AddAdminPanelComponent } from './modules/admin-panel/add-admin-panel/add-admin-panel.component';
 const routes: Routes = [
   { path: '', component: MiddlebarComponent },
   {
@@ -77,6 +78,11 @@ const routes: Routes = [
       {
         path: 'documents',
         component: DigitalDocumentPanelComponent,
+        // children: [{'details/:documentNumber', component:}],
+      },
+      {
+        path: 'add-admin',
+        component: AddAdminPanelComponent,
         // children: [{'details/:documentNumber', component:}],
       },
     ],
