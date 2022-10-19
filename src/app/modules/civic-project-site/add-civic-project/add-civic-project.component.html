@@ -8,7 +8,7 @@
 
         <mat-form-field>
           <mat-label>Miasto: (zablokowane do miasta zalogowanego uzytkownika)</mat-label>
-          <input matInput type="text" placeholder="Np. Warszawa" formControlName="city" [value]="userCity">
+          <input matInput type="text" placeholder="Np. Warszawa" formControlName="city" [value]="userData?.city">
         </mat-form-field>
 
         <mat-form-field appearance="outline">

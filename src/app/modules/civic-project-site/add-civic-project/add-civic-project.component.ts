@@ -18,9 +18,6 @@ export class AddCivicProjectComponent implements OnInit {
 
   userData: UserDto | null = null;
 
-  userCity:string = 'olsztyn'
-  user = this.authService.getUserData().subscribe(x=>{this.userCity = x.city})
-
   listOfCategories:ProjectCategory[] = [ProjectCategory.SPORT,ProjectCategory.EDUCATION,ProjectCategory.CULTURE,ProjectCategory.HEALTH,ProjectCategory.ENVIRONMENT,ProjectCategory.INFRASTRUCTURE,ProjectCategory.NATURE,ProjectCategory.COMMUNITY,ProjectCategory.OTHER]
 
 
