@@ -4,18 +4,22 @@ import { AdminPanelContainerComponent } from './admin-panel-container/admin-pane
 import { CivicProjectPanelComponent } from './civic-project-panel/civic-project-panel.component';
 import { DigitalDocumentPanelComponent } from './digital-document-panel/digital-document-panel.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-
-
+import { MaterialModule } from '../material/material.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AdminPanelContainerComponent,
     CivicProjectPanelComponent,
-    DigitalDocumentPanelComponent
+    DigitalDocumentPanelComponent,
   ],
   imports: [
     CommonModule,
-    AppRoutingModule
-  ]
+    AppRoutingModule,
+    MaterialModule,
+    MatCheckboxModule,
+    FormsModule,
+  ],
 })
-export class AdminPanelModule { }
+export class AdminPanelModule {}
