@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { UserRole } from 'src/app/core/models/auth/UserRole';
 import UserDto from 'src/app/core/models/common/user-dto';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -25,6 +26,8 @@ export class NavbarComponent implements OnInit {
   height: number = window.innerHeight * 15;
 
   isLogged: boolean = false;
+  isAdmin: boolean = false;
+
   userData: UserDto | null = null;
 
   @HostListener('window:resize')
@@ -36,9 +39,11 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.resize();
     this.fetchLoginData();
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
-      this.fetchLoginData()
-    })
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.fetchLoginData();
+      });
   }
 
   onLogout() {
@@ -48,9 +53,12 @@ export class NavbarComponent implements OnInit {
   fetchLoginData() {
     this.isLogged = this.authService.isLogged();
     if (this.isLogged) {
-      this.authService
-        .getUserData()
-        .subscribe((data) => (this.userData = data));
+      this.authService.getUserData().subscribe((data) => {
+        this.userData = data;
+
+        // @ts-ignore
+        this.isAdmin = UserRole.ROLE_ADMIN == UserRole[this.userData.role];
+      });
     }
   }
 }

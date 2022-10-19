@@ -28,7 +28,11 @@
     <mat-grid-tile *ngIf="router.url=='/'" rowspan="2" colspan="100"></mat-grid-tile>
     <mat-grid-tile *ngIf="router.url!='/'" rowspan="2" colspan="25"></mat-grid-tile>
     <mat-grid-tile *ngIf="router.url!='/'" rowspan="2" colspan="50">
-      <div class="nav-buttons"><a>Feautere</a><a>e dowod</a><a>Przypominajka</a></div>
+      <div class="nav-buttons">
+        <a [routerLink]="['/civicProject']" >Projekty</a>
+        <a [routerLink]="['/wallet']">Portfel</a>
+        <a *ngIf="isAdmin" [routerLink]="['/admin']">Panel admina</a>
+      </div>
     </mat-grid-tile>
   </mat-grid-list>
 </div>
