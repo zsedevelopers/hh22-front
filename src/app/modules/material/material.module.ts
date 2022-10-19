@@ -5,6 +5,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {MatExpansionModule} from "@angular/material/expansion";
+import {MatTableModule} from "@angular/material/table";
 
 
 
@@ -15,7 +16,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
           MatFormFieldModule,
             MatInputModule,
     MatCardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule
           ]
 })
 export class MaterialModule { }

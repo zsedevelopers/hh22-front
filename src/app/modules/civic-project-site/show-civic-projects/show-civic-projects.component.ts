@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { AuthService } from 'src/app/core/services/auth.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {AuthService} from 'src/app/core/services/auth.service';
 import CivilProjectDto from '../../../core/models/civil projects/civil-project-dto';
-import { CivilProjectService } from '../../../core/services/civil-project.service';
+import {ProjectCategory} from "../../../core/models/civil projects/project-category";
+import {Icons} from "../../../core/models/civil projects/icons";
+import {CivilProjectService} from '../../../core/services/civil-project.service';
 
 @Component({
   selector: 'app-show-civic-projects',
@@ -13,8 +15,32 @@ export class ShowCivicProjectsComponent implements OnInit {
   constructor(
     private civilProjectService: CivilProjectService,
     fb: FormBuilder,
-    private authService:AuthService
+    private authService:AuthService,
   ) {}
+
+  icons = {
+    'SPORT': Icons.SPORT,
+    'EDUCATION': Icons.EDUCATION,
+    'CULTURE': Icons.CULTURE,
+    'HEALTH': Icons.HEALTH,
+    'ENVIRONMENT': Icons.ENVIRONMENT,
+    'INFRASTRUCTURE': Icons.INFRASTRUCTURE,
+    'NATURE': Icons.NATURE,
+    'COMMUNITY': Icons.COMMUNITY,
+    'OTHER': Icons.OTHER
+  };
+
+  currentProjectIndex:number | null = null
+
+  showProject(index:number){
+    this.currentProjectIndex = index
+  }
+
+  hideProject(){
+    this.currentProjectIndex = null
+  }
+
+  displayedColumns: string[] = ['name', 'description', 'cost']
 
   selectedCity: string = '';
   cities: string[] = ['OLSZTYN', 'RADOM', 'SOSNOWIEC'];

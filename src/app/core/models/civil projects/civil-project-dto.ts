@@ -1,13 +1,18 @@
 import UserDto from '../common/user-dto';
+import AddEstimateDto from "./add-estimate-dto";
+import CreateScheduleDto from "./create-schedule-dto";
+import {ProjectCategory} from "./project-category";
 
 export default interface CivilProjectDto {
-  id: number;
   title: string;
   city: string;
+  shortDescription: string;
   description: string;
   justification: string;
-  authors: UserDto[];
+  authors: string[];
   likedBy: UserDto[];
-  estimates: any;
-  scheduleOfActivities: any;
+  estimates: AddEstimateDto[];
+  schedulesOfActivities: CreateScheduleDto[];
+  category: ProjectCategory;
+  images: { link: string }[];
 }

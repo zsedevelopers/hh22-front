@@ -3,14 +3,7 @@
   height: 95%;
   display: flex;
   margin-top: 20px;
-
-}
-.card{
-  height: 200px;
-  width: 45%;
-  border: 2px solid black;
-  box-sizing: border-box;
-  border-radius: 10px;
+  overflow: hidden;
 }
 .container{
   width: 98%;
@@ -21,16 +14,116 @@
 .header{
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+}
+.headerText{
+  position:absolute;
+  width: 10%;
+  right: 45%;
   font-size: 30px;
+  text-align: center;
 }
-.cityChoose{
 
-}
 .cardContainer{
   width: 100%;
   height: auto;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+}
+
+.card{
+  width: 500px!important;
+  height: 200px;
+  border: 2px solid #3f51b5;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: #ffffff;
+  z-index: 5;
+}
+.mat-card-title{
+  color: Black;
+  height: 20%;
+  width: 300%;
+  font-size: 18px;
+  margin-bottom: 10px;
+  position: absolute;
+}
+.mat-card-content{
+  height: 45%;
+  width: 250px;
+  position: absolute;
+  top: 25%;
+}
+.icon{
+  width: 167px;
+  position: absolute;
+  right: 2.8%;
+  top: -1%;
+  background-color: #ecc351;
+  border-top-right-radius: 8px;
+  border: 2px solid #3f51b5;
+  box-sizing: border-box;
+}
+.showButton{
+  width: 498px;
+  height: 17%;
+  left: 0;
+  bottom: -1%;
+  position: absolute;
+  border-top-right-radius:0;
+}
+
+
+
+
+.projectDetails{
+  width: 100%;
+  min-height: 85%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  box-sizing: border-box;
+
+  align-content: flex-start;
+}
+.detailsTitle{
+  width: 100%;
+  height: 3vh;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+}
+.detailsDesc, .detailsJust{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+  height: auto;
+  min-height: 20vh;
+  flex-wrap: wrap;
+}
+.detailsContentTitle{
+  width: 90%;
+  height: 15%;
+  font-size: 25px;
+  box-sizing: border-box;
+
+}
+.detailsContent{
+  width: 95%;
+  height: 85%;
+  font-size: 20px;
+  box-sizing: border-box;
+  background-color: #f3f2f2;
+  padding: 10px;
+}
+table{
+  width: 100%;
 }
