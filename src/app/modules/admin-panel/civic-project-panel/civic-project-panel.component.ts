@@ -9,8 +9,22 @@ import { CivilProjectService } from 'src/app/core/services/civil-project.service
 })
 export class CivicProjectPanelComponent implements OnInit {
   constructor(private civilProjectService: CivilProjectService) {}
+
   projects: CivilProjectDto[] = [];
+
   ngOnInit(): void {
+    this.civilProjectService
+      .getAllCivilProjects()
+      .subscribe((data) => (this.projects = data));
+  }
+  
+  onVerifyProject(title: string) {
+    this.civilProjectService.verifyCivilProject(title).subscribe(() => {
+      this.fetchCivilProjects();
+    });
+  }
+
+  fetchCivilProjects() {
     this.civilProjectService
       .getAllCivilProjects()
       .subscribe((data) => (this.projects = data));
