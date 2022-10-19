@@ -56,6 +56,7 @@ export class AuthService {
         console.log(`zalogowano jako:`);
         console.log(res.user);
         this.router.navigate(['/']);
+        // this.router.navigate([this.router.url])
       });
   }
 
@@ -76,9 +77,6 @@ export class AuthService {
     if (this.getJwt() != null && !this.isJwtExpired()) {
       return true;
     } else {
-      if (this.getJwt() == null) {
-        this.logout();
-      }
       return false;
     }
   }
