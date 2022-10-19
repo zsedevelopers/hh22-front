@@ -1,26 +1,39 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import AddCivilProjectRequest from '../../../core/models/civil projects/add-civil-project-request';
 import CreateScheduleDto from '../../../core/models/civil projects/create-schedule-dto';
-import {CivilProjectService} from '../../../core/services/civil-project.service';
-import {AuthService} from 'src/app/core/services/auth.service';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators,} from '@angular/forms';
-import {ProjectCategory} from "../../../core/models/civil projects/project-category";
-import AddEstimateDto from "../../../core/models/civil projects/add-estimate-dto";
-import {ApiService} from "../../../core/services/api.service";
-import UserDto from "../../../core/models/common/user-dto";
+import { CivilProjectService } from '../../../core/services/civil-project.service';
+import { AuthService } from 'src/app/core/services/auth.service';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ProjectCategory } from '../../../core/models/civil projects/project-category';
+import AddEstimateDto from '../../../core/models/civil projects/add-estimate-dto';
+import { ApiService } from '../../../core/services/api.service';
+import UserDto from '../../../core/models/common/user-dto';
 
 @Component({
   selector: 'app-add-civic-project',
   templateUrl: './add-civic-project.component.html',
-  styleUrls: ['./add-civic-project.component.scss']
+  styleUrls: ['./add-civic-project.component.scss'],
 })
 export class AddCivicProjectComponent implements OnInit {
-
   userData: UserDto | null = null;
 
-  listOfCategories:ProjectCategory[] = [ProjectCategory.SPORT,ProjectCategory.EDUCATION,ProjectCategory.CULTURE,ProjectCategory.HEALTH,ProjectCategory.ENVIRONMENT,ProjectCategory.INFRASTRUCTURE,ProjectCategory.NATURE,ProjectCategory.COMMUNITY,ProjectCategory.OTHER]
-
-
+  listOfCategories: ProjectCategory[] = [
+    ProjectCategory.SPORT,
+    ProjectCategory.EDUCATION,
+    ProjectCategory.CULTURE,
+    ProjectCategory.HEALTH,
+    ProjectCategory.ENVIRONMENT,
+    ProjectCategory.INFRASTRUCTURE,
+    ProjectCategory.NATURE,
+    ProjectCategory.COMMUNITY,
+    ProjectCategory.OTHER,
+  ];
 
   addProjectForm = this.fb.group({
     title: this.fb.control('', Validators.required),
@@ -30,19 +43,20 @@ export class AddCivicProjectComponent implements OnInit {
     justification: this.fb.control('', Validators.required),
     estimates: this.fb.array([]),
     schedules: this.fb.array([]),
-    category: new FormControl<ProjectCategory>(ProjectCategory.OTHER, {nonNullable: true})
+    category: new FormControl<ProjectCategory>(ProjectCategory.OTHER, {
+      nonNullable: true,
+    }),
   });
-
 
   constructor(
     private civilProjectService: CivilProjectService,
     private authService: AuthService,
-    private fb: FormBuilder,
+    private fb: FormBuilder
   ) {}
 
-
-  ngOnInit(): void {}
-
+  ngOnInit(): void {
+    this.authService.getUserData().subscribe((data) => (this.userData = data));
+  }
 
   get estimates(): FormArray<FormGroup> {
     return this.addProjectForm.controls['estimates'] as FormArray;
@@ -60,10 +74,10 @@ export class AddCivicProjectComponent implements OnInit {
 
   deleteEstimate(index: number) {
     this.estimates.controls.splice(index, 1);
-  
-    this.authService.getUserData().subscribe((data) => {
-      this.userData = data;
-    });
+
+    // this.authService.getUserData().subscribe((data) => {
+    //   this.userData = data;
+    // });
   }
 
   get schedules(): FormArray<FormGroup> {
@@ -116,15 +130,15 @@ export class AddCivicProjectComponent implements OnInit {
       //   cost: formData.estimateCost!,
       // },
       schedulesOfActivities: [],
-      category:formData.category!,
-      images:[]
+      category: formData.category!,
+      images: [],
     };
 
     this.estimates.controls.forEach((group) => {
       const estimate: AddEstimateDto = {
         title: group.value.title,
         description: group.value.description,
-        cost: group.value.cost
+        cost: group.value.cost,
       };
       data.estimates.push(estimate);
     });
@@ -138,6 +152,6 @@ export class AddCivicProjectComponent implements OnInit {
       data.schedulesOfActivities.push(schedule);
     });
 
-    this.civilProjectService.addCivilProject(data).subscribe(()=>{});
+    this.civilProjectService.addCivilProject(data).subscribe(() => {});
   }
 }

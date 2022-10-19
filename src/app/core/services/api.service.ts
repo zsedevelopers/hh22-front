@@ -12,7 +12,6 @@ import CreatePassportDto from '../models/digital documents/create-passport-dto';
 import WalletDto from '../models/digital documents/wallet-dto';
 import { Sex } from '../models/digital documents/enums/sex';
 import CreateDriverLicenceDto from '../models/digital documents/create-driver-licence-dto';
-import { DriverLicenceType } from '../models/digital documents/enums/driver-licence-type';
 @Injectable({
   providedIn: 'root',
 })
