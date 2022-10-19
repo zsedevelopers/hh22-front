@@ -1,5 +1,6 @@
 <h1>Projekty:</h1>
-<div *ngFor="let project of projects; let i = index;"
+<mat-checkbox [(ngModel)]="shouldFilterProjects" (change)="onCheckboxChange()">show only unverified</mat-checkbox>
+<div *ngFor="let project of filteredProjects; let i = index;"
     style="color:white; border: 1px solid white;display: flex; flex-direction: column; width: 400px;">
     <span>{{project.title}}</span>
     <span>{{project.status}}</span>
