@@ -45,7 +45,7 @@ const routes: Routes = [
     path: 'wallet',
     component: DocumentContainerComponent,
     children: [
-      { path: '', component: ShowDocumentsComponent },
+      { path: 'show', component: ShowDocumentsComponent },
       {
         path: 'details',
         component: DetailsContainerComponent,

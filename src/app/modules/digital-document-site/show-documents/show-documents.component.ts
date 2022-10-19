@@ -3,6 +3,7 @@ import IdentityCardDto from 'src/app/core/models/digital documents/identity-card
 import WalletDto from 'src/app/core/models/digital documents/wallet-dto';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { DigitalDocumentService } from 'src/app/core/services/digital-document.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-show-documents',

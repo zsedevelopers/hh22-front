@@ -1,2 +1,6 @@
-<p>document-container works!</p>
-<router-outlet></router-outlet>
+<div class="container">
+  <div class="add-link" [ngClass]="router.url=='/wallet/add'?'active':''"  routerLink="add">Dodaj dokumenty</div>
+
+  <div class="show-link" [ngClass]="router.url=='/wallet/show'?'active':''" routerLink="show">Pokaż dokumenty</div>
+  <router-outlet></router-outlet>
+</div>
