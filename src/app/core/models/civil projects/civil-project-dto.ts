@@ -15,6 +15,6 @@ export default interface CivilProjectDto {
   category: ProjectCategory;
   images: { link: string }[];
   estimates: any;
-  scheduleOfActivities: any;
+  schedulesOfActivities: any;
   status: CivilProjectStatus;
 }
