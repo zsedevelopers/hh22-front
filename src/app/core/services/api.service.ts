@@ -16,7 +16,7 @@ import CreateDriverLicenceDto from '../models/digital documents/create-driver-li
   providedIn: 'root',
 })
 export class ApiService {
-  private baseUrl: string = 'http://localhost:8080';
+  private baseUrl: string = 'http://146.59.87.231:8080';
   constructor(private http: HttpClient) {}
 
   //#region Auth
