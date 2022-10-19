@@ -66,6 +66,10 @@ export class AuthService {
     });
   }
 
+  registerAdmin(requestData:RegisterRequest){
+    return this.apiService.registerAdmin(requestData, this.getJwt()!)
+  }
+
   logout() {
     console.log('logged out');
     localStorage.removeItem('jwt');

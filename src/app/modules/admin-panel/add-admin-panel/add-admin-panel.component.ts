@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import RegisterRequest from "../../../core/models/auth/register-request"
+import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-add-admin-panel',
   templateUrl: './add-admin-panel.component.html',
@@ -18,7 +20,7 @@ export class AddAdminPanelComponent implements OnInit {
     passwordConfirm: new FormControl('', Validators.required),
   });
   
-  constructor() { }
+  constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
   }
@@ -38,7 +40,7 @@ export class AddAdminPanelComponent implements OnInit {
       phoneNumber: parseInt(this.registerForm.value.phoneNumber!),
       password: this.registerForm.value.password!,
     };
-    this.authService.register(requestData);
+    this.authService.registerAdmin(requestData).subscribe()
   }
 
   private passwordsMatch() {
