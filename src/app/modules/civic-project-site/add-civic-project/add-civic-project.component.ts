@@ -152,7 +152,8 @@ export class AddCivicProjectComponent implements OnInit {
       };
       data.schedulesOfActivities.push(schedule);
     });
-
-    this.civilProjectService.addCivilProject(data).subscribe(() => {});
+    if(this.authService.isLogged()){
+      this.civilProjectService.addCivilProject(data).subscribe(() => {});
+    }
   }
 }

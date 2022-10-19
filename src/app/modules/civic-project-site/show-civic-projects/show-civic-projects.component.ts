@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { AuthService } from 'src/app/core/services/auth.service';
 import CivilProjectDto from '../../../core/models/civil projects/civil-project-dto';
 import { CivilProjectService } from '../../../core/services/civil-project.service';
 
@@ -11,7 +12,8 @@ import { CivilProjectService } from '../../../core/services/civil-project.servic
 export class ShowCivicProjectsComponent implements OnInit {
   constructor(
     private civilProjectService: CivilProjectService,
-    fb: FormBuilder
+    fb: FormBuilder,
+    private authService:AuthService
   ) {}
 
   selectedCity: string = '';
@@ -23,6 +25,9 @@ export class ShowCivicProjectsComponent implements OnInit {
   }
 
   loadProjects(city: string) {
+    if(!this.authService.isLogged()){
+      return;
+    }
     this.civilProjectService
       .getCivilProjectsByCity(city)
       .subscribe((data) => (this.projects = data));
