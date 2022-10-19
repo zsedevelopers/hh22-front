@@ -7,12 +7,14 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MaterialModule } from '../material/material.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
+import { AddAdminPanelComponent } from './add-admin-panel/add-admin-panel.component';
 
 @NgModule({
   declarations: [
     AdminPanelContainerComponent,
     CivicProjectPanelComponent,
     DigitalDocumentPanelComponent,
+    AddAdminPanelComponent,
   ],
   imports: [
     CommonModule,
