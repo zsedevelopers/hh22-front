@@ -12,7 +12,6 @@ import {
 } from '@angular/forms';
 import { ProjectCategory } from '../../../core/models/civil projects/project-category';
 import AddEstimateDto from '../../../core/models/civil projects/add-estimate-dto';
-import { ApiService } from '../../../core/services/api.service';
 import UserDto from '../../../core/models/common/user-dto';
 
 @Component({
@@ -21,6 +20,7 @@ import UserDto from '../../../core/models/common/user-dto';
   styleUrls: ['./add-civic-project.component.scss'],
 })
 export class AddCivicProjectComponent implements OnInit {
+  userCity:string = "";
   userData: UserDto | null = null;
 
   listOfCategories: ProjectCategory[] = [
@@ -37,7 +37,10 @@ export class AddCivicProjectComponent implements OnInit {
 
   addProjectForm = this.fb.group({
     title: this.fb.control('', Validators.required),
-    city: this.fb.control('', Validators.required),
+    city: [{
+      value: this.userCity,
+      disabled:true
+    }],
     shortDescription: this.fb.control('', Validators.required),
     description: this.fb.control('', Validators.required),
     justification: this.fb.control('', Validators.required),
@@ -55,7 +58,11 @@ export class AddCivicProjectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getUserData().subscribe((data) => (this.userData = data));
+    this.authService.getUserData().subscribe((data) => {
+      this.userData = data;
+      this.addProjectForm.value.city = this.userData.city
+      this.userCity = this.userData.city
+    });
   }
 
   get estimates(): FormArray<FormGroup> {
@@ -74,10 +81,6 @@ export class AddCivicProjectComponent implements OnInit {
 
   deleteEstimate(index: number) {
     this.estimates.controls.splice(index, 1);
-
-    // this.authService.getUserData().subscribe((data) => {
-    //   this.userData = data;
-    // });
   }
 
   get schedules(): FormArray<FormGroup> {
@@ -98,6 +101,9 @@ export class AddCivicProjectComponent implements OnInit {
   }
 
   onFormSubmit() {
+    console.log(this.userData);
+    console.log('form:')
+    console.log(this.addProjectForm.value);
     if (!this.authService.isLogged()) {
       console.warn(`you're not logged in`);
       return;
@@ -110,25 +116,20 @@ export class AddCivicProjectComponent implements OnInit {
 
     const formData = this.addProjectForm.value;
 
-    if (formData.city?.toUpperCase() != this.userData?.city.toUpperCase()) {
-      console.warn(`input city doesn't match user's city`);
-      return;
-    }
+    // if (formData.city?.toUpperCase() != this.userData?.city.toUpperCase()) {
+    //   console.warn(`input city doesn't match user's city`);
+    //   return;
+    // }
 
     const data: AddCivilProjectRequest = {
       title: formData.title!,
-      city: formData.city!,
+      city: this.userCity,
       shortDescription: formData.shortDescription!,
       description: formData.description!,
       justification: formData.justification!,
       authors: [this.userData?.pesel!],
       likedBy: [],
       estimates: [],
-      //   {
-      //   title: formData.estimateTitle!,
-      //   description: formData.estimateDescription!,
-      //   cost: formData.estimateCost!,
-      // },
       schedulesOfActivities: [],
       category: formData.category!,
       images: [],

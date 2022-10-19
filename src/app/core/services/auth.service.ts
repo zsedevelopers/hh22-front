@@ -73,11 +73,7 @@ export class AuthService {
   }
 
   isLogged(): boolean {
-    if (
-      this.getJwt() != null &&
-      // this.userData != null &&
-      !this.isJwtExpired()
-    ) {
+    if (this.getJwt() != null && !this.isJwtExpired()) {
       return true;
     } else {
       if (this.getJwt() == null) {
