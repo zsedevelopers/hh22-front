@@ -26,7 +26,7 @@ export class AuthService {
     console.log('user:');
     // console.log(this.userData);
     console.log('expired:');
-    console.log(this.isJwtExpired());
+    // console.log(this.isJwtExpired());
 
     if (this.getJwt() != null) {
       console.log('a');
