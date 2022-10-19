@@ -28,6 +28,14 @@ export class ApiService {
     return this.http.post(`${this.baseUrl}/api/v1/user/new`, data);
   }
 
+  registerAdmin(data: RegisterRequest, token: string) {
+    return this.http.post(`${this.baseUrl}/api/v1/user/new/admin`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+
   getRefreshToken() {
     return this.http.get(`${this.baseUrl}/api/v1/user/token/refresh`);
   }
