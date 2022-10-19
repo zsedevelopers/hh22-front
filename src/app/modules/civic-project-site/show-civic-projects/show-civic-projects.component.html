@@ -4,11 +4,11 @@
     <mat-form-field appearance="standard">
       <mat-label class="cityChoose">Miasto</mat-label>
       <mat-select [(ngModel)]="selectedCity" (selectionChange)="onCitySelectChange()">
-        <mat-option *ngFor="let city of cities" [value]="city">{{city}}</mat-option>
+        <mat-option *ngFor="let city of cities" [value]="city">{{city.charAt(0).toUpperCase()+city.toLowerCase().slice(1)}}</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <div class="headerText">{{selectedCity}}</div>
+    <div class="headerText">{{selectedCity.charAt(0).toUpperCase()+selectedCity.toLowerCase().slice(1)}}</div>
   </div>
 
 <div *ngIf="currentProjectIndex!=null" class="projectDetails">
@@ -23,8 +23,38 @@
     <div class="detailsContent">{{projects[this.currentProjectIndex].justification}}</div>
   </div>
 
-  <p>Harmonogram</p>
-  <table mat-table [dataSource]="projects[currentProjectIndex].schedulesOfActivities" class="mat-elevation-z8">
+  <p *ngIf="projects[currentProjectIndex].schedulesOfActivities.length>0" style="font-size: 27px">Harmonogram</p>
+  <table mat-table *ngIf="projects[currentProjectIndex].schedulesOfActivities.length>0" [dataSource]="projects[currentProjectIndex].schedulesOfActivities" class="mat-elevation-z8">
+
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+
+    <!-- Name Column -->
+    <ng-container  matColumnDef="name">
+      <th mat-header-cell class="tableHeader" *matHeaderCellDef> Nazwa </th>
+      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="description">
+      <th mat-header-cell class="tableHeader" *matHeaderCellDef> Opis </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="cost">
+      <th mat-header-cell class="tableHeader" *matHeaderCellDef> Data </th>
+      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <p *ngIf="projects[currentProjectIndex].schedulesOfActivities.length>0" style="font-size: 27px">Kosztorys</p>
+  <table mat-table *ngIf="projects[currentProjectIndex].estimates.length>0" [dataSource]="projects[currentProjectIndex].estimates" class="mat-elevation-z8">
 
     <!--- Note that these columns can be defined in any order.
           The actual rendered columns are set as a property on the row definition" -->
@@ -33,20 +63,20 @@
 
     <!-- Name Column -->
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nazwa </th>
+      <th mat-header-cell class="tableHeader" *matHeaderCellDef> Nazwa </th>
       <td mat-cell *matCellDef="let element"> {{element.title}} </td>
     </ng-container>
 
     <!-- Weight Column -->
     <ng-container matColumnDef="description">
-      <th mat-header-cell *matHeaderCellDef> Opis </th>
+      <th mat-header-cell class="tableHeader" *matHeaderCellDef> Opis </th>
       <td mat-cell *matCellDef="let element"> {{element.description}} </td>
     </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="cost">
-      <th mat-header-cell *matHeaderCellDef> Data </th>
-      <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      <th mat-header-cell class="tableHeader" *matHeaderCellDef> Koszt </th>
+      <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -86,7 +86,6 @@
   flex-wrap: wrap;
   justify-content: space-around;
   box-sizing: border-box;
-
   align-content: flex-start;
 }
 .detailsTitle{
@@ -126,4 +125,9 @@
 }
 table{
   width: 100%;
+  margin-bottom: 25px;
+}
+.tableHeader{
+  background-color: #3f51b5;
+  color: white;
 }
