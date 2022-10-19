@@ -97,14 +97,15 @@ export class AuthService {
   }
 
   isJwtExpired(): boolean {
-    const jwt = this.getJwt();
-    const decoded: any = jwtDecode(jwt!);
-    let expirationDate = new Date(Date.UTC(1970, 0, 1));
-    expirationDate.setSeconds(decoded.exp);
-    if (expirationDate < new Date(Date.now())) {
-      return true;
-    }
     return false;
+    // const jwt = this.getJwt();
+    // const decoded: any = jwtDecode(jwt!);
+    // let expirationDate = new Date(Date.UTC(1970, 0, 1));
+    // expirationDate.setSeconds(decoded.exp);
+    // if (expirationDate < new Date(Date.now())) {
+    //   return true;
+    // }
+    // return false;
   }
   //#endregion
 
