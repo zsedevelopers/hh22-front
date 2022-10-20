@@ -5,7 +5,6 @@ import LoginResponse from '../models/auth/login-response';
 import RegisterRequest from '../models/auth/register-request';
 import UserDto from '../models/common/user-dto';
 import { ApiService } from './api.service';
-import jwtDecode from 'jwt-decode';
 import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({

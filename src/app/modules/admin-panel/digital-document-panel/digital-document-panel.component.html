@@ -1,1 +1,21 @@
 <p>digital-document-panel works!</p>
+<h2>Prawa jazdy</h2>
+<div *ngFor="let licence of drivingLicences">
+    <span>{{licence.firstName}}</span>
+    <span>{{licence.surname}}</span>
+    <span>{{licence.documentType}}</span>
+</div>
+<h2>Paszporty</h2>
+
+<div *ngFor="let passport of passports">
+    <span>{{passport.firstName}}</span>
+    <span>{{passport.surname}}</span>
+    <span>{{passport.documentType}}</span>
+</div>
+<h2>Dowody osobiste</h2>
+
+<div *ngFor="let identityCard of identityCards">
+    <span>{{identityCard.firstName}}</span>
+    <span>{{identityCard.surname}}</span>
+    <span>{{identityCard.documentType}}</span>
+</div>

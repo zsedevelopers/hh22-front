@@ -12,6 +12,7 @@ import CreatePassportDto from '../models/digital documents/create-passport-dto';
 import WalletDto from '../models/digital documents/wallet-dto';
 import { Sex } from '../models/digital documents/enums/sex';
 import CreateDriverLicenceDto from '../models/digital documents/create-driver-licence-dto';
+import DocumentEntityDto from '../models/digital documents/document-entity-dto';
 @Injectable({
   providedIn: 'root',
 })
@@ -193,6 +194,27 @@ export class ApiService {
         Authorization: `Bearer ${token}`,
       },
     });
+  }
+
+  getUnverifiedDocuments(token: string): Observable<DocumentEntityDto[]> {
+    return this.http.get<DocumentEntityDto[]>(
+      `${this.baseUrl}/api/v1/documents/unverified`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+  getVerifiedDocuments(token: string): Observable<DocumentEntityDto[]> {
+    return this.http.get<DocumentEntityDto[]>(
+      `${this.baseUrl}/api/v1/documents/unverified`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
   }
   //#endregion
 }
