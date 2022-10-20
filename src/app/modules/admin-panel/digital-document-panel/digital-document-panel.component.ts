@@ -29,11 +29,11 @@ export class DigitalDocumentPanelComponent implements OnInit {
               console.log('a');
               this.identityCards.push(d);
               break;
-            case DocumentType[DocumentType.IDENTITY_CARD] as unknown as DocumentType:
+            case DocumentType[DocumentType.PASSPORT] as unknown as DocumentType:
               console.log('b');
               this.passports.push(d);
               break;
-            case DocumentType[DocumentType.IDENTITY_CARD] as unknown as DocumentType:
+            case DocumentType[DocumentType.DRIVING_LICENSE] as unknown as DocumentType:
               console.log('c');
               this.drivingLicences.push(d);
               break;

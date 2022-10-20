@@ -8,7 +8,7 @@ import { MaterialModule } from '../material/material.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddAdminPanelComponent } from './add-admin-panel/add-admin-panel.component';
-
+import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AdminPanelContainerComponent,
@@ -23,6 +23,7 @@ import { AddAdminPanelComponent } from './add-admin-panel/add-admin-panel.compon
     MatCheckboxModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTabsModule,
   ],
 })
 export class AdminPanelModule {}
