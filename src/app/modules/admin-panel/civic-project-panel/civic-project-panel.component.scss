@@ -1,0 +1,160 @@
+:host {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  background-color: #212020;
+}
+.container {
+  width: 55%;
+  min-height: 90vh;
+  padding: 20px 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+
+  h2 {
+    padding-left: 10px;
+  }
+}
+.checkbox-container {
+  margin-bottom: 15px;
+  display: flex;
+  width: 50%;
+  justify-content: space-evenly;
+}
+.project-list-container {
+  margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.project-container {
+  margin: 5px;
+  padding: 10px;
+  width: 30%;
+  min-height: 50px;
+  border: 3px dotted black;
+  border-radius: 4px;
+
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.headerText {
+  position: absolute;
+  width: 10%;
+  right: 45%;
+  font-size: 30px;
+  text-align: center;
+}
+
+.cardContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  width: 500px !important;
+  height: 200px;
+  border: 2px solid #3f51b5;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: #ffffff;
+  z-index: 5;
+}
+.mat-card-title {
+  color: Black;
+  height: 20%;
+  width: fit-content;
+  font-size: 18px;
+  margin-bottom: 10px;
+  position: absolute;
+}
+.mat-card-content {
+  height: 45%;
+  width: 250px;
+  position: absolute;
+  top: 25%;
+}
+.icon {
+  width: 167px;
+  position: absolute;
+  right: 2.8%;
+  top: -1%;
+  background-color: #ecc351;
+  border-top-right-radius: 8px;
+  border: 2px solid #3f51b5;
+  box-sizing: border-box;
+}
+.showButton {
+  width: 498px;
+  height: 17%;
+  left: 0;
+  bottom: -1%;
+  position: absolute;
+  border-top-right-radius: 0;
+}
+
+.projectDetails {
+  width: 100%;
+  min-height: 85%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  box-sizing: border-box;
+  align-content: flex-start;
+}
+.detailsTitle {
+  width: 100%;
+  height: 3vh;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+.detailsDesc,
+.detailsJust {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+
+  height: auto;
+  min-height: 20vh;
+  flex-wrap: wrap;
+}
+.detailsContentTitle {
+  width: 90%;
+  height: 15%;
+  font-size: 25px;
+  box-sizing: border-box;
+}
+.detailsContent {
+  width: 95%;
+  height: 85%;
+  font-size: 20px;
+  box-sizing: border-box;
+  background-color: #f3f2f2;
+  padding: 10px;
+}
+table {
+  width: 100%;
+  margin-bottom: 25px;
+}
+.tableHeader {
+  background-color: #3f51b5;
+  color: white;
+}
