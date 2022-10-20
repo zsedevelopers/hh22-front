@@ -15,7 +15,7 @@
   flex-wrap: wrap;
   padding-bottom: 30px;
 
-  h2{
+  h2 {
     padding-left: 10px;
   }
 }
@@ -34,11 +34,77 @@
 .id-card-container,
 .passport-container,
 .driving-licence-container {
-    width: 30%;
-    min-height: 50px;
-    border: 3px dotted black;
-    border-radius: 4px;
+  width: 30%;
+  min-height: 50px;
+  border: 3px dotted black;
+  border-radius: 4px;
 
+  display: flex;
+  flex-direction: column;
+}
+
+.cardContainer {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.card {
+  width: 500px !important;
+  height: 200px;
+  border: 2px solid #3f51b5;
+  box-sizing: border-box;
+  border-radius: 10px;
+  margin-top: 20px;
+  background-color: #ffffff;
+  z-index: 5;
+}
+
+.mat-card-title {
+  color: Black;
+  height: 10%;
+  width: fit-content;
+  font-size: 18px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.mat-card-subtitle {
+  position: relative;
+  // top: -12px;
+}
+.mat-card-content {
+  // height: 45%;
+  width: 100%;
+  height: 30%;
+  position: relative;
+  top: -5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .left {
     display: flex;
     flex-direction: column;
+  }
+  .right{
+    width: fit-content;
+    height: fit-content;
+    img{
+      width: 120px;
+      aspect-ratio: 35/45;
+      margin: 0;
+      position: relative;
+      top: -45px;
+      right: 10px;
+      border: 3px solid black;
+      border-radius: 3px;
+    }
+    padding-right: 15px
+  }
+
+}
+.mat-card-actions{
+  position: relative;
 }

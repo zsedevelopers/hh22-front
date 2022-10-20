@@ -14,6 +14,7 @@ import { Sex } from '../models/digital documents/enums/sex';
 import CreateDriverLicenceDto from '../models/digital documents/create-driver-licence-dto';
 import DocumentEntityDto from '../models/digital documents/document-entity-dto';
 import { DriverLicenceType } from '../models/digital documents/enums/driver-licence-type';
+import VerifyDocumentDto from '../models/digital documents/verifyDocumentDto';
 @Injectable({
   providedIn: 'root',
 })
@@ -178,8 +179,10 @@ export class ApiService {
     data: CreateDriverLicenceDto,
     token: string
   ): Observable<HttpResponse<null>> {
-    let parsedData:any = data
-    parsedData.permissions.map((p:any) => p.driverLicenceType = DriverLicenceType[p.driverLicenceType])
+    let parsedData: any = data;
+    parsedData.permissions.map(
+      (p: any) => (p.driverLicenceType = DriverLicenceType[p.driverLicenceType])
+    );
     return this.http.post<HttpResponse<null>>(
       `${this.baseUrl}/api/v1/document/driver-licence`,
       data,
@@ -199,6 +202,21 @@ export class ApiService {
     });
   }
 
+  verifyDocument(
+    data: VerifyDocumentDto,
+    token: string
+  ): Observable<HttpResponse<null>> {
+    return this.http.patch<HttpResponse<null>>(
+      `${this.baseUrl}/api/v1/wallet/verification`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+
   getUnverifiedDocuments(token: string): Observable<DocumentEntityDto[]> {
     return this.http.get<DocumentEntityDto[]>(
       `${this.baseUrl}/api/v1/documents/unverified`,
@@ -211,7 +229,7 @@ export class ApiService {
   }
   getVerifiedDocuments(token: string): Observable<DocumentEntityDto[]> {
     return this.http.get<DocumentEntityDto[]>(
-      `${this.baseUrl}/api/v1/documents/unverified`,
+      `${this.baseUrl}/api/v1/documents/verified`,
       {
         headers: {
           Authorization: `Bearer ${token}`,

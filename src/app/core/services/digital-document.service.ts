@@ -5,6 +5,7 @@ import CreateDriverLicenceDto from '../models/digital documents/create-driver-li
 import CreateIdentityCardDto from '../models/digital documents/create-identity-card-dto';
 import CreatePassportDto from '../models/digital documents/create-passport-dto';
 import DocumentEntityDto from '../models/digital documents/document-entity-dto';
+import VerifyDocumentDto from '../models/digital documents/verifyDocumentDto';
 import WalletDto from '../models/digital documents/wallet-dto';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
@@ -46,5 +47,9 @@ export class DigitalDocumentService {
 
   getVerifiedDocuments(): Observable<DocumentEntityDto[]> {
     return this.apiService.getVerifiedDocuments(this.authService.getJwt()!);
+  }
+
+  verifyDocument(data:VerifyDocumentDto){
+    return this.apiService.verifyDocument(data, this.authService.getJwt()!)
   }
 }
