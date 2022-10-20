@@ -52,7 +52,7 @@ export class CivicProjectPanelComponent implements OnInit {
     this.civilProjectService.verifyCivilProject(title).subscribe(() => {
       this.fetchCivilProjects();
       this.filterProjects();
-      this.hideProject()
+      this.hideProject();
     });
   }
   onCheckboxChange() {
@@ -84,8 +84,21 @@ export class CivicProjectPanelComponent implements OnInit {
     this.currentProjectIndex = index;
   }
 
-  getProjectIndex(project:CivilProjectDto){
-    return this.projects.indexOf(project)
+  getProjectIndex(project: CivilProjectDto) {
+    return this.projects.indexOf(project);
+  }
+
+  isProjectVerified(project: CivilProjectDto) {
+    if (
+      project.status ==
+      (CivilProjectStatus[
+        CivilProjectStatus.VERIFIED
+      ] as unknown as CivilProjectStatus)
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   hideProject() {
