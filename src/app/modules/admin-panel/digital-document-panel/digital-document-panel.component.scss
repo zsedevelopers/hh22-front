@@ -1,0 +1,44 @@
+:host {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  background-color: #212020;
+}
+.container {
+  width: 55%;
+  min-height: 90vh;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  flex-wrap: wrap;
+  padding-bottom: 30px;
+
+  h2{
+    padding-left: 10px;
+  }
+}
+.checkbox-container {
+  margin-bottom: 15px;
+  display: flex;
+  width: 50%;
+  justify-content: space-evenly;
+}
+.document-list-container {
+  margin-bottom: 15px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.id-card-container,
+.passport-container,
+.driving-licence-container {
+    width: 30%;
+    min-height: 50px;
+    border: 3px dotted black;
+    border-radius: 4px;
+
+    display: flex;
+    flex-direction: column;
+}

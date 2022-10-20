@@ -16,6 +16,10 @@ export class DigitalDocumentPanelComponent implements OnInit {
   passports: DocumentEntityDto[] = [];
   drivingLicences: DocumentEntityDto[] = [];
 
+  showDrivingLicences: boolean = true;
+  showPassports: boolean = true;
+  showIdCards: boolean = true;
+
   constructor(private documentService: DigitalDocumentService) {}
 
   ngOnInit(): void {
@@ -25,7 +29,9 @@ export class DigitalDocumentPanelComponent implements OnInit {
         data.forEach((d) => {
           console.log(d.documentType);
           switch (d.documentType) {
-            case DocumentType[DocumentType.IDENTITY_CARD] as unknown as DocumentType:
+            case DocumentType[
+              DocumentType.IDENTITY_CARD
+            ] as unknown as DocumentType:
               console.log('a');
               this.identityCards.push(d);
               break;
@@ -33,12 +39,18 @@ export class DigitalDocumentPanelComponent implements OnInit {
               console.log('b');
               this.passports.push(d);
               break;
-            case DocumentType[DocumentType.DRIVING_LICENSE] as unknown as DocumentType:
+            case DocumentType[
+              DocumentType.DRIVING_LICENSE
+            ] as unknown as DocumentType:
               console.log('c');
               this.drivingLicences.push(d);
               break;
           }
         });
       });
+  }
+
+  onCheckboxChange() {
+    
   }
 }
