@@ -5,46 +5,45 @@ import LoginResponse from '../models/auth/login-response';
 import RegisterRequest from '../models/auth/register-request';
 import UserDto from '../models/common/user-dto';
 import { ApiService } from './api.service';
-import jwtDecode from 'jwt-decode';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  // userData: UserDto | null = {
-  //   firstName:"A",
-  //   city:"A",
-  //   email:"A",
-  //   pesel:"s",
-  //   phoneNumber:3,
-  //   surname:"A"
-  // };
   constructor(private apiService: ApiService, private router: Router) {
     console.log('jwt:');
     console.log(this.getJwt());
-    console.log('user:');
-    // console.log(this.userData);
-    console.log('expired:');
-    // console.log(this.isJwtExpired());
-
-    if (this.getJwt() != null) {
-      console.log('a');
-      if (this.isJwtExpired()) {
-        this.logout();
-      } else {
-        console.log('b');
-        // if (this.userData == null) {
-        //   console.log('c');
-
-        //   this.getUserData().subscribe((data: UserDto) => {
-        //     this.userData = data;
-        //     console.log('user data 2:')
-        //     console.log(this.userData)
-        //   });
-        // }
-      }
+    console.log(this.isLogged());
+    if (this.isLogged()) {
+      this.getUserData().subscribe(
+        (data) => {
+          if (data == null) {
+            this.logout();
+          }
+        },
+        (error) => {
+          this.logout();
+        }
+      );
     }
+    // if (this.getJwt() != null) {
+    //   console.log('a');
+    //   if (this.isJwtExpired()) {
+    //     this.logout();
+    //   } else {
+    //     console.log('b');
+    //     // if (this.userData == null) {
+    //     //   console.log('c');
+
+    //     //   this.getUserData().subscribe((data: UserDto) => {
+    //     //     this.userData = data;
+    //     //     console.log('user data 2:')
+    //     //     console.log(this.userData)
+    //     //   });
+    //     // }
+    //   }
+    // }
   }
 
   login(requestData: LoginRequest) {
@@ -66,8 +65,8 @@ export class AuthService {
     });
   }
 
-  registerAdmin(requestData:RegisterRequest){
-    return this.apiService.registerAdmin(requestData, this.getJwt()!)
+  registerAdmin(requestData: RegisterRequest) {
+    return this.apiService.registerAdmin(requestData, this.getJwt()!);
   }
 
   logout() {
@@ -85,8 +84,13 @@ export class AuthService {
     }
   }
 
-  getUserData(): Observable<UserDto> {
-    return this.apiService.getUserData(this.getJwt()!);
+  getUserData() {
+    return this.apiService.getUserData(this.getJwt()!).pipe(
+      catchError((err) => {
+        this.logout();
+        return throwError(err);
+      })
+    );
   }
 
   //#region Jwt

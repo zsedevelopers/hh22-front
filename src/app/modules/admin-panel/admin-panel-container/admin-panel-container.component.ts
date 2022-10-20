@@ -12,9 +12,14 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class AdminPanelContainerComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
+  navbarLinks = ['civic-projects', 'documents', 'add-admin'];
+  navbarTabTitles:Record<string, string> = {
+    'civic-projects': 'projekty obywatelskie',
+    'documents': 'dokumenty',
+    'add-admin': 'dodawanie administratorów',
+  };
   ngOnInit(): void {
     //TODO: uncomment later !VERY IMPORTANT!
-
     // if (!this.authService.isLogged()) {
     //   console.warn('you have to be logged in to access this page')
     //   this.router.navigate(['/']);

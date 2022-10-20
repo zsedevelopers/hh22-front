@@ -1,1 +1,38 @@
-<p>digital-document-panel works!</p>
+<div class="container">
+    <div class="checkbox-container">
+        <mat-checkbox [(ngModel)]="showDrivingLicences" (change)="onCheckboxChange()">prawa jazdy
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="showPassports" (change)="onCheckboxChange()">paszporty</mat-checkbox>
+        <mat-checkbox [(ngModel)]="showIdCards" (change)="onCheckboxChange()">dowody osobiste</mat-checkbox>
+    </div>
+
+    <h2>Prawa jazdy</h2>
+    <div *ngIf="showDrivingLicences" class="document-list-container">
+        <div *ngFor="let licence of drivingLicences" class="driving-licence-container">
+            <span>{{licence.firstName}}</span>
+            <span>{{licence.surname}}</span>
+            <span>{{licence.documentType}}</span>
+        </div>
+
+    </div>
+    <h2>Paszporty</h2>
+    <div *ngIf="showPassports" class="document-list-container">
+
+        <div *ngFor="let passport of passports" class="passport-container">
+            <span>{{passport.firstName}}</span>
+            <span>{{passport.surname}}</span>
+            <span>{{passport.documentType}}</span>
+        </div>
+
+    </div>
+    <h2>Dowody osobiste</h2>
+    <div *ngIf="showIdCards" class="document-list-container">
+
+        <div *ngFor="let identityCard of identityCards" class="id-card-container">
+            <span>{{identityCard.firstName}}</span>
+            <span>{{identityCard.surname}}</span>
+            <span>{{identityCard.documentType}}</span>
+        </div>
+
+    </div>
+</div>
