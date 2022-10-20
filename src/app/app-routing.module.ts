@@ -45,16 +45,16 @@ const routes: Routes = [
     path: 'wallet',
     component: DocumentContainerComponent,
     children: [
-      { path: 'show', component: ShowDocumentsComponent },
-      {
-        path: 'details',
-        component: DetailsContainerComponent,
-        children: [
-          { path: 'driver-licence', component: DetailsDriverLicenceComponent },
-          { path: 'identity-card', component: DetailsIdentityCardComponent },
-          { path: 'passport', component: DetailsPassportComponent },
-        ],
+      { path: 'show', component: ShowDocumentsComponent},
+          { path: 'show/identity-card', component: AddIdentityCardFormComponent },
+          { path: 'show/passport', component: AddPassportFormComponent },
+          { path: 'show/driver-licence', component: AddDriverLicenceFormComponent },
+        ]
       },
+
+
+
+
       {
         path: 'add',
         component: AddDocumentComponent,
@@ -64,8 +64,6 @@ const routes: Routes = [
           { path: 'driver-licence', component: AddDriverLicenceFormComponent },
         ],
       },
-    ],
-  },
   {
     path: 'admin',
     component: AdminPanelContainerComponent,

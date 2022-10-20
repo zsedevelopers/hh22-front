@@ -10,7 +10,7 @@ export default interface DriverLicenceDto {
   frontOfDocumentImage: ImageDto;
   backOfDocumentImage: ImageDto;
   firstName: string;
-  secondName: string;
+  secondName: string | null;
   surname: string;
   placeOfBirth: string;
   birthDate: Date;

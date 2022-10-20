@@ -6,7 +6,7 @@ export default interface IdentityCardDto {
   documentType: DocumentType;
   picture: { link: string };
   firstName: string;
-  secondName: string;
+  secondName: string  | null;
   surname: string;
   nationality: string;
   documentNumber: string;

@@ -6,6 +6,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatCardModule} from "@angular/material/card";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatTableModule} from "@angular/material/table";
+import {MatListModule} from "@angular/material/list";
 
 
 
@@ -17,7 +18,8 @@ import {MatTableModule} from "@angular/material/table";
             MatInputModule,
     MatCardModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    MatListModule
           ]
 })
 export class MaterialModule { }

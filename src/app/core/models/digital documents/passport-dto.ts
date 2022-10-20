@@ -7,7 +7,7 @@ export default interface PassportDto {
   documentType: DocumentType;
   picture: { link: string };
   firstName: string;
-  secondName: string;
+  secondName: string  | null;
   surname: string;
   nationality: string;
   documentNumber: string;

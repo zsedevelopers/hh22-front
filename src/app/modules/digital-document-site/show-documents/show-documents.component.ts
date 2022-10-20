@@ -14,7 +14,19 @@ export class ShowDocumentsComponent implements OnInit {
   hasWallet: boolean = false;
   wallet: WalletDto | null = null;
 
-  constructor(private documentService: DigitalDocumentService) {}
+  driverDetails:boolean = false
+
+  showDriverDetails(){
+    this.driverDetails = !this.driverDetails
+  }
+
+  idDetails:boolean = false
+
+  showIdDetails(){
+    this.idDetails = !this.idDetails
+  }
+
+  constructor(private documentService: DigitalDocumentService, public router:Router) {}
 
   ngOnInit(): void {
 

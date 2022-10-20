@@ -1,23 +1,102 @@
-Your documents:
-<!-- <div *ngFor="let document of documents">
-    {{document.name}} <button [routerLink]="['details/', document.name]">Info</button>
-</div> -->
-<p *ngIf="!hasWallet">
-    You don't have any documents,
-    add one?
-</p>
+<div class="container" *ngIf="router.url=='/wallet/show'">
 
-<p *ngIf="wallet?.identityCard != null">
-    Dowod
-    <button [routerLink]="['details/identity-card']">info</button>
-</p>
+  <h2 style="text-align: center;width: 100%; font-size: 35px">Prawo jazdy</h2>
+  <div class="cardContainer" *ngIf="wallet!=null && wallet.driverLicence != null">
+    <div *ngIf="wallet!=null && wallet.driverLicence != null" class="images">
+      <img [src]="wallet.driverLicence.frontOfDocumentImage.link"  class="cardPhoto">
+      <img [src]="wallet.driverLicence.backOfDocumentImage.link"  class="cardPhoto">
+      <img [src]="wallet.driverLicence.picture.link"  class="cardPicture">
+    </div>
+    <button (click)="showDriverDetails()" class="showDetails" mat-raised-button color="primary"><a *ngIf="!driverDetails">Pokaż szczegóły</a><a *ngIf="driverDetails">Ukryj szczegóły</a></button>
+    <div *ngIf="wallet!=null && wallet.driverLicence != null && driverDetails" class="cardDetails">
+      <mat-list role="list">
+        <mat-list-item role="listitem"><b>Imię:</b> {{wallet.driverLicence.firstName}}</mat-list-item>
+        <mat-list-item role="listitem" *ngIf="wallet.driverLicence.secondName"><b>Drugie imię:</b> {{wallet.driverLicence.secondName}}</mat-list-item>
+        <mat-list-item role="listitem"><b>Nazwisko:</b> {{wallet.driverLicence.surname}}</mat-list-item>
+        <mat-list-item role="listitem"><b>Miejsce urodzenia:</b> {{wallet.driverLicence.placeOfBirth}}</mat-list-item>
+        <mat-list-item role="listitem"><b>Data urodzenia:</b> {{wallet.driverLicence.birthDate}}</mat-list-item>
+         </mat-list>
+      <mat-list role="list">
+        <mat-list-item role="listitem"><b>Uprawnienia:</b> <a *ngFor="let perm of wallet.driverLicence.permissions">{{perm.driverLicenceType}}</a></mat-list-item>
+        <mat-list-item role="listitem"><b>Numer dokumentu:</b> {{wallet.driverLicence.documentNumber}}</mat-list-item>
+        <mat-list-item role="listitem"><b>Ośrodek wydający:</b> {{wallet.driverLicence.issuingAuthority}}</mat-list-item>
+        <mat-list-item role="listitem"><b>Data wydania:</b> {{wallet.driverLicence.dateOfIssue}}</mat-list-item>
+      </mat-list>
+    </div>
+  </div>
+  <div style="align-content: center;justify-content: center!important;" class="cardContainer" *ngIf="wallet==null || wallet.driverLicence == null">
+    <p style="font-size:20px;text-align: center;width: 100%">Nic tu nie ma</p>
+    <button routerLink="driver-licence" class="showDetails" mat-raised-button color="primary">Dodaj prawo jazdy</button>
+  </div>
 
-<p *ngIf="wallet?.passport != null">
-    Paszport
-    <button [routerLink]="['details/passport']">info</button>
-</p>
-<p *ngIf="wallet?.driverLicence != null">
-    Prawo jazdy
-    <button [routerLink]="['details/driver-licence']">info</button>
-</p>
-<button [routerLink]="['add']">dodaj nowy dokument</button>
+
+    <h2 style="text-align: center;width: 100%; font-size: 35px">Dowód osobisty</h2>
+    <div class="cardContainer" *ngIf="wallet!=null && wallet.identityCard != null">
+      <div *ngIf="wallet!=null && wallet.identityCard != null" class="images">
+<!--        <img [src]="wallet.identityCard.frontOfDocumentImage.link"  class="cardPhoto">-->
+<!--        <img [src]="wallet.identityCard.backOfDocumentImage.link"  class="cardPhoto">-->
+        <img [src]="wallet.identityCard.picture.link"  class="cardPicture">
+      </div>
+      <button (click)="showIdDetails()" class="showDetails" mat-raised-button color="primary"><a *ngIf="!idDetails">Pokaż szczegóły</a><a *ngIf="idDetails">Ukryj szczegóły</a></button>
+      <div *ngIf="wallet!=null && wallet.identityCard != null && idDetails" class="cardDetails">
+        <mat-list role="list">
+          <mat-list-item role="listitem"><b>Imię:</b> {{wallet.identityCard.firstName}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="wallet.identityCard.secondName"><b>Drugie imię:</b> {{wallet.driverLicence.secondName}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Nazwisko:</b> {{wallet.identityCard.surname}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Miejsce urodzenia:</b> {{wallet.identityCard.placeOfBirth}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Data urodzenia:</b> {{wallet.identityCard.birthDate}}</mat-list-item>
+        </mat-list>
+        <mat-list role="list">
+          <mat-list-item role="listitem"><b>Narodowość:</b> {{wallet.identityCard.nationality}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Płeć:</b> {{wallet.identityCard.sex}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Numer dokumentu:</b> {{wallet.identityCard.documentNumber}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Ośrodek wydający:</b> {{wallet.identityCard.issuingAuthority}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Data wydania:</b> {{wallet.identityCard.dateOfIssue}}</mat-list-item>
+        </mat-list>
+        <mat-list role="list">
+          <mat-list-item role="listitem"><b>CAN:</b> {{wallet.identityCard.CAN}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Nazwizsko rodowe:</b> {{wallet.identityCard.familyName}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Imię ojca:</b> {{wallet.identityCard.fatherName}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Imię matki:</b> {{wallet.identityCard.motherName}}</mat-list-item>>
+        </mat-list>
+      </div>
+    </div>
+    <div style="align-content: center;justify-content: center!important;" class="cardContainer" *ngIf="wallet==null || wallet.identityCard == null">
+      <p style="font-size:20px;text-align: center;width: 100%">Nic tu nie ma</p>
+      <button routerLink="identity-card" class="showDetails" mat-raised-button color="primary">Dodaj dowód osobisty</button>
+    </div>
+
+
+    <h2 style="text-align: center;width: 100%; font-size: 35px">Paszport</h2>
+    <div class="cardContainer" *ngIf="wallet!=null && wallet.identityCard != null">
+      <div *ngIf="wallet!=null && wallet.passport != null" class="images">
+        <!--        <img [src]="wallet.passport.frontOfDocumentImage.link"  class="cardPhoto">-->
+        <!--        <img [src]="wallet.passport.backOfDocumentImage.link"  class="cardPhoto">-->
+        <img [src]="wallet.passport.picture.link"  class="cardPicture">
+      </div>
+      <button (click)="showIdDetails()" class="showDetails" mat-raised-button color="primary"><a *ngIf="!idDetails">Pokaż szczegóły</a><a *ngIf="idDetails">Ukryj szczegóły</a></button>
+      <div *ngIf="wallet!=null && wallet.passport != null && idDetails" class="cardDetails">
+        <mat-list role="list">
+          <mat-list-item role="listitem"><b>Imię:</b> {{wallet.passport.firstName}}</mat-list-item>
+          <mat-list-item role="listitem" *ngIf="wallet.passport.secondName"><b>Drugie imię:</b> {{wallet.driverLicence.secondName}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Nazwisko:</b> {{wallet.passport.surname}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Miejsce urodzenia:</b> {{wallet.passport.placeOfBirth}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Data urodzenia:</b> {{wallet.passport.birthDate}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Data urodzenia:</b> {{wallet.passport.expiryDate}}</mat-list-item>
+        </mat-list>
+        <mat-list role="list">
+          <mat-list-item role="listitem"><b>Narodowość:</b> {{wallet.passport.nationality}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Płeć:</b> {{wallet.passport.sex}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Numer dokumentu:</b> {{wallet.passport.documentNumber}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Ośrodek wydający:</b> {{wallet.passport.issuingAuthority}}</mat-list-item>
+          <mat-list-item role="listitem"><b>Data wydania:</b> {{wallet.passport.dateOfIssue}}</mat-list-item>
+        </mat-list>
+
+      </div>
+    </div>
+    <div style="align-content: center;justify-content: center!important;" class="cardContainer" *ngIf="wallet==null || wallet.passport == null">
+      <p style="font-size:20px;text-align: center;width: 100%">Nic tu nie ma</p>
+      <button routerLink="identity-card" class="showDetails" mat-raised-button color="primary">Dodaj paszport</button>
+    </div>
+
+</div>
