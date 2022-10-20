@@ -30,7 +30,7 @@
     <mat-grid-tile *ngIf="router.url!='/'" rowspan="2" colspan="50">
       <div class="nav-buttons">
         <a style="color: white" [routerLink]="['/civicProject/show']" >Projekty</a>
-        <a style="color: white" [routerLink]="['/wallet/show']">Portfel</a>
+        <a style="color: white" [routerLink]="['/wallet/showWallet']">Portfel</a>
         <a style="color: white" *ngIf="isAdmin" [routerLink]="['/admin/civic-projects']">Panel admina</a>
       </div>
     </mat-grid-tile>
