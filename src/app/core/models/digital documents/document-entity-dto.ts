@@ -18,4 +18,6 @@ export default interface DocumentEntityDto {
   expiryDate: Date;
   issuingAuthority: string;
   dateOfIssue: Date;
+  nationality?: string;
+  pesel?: string;
 }
