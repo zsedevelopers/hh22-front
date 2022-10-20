@@ -107,7 +107,13 @@
         <mat-card class="card" *ngFor="let project of filteredProjects; let i = index">
             <mat-card-title>{{project.title}}</mat-card-title>
             <img class="icon" mat-card-image [src]="icons[project.category]">
-            <mat-card-content>{{project.shortDescription}}<br>{{project.city}}<br>{{project.status}}</mat-card-content>
+            <mat-card-subtitle> {{formatStatus(project.status)}}</mat-card-subtitle>
+            <mat-card-content>
+                <span>miasto: {{formatCity(project.city)}}</span>
+                <span *ngIf="isProjectVerified(project)">głosy: {{project.likedBy.length}}</span>
+                <span class="short-description-label">opis:</span>
+                <p>{{project.shortDescription}}</p>
+            </mat-card-content>
 
             <mat-card-actions>
                 <button class="showButton" mat-raised-button color="primary"

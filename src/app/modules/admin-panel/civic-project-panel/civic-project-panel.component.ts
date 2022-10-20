@@ -108,4 +108,18 @@ export class CivicProjectPanelComponent implements OnInit {
   onCitySelectChange() {
     this.filterProjects();
   }
+
+  formatCity(city: string): string {
+    return city.charAt(0).toUpperCase() + city.toLowerCase().slice(1);
+  }
+  formatStatus(status: CivilProjectStatus): string {
+    if (
+      (status as unknown as string) ==
+      CivilProjectStatus[CivilProjectStatus.VERIFIED]
+    ) {
+      return 'Zweryfikowany';
+    } else {
+      return 'Niezweryfikowany';
+    }
+  }
 }
