@@ -26,7 +26,20 @@ export class DigitalDocumentPanelComponent implements OnInit {
   constructor(private documentService: DigitalDocumentService) {}
 
   ngOnInit(): void {
+    this.fetchDocuments();
+  }
+  verifyDocument(document: DocumentEntityDto) {
+    this.documentService.verifyDocument(document.id).subscribe({
+      next: () => {
+        this.fetchDocuments();
+        this.filterDocuments();
+      },
+    });
+  }
+
+  fetchDocuments() {
     this.documents = [];
+
     this.documentService
       .getUnverifiedDocuments()
       .subscribe((data: DocumentEntityDto[]) => {
@@ -39,13 +52,6 @@ export class DigitalDocumentPanelComponent implements OnInit {
         this.documents.push(...data);
         this.filteredDocuments = this.documents;
       });
-  }
-  verifyDocument(document: DocumentEntityDto) {
-    const requestData: VerifyDocumentDto = {
-      documentType: document.documentType as unknown as string,
-      pesel: document.pesel!,
-    };
-    this.documentService.verifyDocument(requestData).subscribe();
   }
 
   isDocumentVerified(document: DocumentEntityDto) {

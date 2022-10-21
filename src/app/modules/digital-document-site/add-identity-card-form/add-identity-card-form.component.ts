@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import UserDto from 'src/app/core/models/common/user-dto';
 import CreateIdentityCardDto from 'src/app/core/models/digital documents/create-identity-card-dto';
 import { Sex } from 'src/app/core/models/digital documents/enums/sex';
@@ -40,7 +41,8 @@ export class AddIdentityCardFormComponent implements OnInit {
   constructor(
     private digitalDocumentService: DigitalDocumentService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -128,10 +130,14 @@ export class AddIdentityCardFormComponent implements OnInit {
   addIdWithWalletCheck(data: CreateIdentityCardDto) {
     console.log(this.wallet);
     if (this.wallet != null) {
-      this.digitalDocumentService.addIdentityCard(data).subscribe();
+      this.digitalDocumentService.addIdentityCard(data).subscribe(() => {
+        this.router.navigate(['/wallet/showWallet']);
+      });
     } else {
       this.digitalDocumentService.createWallet().subscribe(() => {
-        this.digitalDocumentService.addIdentityCard(data).subscribe();
+        this.digitalDocumentService.addIdentityCard(data).subscribe(() => {
+          this.router.navigate(['/wallet/showWallet']);
+        });
       });
     }
   }

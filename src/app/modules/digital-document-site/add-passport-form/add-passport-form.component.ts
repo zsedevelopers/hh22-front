@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import UserDto from 'src/app/core/models/common/user-dto';
 import CreateIdentityCardDto from 'src/app/core/models/digital documents/create-identity-card-dto';
 import CreatePassportDto from 'src/app/core/models/digital documents/create-passport-dto';
@@ -17,7 +18,8 @@ export class AddPassportFormComponent implements OnInit {
   constructor(
     private digitalDocumentService: DigitalDocumentService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   userData: UserDto | null = null;
@@ -95,7 +97,8 @@ export class AddPassportFormComponent implements OnInit {
       return;
     }
     const data: CreatePassportDto = {
-      picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg/220px-Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg",
+      picture:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg/220px-Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg',
       frontOfDocumentImage: 'a',
       backOfDocumentImage: 'a',
       firstName: this.userData?.firstName!,
@@ -118,10 +121,14 @@ export class AddPassportFormComponent implements OnInit {
 
   private addPassportWithWalletCheck(data: CreatePassportDto) {
     if (this.wallet != null) {
-      this.digitalDocumentService.addPassport(data).subscribe();
+      this.digitalDocumentService.addPassport(data).subscribe(() => {
+        this.router.navigate(['/wallet/showWallet']);
+      });
     } else {
       this.digitalDocumentService.createWallet().subscribe(() => {
-        this.digitalDocumentService.addPassport(data).subscribe();
+        this.digitalDocumentService.addPassport(data).subscribe(() => {
+          this.router.navigate(['/wallet/showWallet']);
+        });
       });
     }
   }

@@ -49,7 +49,7 @@ export class DigitalDocumentService {
     return this.apiService.getVerifiedDocuments(this.authService.getJwt()!);
   }
 
-  verifyDocument(data:VerifyDocumentDto){
-    return this.apiService.verifyDocument(data, this.authService.getJwt()!)
+  verifyDocument(id:number){
+    return this.apiService.verifyDocument(id, this.authService.getJwt()!)
   }
 }
