@@ -13,6 +13,8 @@ import {
 import { ProjectCategory } from '../../../core/models/civil projects/project-category';
 import AddEstimateDto from '../../../core/models/civil projects/add-estimate-dto';
 import UserDto from '../../../core/models/common/user-dto';
+import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-add-civic-project',
@@ -20,7 +22,7 @@ import UserDto from '../../../core/models/common/user-dto';
   styleUrls: ['./add-civic-project.component.scss'],
 })
 export class AddCivicProjectComponent implements OnInit {
-  userCity:string = "";
+  userCity: string = '';
   userData: UserDto | null = null;
 
   listOfCategories: ProjectCategory[] = [
@@ -37,13 +39,27 @@ export class AddCivicProjectComponent implements OnInit {
 
   addProjectForm = this.fb.group({
     title: this.fb.control('', Validators.required),
-    city: [{
-      value: this.userCity,
-      disabled:true
-    }],
-    shortDescription: this.fb.control('', Validators.required),
-    description: this.fb.control('', Validators.required),
-    justification: this.fb.control('', Validators.required),
+    city: [
+      {
+        value: this.userCity,
+        disabled: true,
+      },
+    ],
+    shortDescription: this.fb.control('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(255),
+    ]),
+    description: this.fb.control('', [
+      Validators.required,
+      Validators.minLength(255),
+      Validators.maxLength(4096),
+    ]),
+    justification: this.fb.control('', [
+      Validators.required,
+      Validators.minLength(50),
+      Validators.maxLength(4096),
+    ]),
     estimates: this.fb.array([]),
     schedules: this.fb.array([]),
     category: new FormControl<ProjectCategory>(ProjectCategory.OTHER, {
@@ -54,16 +70,26 @@ export class AddCivicProjectComponent implements OnInit {
   constructor(
     private civilProjectService: CivilProjectService,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.authService.getUserData().subscribe((data) => {
-      this.userData = data;
-      this.addProjectForm.value.city = this.userData.city
-      this.userCity = this.userData.city
-    });
-    
+    this.authService
+      .getUserData()
+      .pipe(
+        catchError((err) => {
+          alert('you have to be logged in to access this feature');
+          this.router.navigate(['/'])
+          
+          return throwError(err);
+        })
+      )
+      .subscribe((data) => {
+        this.userData = data;
+        this.addProjectForm.value.city = this.userData.city;
+        this.userCity = this.userData.city;
+      });
   }
 
   get estimates(): FormArray<FormGroup> {
@@ -103,7 +129,7 @@ export class AddCivicProjectComponent implements OnInit {
 
   onFormSubmit() {
     console.log(this.userData);
-    console.log('form:')
+    console.log('form:');
     console.log(this.addProjectForm.value);
     if (!this.authService.isLogged()) {
       console.warn(`you're not logged in`);
@@ -153,8 +179,10 @@ export class AddCivicProjectComponent implements OnInit {
       };
       data.schedulesOfActivities.push(schedule);
     });
-    if(this.authService.isLogged()){
-      this.civilProjectService.addCivilProject(data).subscribe(() => {});
+    if (this.authService.isLogged()) {
+      this.civilProjectService.addCivilProject(data).subscribe(() => {
+        this.router.navigate(['/civicProject/show']);
+      });
     }
   }
 }

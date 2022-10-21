@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import UserDto from 'src/app/core/models/common/user-dto';
 import CreateIdentityCardDto from 'src/app/core/models/digital documents/create-identity-card-dto';
 import { Sex } from 'src/app/core/models/digital documents/enums/sex';
@@ -15,10 +16,22 @@ import { DigitalDocumentService } from 'src/app/core/services/digital-document.s
 export class AddIdentityCardFormComponent implements OnInit {
   userData: UserDto | null = null;
   wallet: WalletDto | null = null;
+  private imageUrlRegex = '(http(s?):)([/|.|w|s|-])*.(?:jpg|png)';
+  private canNumberRegex = '^[A-Z]{3}[d]{6}$';
+  private peselRegex = '^[d]{11}$';
   addIdForm = this.fb.group({
-    pictureUrl: this.fb.control('', Validators.required),
-    frontImageUrl: this.fb.control('', Validators.required),
-    backImageUrl: this.fb.control('', Validators.required),
+    pictureUrl: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.imageUrlRegex),
+    ]),
+    frontImageUrl: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.imageUrlRegex),
+    ]),
+    backImageUrl: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.imageUrlRegex),
+    ]),
     firstName: this.fb.control('', Validators.required),
     secondName: this.fb.control(''),
     surname: this.fb.control('', Validators.required),
@@ -27,9 +40,15 @@ export class AddIdentityCardFormComponent implements OnInit {
     documentNumber: this.fb.control('', Validators.required),
     expirationDate: this.fb.control(new Date(Date.now()), Validators.required),
     dateOfBirth: this.fb.control(new Date(Date.now()), Validators.required),
-    CAN: this.fb.control(''),
+    CAN: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.canNumberRegex),
+    ]),
     placeOfBirth: this.fb.control('', Validators.required),
-    pesel: this.fb.control('', Validators.required),
+    pesel: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.peselRegex),
+    ]),
     familyName: this.fb.control('', Validators.required),
     motherName: this.fb.control('', Validators.required),
     fatherName: this.fb.control('', Validators.required),
@@ -40,7 +59,8 @@ export class AddIdentityCardFormComponent implements OnInit {
   constructor(
     private digitalDocumentService: DigitalDocumentService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -59,6 +79,7 @@ export class AddIdentityCardFormComponent implements OnInit {
     }
     if (this.addIdForm.invalid) {
       console.warn('invalid form data');
+      return;
     }
 
     const formData = this.addIdForm.value;
@@ -103,7 +124,8 @@ export class AddIdentityCardFormComponent implements OnInit {
     }
 
     const data: CreateIdentityCardDto = {
-      picture: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg/220px-Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg',
+      picture:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg/220px-Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg',
       frontOfDocumentImage: 'a',
       backOfDocumentImage: 'a',
       firstName: this.userData!.firstName!,
@@ -128,10 +150,14 @@ export class AddIdentityCardFormComponent implements OnInit {
   addIdWithWalletCheck(data: CreateIdentityCardDto) {
     console.log(this.wallet);
     if (this.wallet != null) {
-      this.digitalDocumentService.addIdentityCard(data).subscribe();
+      this.digitalDocumentService.addIdentityCard(data).subscribe(() => {
+        this.router.navigate(['/wallet/showWallet']);
+      });
     } else {
       this.digitalDocumentService.createWallet().subscribe(() => {
-        this.digitalDocumentService.addIdentityCard(data).subscribe();
+        this.digitalDocumentService.addIdentityCard(data).subscribe(() => {
+          this.router.navigate(['/wallet/showWallet']);
+        });
       });
     }
   }

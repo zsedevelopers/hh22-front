@@ -5,7 +5,7 @@ import LoginResponse from '../models/auth/login-response';
 import RegisterRequest from '../models/auth/register-request';
 import UserDto from '../models/common/user-dto';
 import { ApiService } from './api.service';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -47,16 +47,12 @@ export class AuthService {
   }
 
   login(requestData: LoginRequest) {
-    return this.apiService
-      .login(requestData)
-      .subscribe((res: LoginResponse) => {
+    return this.apiService.login(requestData).pipe(
+      tap((res) => {
         this.setJwt(res.access_token);
-        // this.userData = res.user;
-        console.log(`zalogowano jako:`);
-        console.log(res.user);
         this.router.navigate(['/']);
-        // this.router.navigate([this.router.url])
-      });
+      })
+    );
   }
 
   register(requestData: RegisterRequest) {
@@ -70,7 +66,7 @@ export class AuthService {
   }
 
   logout() {
-    console.log('logged out');
+    // console.log('logged out');
     localStorage.removeItem('jwt');
     localStorage.removeItem('refreshToken');
     this.router.navigate(['/']);
@@ -85,13 +81,7 @@ export class AuthService {
   }
 
   getUserData() {
-    return this.apiService.getUserData(this.getJwt()!).pipe(
-      catchError((err) => {
-        this.logout();
-        alert('you have to be logged in to access this feature')
-        return throwError(err);
-      })
-    );
+    return this.apiService.getUserData(this.getJwt()!);
   }
 
   //#region Jwt

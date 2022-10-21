@@ -21,6 +21,7 @@
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input matInput type="email" placeholder="email" formControlName="email">
+        <mat-error *ngIf="registerForm.controls.email.invalid">Wprowadź poprawny email</mat-error>
       </mat-form-field>
 
       <mat-form-field class="halfInput">
@@ -30,19 +31,21 @@
 
       <mat-form-field class="halfInputRight">
         <mat-label>numer telefonu</mat-label>
-        <input matInput type="text" placeholder="phone number" formControlName="phoneNumber">
+        <input matInput type="text" placeholder="111 222 333" formControlName="phoneNumber">
+        <mat-error *ngIf="registerForm.controls.phoneNumber.invalid">Wprowadź poprawny numer telefonu</mat-error>
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Pesel</mat-label>
         <input matInput type="text" placeholder="pesel" formControlName="pesel">
+        <mat-error *ngIf="registerForm.controls.pesel.invalid">Wprowadź poprawny PESEL</mat-error>
+
       </mat-form-field>
-
-
 
       <mat-form-field>
         <mat-label>Hasło:</mat-label>
         <input matInput type="password" placeholder="password" formControlName="password">
+        <mat-error *ngIf="registerForm.controls.password.invalid">Hasło nie może być puste</mat-error>
       </mat-form-field>
 
       <mat-form-field>
@@ -50,11 +53,7 @@
         <input matInput type="password" placeholder="confirm password" formControlName="passwordConfirm">
       </mat-form-field>
 
-
-
-
-
-
+      <mat-error *ngIf="errorMessage != null">{{errorMessage}}</mat-error>
 
       <button mat-raised-button type="submit" color="primary" value="prześlij">Zarejestruj się</button>
     </form>

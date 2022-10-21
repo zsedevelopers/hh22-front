@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import UserDto from 'src/app/core/models/common/user-dto';
 import CreateIdentityCardDto from 'src/app/core/models/digital documents/create-identity-card-dto';
 import CreatePassportDto from 'src/app/core/models/digital documents/create-passport-dto';
@@ -17,16 +18,29 @@ export class AddPassportFormComponent implements OnInit {
   constructor(
     private digitalDocumentService: DigitalDocumentService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   userData: UserDto | null = null;
   wallet: WalletDto | null = null;
 
+  private imageUrlRegex = '(http(s?):)([/|.|w|s|-])*.(?:jpg|png)';
+  private peselRegex = '^[d]{11}$';
+
   addPassportForm = this.fb.group({
-    picture: this.fb.control('', Validators.required),
-    frontImageUrl: this.fb.control('', Validators.required),
-    backImageUrl: this.fb.control('', Validators.required),
+    picture: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.imageUrlRegex),
+    ]),
+    frontImageUrl: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.imageUrlRegex),
+    ]),
+    backImageUrl: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.imageUrlRegex),
+    ]),
     firstName: this.fb.control('', Validators.required),
     secondName: this.fb.control(''),
     surname: this.fb.control('', Validators.required),
@@ -36,7 +50,10 @@ export class AddPassportFormComponent implements OnInit {
     expirationDate: this.fb.control(new Date(Date.now()), Validators.required),
     dateOfBirth: this.fb.control(new Date(Date.now()), Validators.required),
     placeOfBirth: this.fb.control('', Validators.required),
-    pesel: this.fb.control('', Validators.required),
+    pesel: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.peselRegex),
+    ]),
     issuingAuthority: this.fb.control('', Validators.required),
     issueDate: this.fb.control(new Date(Date.now()), Validators.required),
   });
@@ -57,6 +74,7 @@ export class AddPassportFormComponent implements OnInit {
     }
     if (this.addPassportForm.invalid) {
       console.warn('invalid form data');
+      return;
     }
 
     const formData = this.addPassportForm.value;
@@ -95,7 +113,8 @@ export class AddPassportFormComponent implements OnInit {
       return;
     }
     const data: CreatePassportDto = {
-      picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg/220px-Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg",
+      picture:
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg/220px-Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg',
       frontOfDocumentImage: 'a',
       backOfDocumentImage: 'a',
       firstName: this.userData?.firstName!,
@@ -118,10 +137,14 @@ export class AddPassportFormComponent implements OnInit {
 
   private addPassportWithWalletCheck(data: CreatePassportDto) {
     if (this.wallet != null) {
-      this.digitalDocumentService.addPassport(data).subscribe();
+      this.digitalDocumentService.addPassport(data).subscribe(() => {
+        this.router.navigate(['/wallet/showWallet']);
+      });
     } else {
       this.digitalDocumentService.createWallet().subscribe(() => {
-        this.digitalDocumentService.addPassport(data).subscribe();
+        this.digitalDocumentService.addPassport(data).subscribe(() => {
+          this.router.navigate(['/wallet/showWallet']);
+        });
       });
     }
   }

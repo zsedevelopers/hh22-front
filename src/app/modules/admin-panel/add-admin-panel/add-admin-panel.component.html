@@ -1,7 +1,7 @@
 <div class="body">
   <div class="login-tile">
     <p class="login-header">Zarejestruj admina</p>
-    <form [formGroup]="registerForm" (ngSubmit)="onRegisterFormSubmit()">
+    <form [formGroup]="registerForm">
 
       <mat-form-field class="halfInput">
         <mat-label>Imię</mat-label>
@@ -21,6 +21,7 @@
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input matInput type="email" placeholder="email" formControlName="email">
+        <mat-error *ngIf="registerForm.controls.email.invalid">Wprowadź poprawny email</mat-error>
       </mat-form-field>
 
       <mat-form-field class="halfInput">
@@ -31,24 +32,33 @@
       <mat-form-field class="halfInputRight">
         <mat-label>numer telefonu</mat-label>
         <input matInput type="text" placeholder="phone number" formControlName="phoneNumber">
+        <mat-error *ngIf="registerForm.controls.phoneNumber.invalid">Wprowadź poprawny numer telefonu</mat-error>
+
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Pesel</mat-label>
         <input matInput type="text" placeholder="pesel" formControlName="pesel">
+        <mat-error *ngIf="registerForm.controls.pesel.invalid">Wprowadź poprawny PESEL</mat-error>
+
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Hasło:</mat-label>
         <input matInput type="password" placeholder="password" formControlName="password">
+        <mat-error *ngIf="registerForm.controls.password.invalid">Hasło nie może być puste</mat-error>
+
       </mat-form-field>
 
       <mat-form-field>
         <mat-label>Powtórz hasło</mat-label>
         <input matInput type="password" placeholder="confirm password" formControlName="passwordConfirm">
       </mat-form-field>
+      <div class="error-container">
+        <mat-error *ngIf="errorMessage != null">{{errorMessage}}</mat-error>
+      </div>
 
-      <button mat-raised-button type="submit" color="primary" value="prześlij">Zarejestruj</button>
+      <button mat-raised-button  color="primary" (click)="onRegisterFormSubmit()" value="prześlij">Zarejestruj</button>
     </form>
   </div>
 
