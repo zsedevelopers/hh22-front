@@ -8,10 +8,11 @@ export default interface CreatePassportDto {
   secondName: string | null;
   surname: string;
   nationality: string;
+  sex: Sex;
   documentNumber: string;
   expiryDate: Date;
   birthDate: Date;
-  sex: Sex;
+
   placeOfBirth: string;
   pesel: string;
   issuingAuthority: string;
