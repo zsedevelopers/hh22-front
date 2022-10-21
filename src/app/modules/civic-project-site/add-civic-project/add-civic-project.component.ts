@@ -13,6 +13,7 @@ import {
 import { ProjectCategory } from '../../../core/models/civil projects/project-category';
 import AddEstimateDto from '../../../core/models/civil projects/add-estimate-dto';
 import UserDto from '../../../core/models/common/user-dto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-civic-project',
@@ -54,7 +55,8 @@ export class AddCivicProjectComponent implements OnInit {
   constructor(
     private civilProjectService: CivilProjectService,
     private authService: AuthService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -63,7 +65,6 @@ export class AddCivicProjectComponent implements OnInit {
       this.addProjectForm.value.city = this.userData.city
       this.userCity = this.userData.city
     });
-    
   }
 
   get estimates(): FormArray<FormGroup> {
@@ -154,7 +155,9 @@ export class AddCivicProjectComponent implements OnInit {
       data.schedulesOfActivities.push(schedule);
     });
     if(this.authService.isLogged()){
-      this.civilProjectService.addCivilProject(data).subscribe(() => {});
+      this.civilProjectService.addCivilProject(data).subscribe(() => {
+        this.router.navigate(['/civicProject/show'])
+      });
     }
   }
 }
