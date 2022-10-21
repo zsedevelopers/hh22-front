@@ -97,7 +97,7 @@
 
     <mat-card-actions class="buttons">
       <button class="showButton" mat-raised-button color="primary" (click)="showProject(i)">Zobacz szczegóły</button>
-      <button [ngClass]="isLiked()?'disabled':''"  mat-raised-button color="warn" (click)="likeProject(project.title)">+</button>
+      <button [ngClass]="isLiked()?'disabled':''" class="showButton"  mat-raised-button color="warn" (click)="likeProject(project.title)">+</button>
     </mat-card-actions>
   </mat-card>
 </div>
