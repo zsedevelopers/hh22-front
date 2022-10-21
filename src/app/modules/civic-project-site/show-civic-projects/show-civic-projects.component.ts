@@ -5,6 +5,7 @@ import CivilProjectDto from '../../../core/models/civil projects/civil-project-d
 import { ProjectCategory } from '../../../core/models/civil projects/project-category';
 import { Icons } from '../../../core/models/civil projects/icons';
 import { CivilProjectService } from '../../../core/services/civil-project.service';
+import UserDto from "../../../core/models/common/user-dto";
 
 @Component({
   selector: 'app-show-civic-projects',
@@ -46,16 +47,33 @@ export class ShowCivicProjectsComponent implements OnInit {
   cities: string[] = ['OLSZTYN', 'RADOM', 'SOSNOWIEC'];
   projects: CivilProjectDto[] = [];
 
+  currentUser:UserDto | null = null
+
   onCitySelectChange() {
     this.loadProjects(this.selectedCity);
   }
 
-  // likeProject(title:string){
-  //   if (!this.authService.isLogged()) {
-  //     return;
-  //   }
-  //   this.civilProjectService.likeCivilProject(title)
-  // }
+  likeProject(title:string){
+    if (!this.authService.isLogged()) {
+      return;
+    }
+    this.civilProjectService.likeCivilProject(title).subscribe()
+  }
+
+  isLiked():boolean{
+    if(this.currentUser==null){
+      console.log('niezalogowany')
+      return true;
+    }
+    for(let i=0;i<this.projects.length;i++){
+      for(let j=0;j<this.projects[i].likedBy.length;j++){
+        if(this.projects[i].likedBy[j].pesel==this.currentUser.pesel){
+          return true
+        }
+      }
+    }
+    return false
+  }
 
   loadProjects(city: string) {
     if (!this.authService.isLogged()) {
@@ -64,9 +82,11 @@ export class ShowCivicProjectsComponent implements OnInit {
     this.civilProjectService
       .getCivilProjectsByCity(city)
       .subscribe((data) => (this.projects = data));
+
   }
 
   ngOnInit(): void {
+    this.authService.getUserData().subscribe(user=>{this.currentUser = user})
     this.selectedCity = this.cities[0];
     this.loadProjects(this.selectedCity);
     this.civilProjectService.getAllCivilProjects().subscribe((data) => {
@@ -77,5 +97,14 @@ export class ShowCivicProjectsComponent implements OnInit {
         this.loadProjects(this.selectedCity);
       }
     });
+
+    if(this.authService.isLogged()){
+      this.authService.getUserData().subscribe(user=>{
+        this.currentUser = user;
+        console.log(this.currentUser);
+        console.log(this.isLiked())
+      })
+
+    }
   }
 }

@@ -96,7 +96,7 @@ export class ApiService {
 
   likeCivilProject(title: string, token: string) {
     return this.http.post(
-      `${this.baseUrl}/api/v1/civicproject/favourite/title/${title}`,
+      `${this.baseUrl}/api/v1/civicproject/favourite/${title}`,
       {},
       {
         headers: {

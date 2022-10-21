@@ -17,7 +17,6 @@
   justify-content: space-between;
 }
 .headerText{
-  position:absolute;
   width: 10%;
   right: 45%;
   font-size: 30px;
@@ -34,55 +33,86 @@
 
 .card{
   width: 500px!important;
-  height: 200px;
+  height: 220px;
   border: 2px solid #3f51b5;
   box-sizing: border-box;
   border-radius: 10px;
   margin-top: 20px;
   background-color: #ffffff;
   z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  padding: 0;
+  word-break: break-all
 }
 .mat-card-title{
   color: Black;
   height: 20%;
-  width: 300%;
+  width: 300px;
   font-size: 18px;
   margin-bottom: 10px;
-  position: absolute;
+  //box-sizing: border-box;
+  //border: 1px solid black;
 }
 .mat-card-content{
   height: 45%;
-  width: 250px;
-  position: absolute;
-  top: 25%;
+  width: 300px;
+  //box-sizing: border-box;
+  //border: 1px solid black;
+  word-break: break-all
 }
 .icon{
   width: 167px;
-  position: absolute;
-  right: 2.8%;
-  top: -1%;
   background-color: #ecc351;
   border-top-right-radius: 8px;
   border: 2px solid #3f51b5;
   box-sizing: border-box;
+  padding: 0!important;
+  margin: 0!important;
+  position: relative;
+  top: -2px;
+  right: -2px;
+}
+.contentContainer{
+  width: 300px;
+  //box-sizing: border-box;
+  //border: 1px solid black;
+}
+.buttons{
+  width: 100%;
+  height: 52px;
+  display: flex;
+  justify-content:space-between ;
+  align-content: flex-start;
+  //box-sizing: border-box;
+  //border: 1px solid black;
+  padding: 0!important;
+  margin: 0!important;
+  position: relative;
+  bottom: 2px;
+  right: 0px;
 }
 .showButton{
-  width: 70%;
-  height: 17%;
-  left: 0;
-  bottom: -1%;
-  position: absolute;
-  border-top-right-radius:0;
+  width: 334px;
+  height: 51px;
+  border-bottom-left-radius: 7px;
+  border-radius:0;
+  margin: 0!important;
+  padding: 0!important;
 }
 .voteButton{
-  width: 30%;
-  height: 17%;
-  right: 0;
-  bottom: -1%;
-  position: absolute;
-  border-top-right-radius:0;
+  width: 166px;
+  height: 51px;
+  margin: 0!important;
+  border-radius:0;
+  border-bottom-right-radius: 7px;
+  padding: 0!important;
 }
-
+.disabled{
+  background-color: #ecc351!important;
+}
 
 
 .projectDetails{
@@ -138,3 +168,5 @@ table{
   background-color: #3f51b5;
   color: white;
 }
+
+
