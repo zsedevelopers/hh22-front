@@ -88,12 +88,13 @@
 
 <div class="cardContainer" *ngIf="currentProjectIndex==null">
   <mat-card class="card" *ngFor="let project of projects; let i = index">
-    <mat-card-title>{{project.title}}</mat-card-title>
+    <mat-card-title>{{project.title}} głosy: {{project.likedBy.length}}</mat-card-title>
     <img class="icon" mat-card-image [src]="icons[project.category]">
     <mat-card-content>{{project.shortDescription}}</mat-card-content>
 
     <mat-card-actions>
       <button class="showButton" mat-raised-button color="primary" (click)="showProject(i)">Zobacz szczegóły</button>
+<!--      <button class="voteButton" mat-raised-button color="warn" (click)="likeProject(project.title)">+</button>-->
     </mat-card-actions>
   </mat-card>
 </div>

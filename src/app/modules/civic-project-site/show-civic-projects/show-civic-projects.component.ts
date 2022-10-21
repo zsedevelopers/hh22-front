@@ -50,6 +50,13 @@ export class ShowCivicProjectsComponent implements OnInit {
     this.loadProjects(this.selectedCity);
   }
 
+  // likeProject(title:string){
+  //   if (!this.authService.isLogged()) {
+  //     return;
+  //   }
+  //   this.civilProjectService.likeCivilProject(title)
+  // }
+
   loadProjects(city: string) {
     if (!this.authService.isLogged()) {
       return;
