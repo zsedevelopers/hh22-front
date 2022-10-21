@@ -9,9 +9,14 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm = new FormGroup({
-    pesel: new FormControl('', Validators.required),
+    pesel: new FormControl('', [
+      Validators.required,
+      Validators.pattern('[0-9]{11}'),
+    ]),
     password: new FormControl('', Validators.required),
   });
+
+  errorMessage: string | null = null;
 
   constructor(private authService: AuthService) {}
 
@@ -27,6 +32,14 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.value.password!,
     };
 
-    this.authService.login(requestData);
+    this.authService.login(requestData).subscribe({
+      error: (error) => {
+        console.log(error.status);
+        if (error.status == 401) {
+          console.log('a')
+          this.errorMessage = 'niepoprawne dane logowania';
+        }
+      },
+    });
   }
 }

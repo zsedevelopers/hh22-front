@@ -5,7 +5,7 @@ import LoginResponse from '../models/auth/login-response';
 import RegisterRequest from '../models/auth/register-request';
 import UserDto from '../models/common/user-dto';
 import { ApiService } from './api.service';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, tap, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -48,15 +48,14 @@ export class AuthService {
 
   login(requestData: LoginRequest) {
     return this.apiService
-      .login(requestData)
-      .subscribe((res: LoginResponse) => {
+      .login(requestData).pipe(tap((res) => {
         this.setJwt(res.access_token);
-        // this.userData = res.user;
-        console.log(`zalogowano jako:`);
-        console.log(res.user);
-        this.router.navigate(['/']);
-        // this.router.navigate([this.router.url])
-      });
+          this.router.navigate(['/']);
+      }))
+      // .pipe((res: LoginResponse) => {
+      //   this.setJwt(res.access_token);
+      //   this.router.navigate(['/']);
+      // });
   }
 
   register(requestData: RegisterRequest) {
