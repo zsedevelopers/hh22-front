@@ -5,16 +5,17 @@
         <mat-form-field appearance="standard">
           <mat-label>Pesel</mat-label>
           <input matInput placeholder="01010101011" type="text" formControlName="pesel">
+          <mat-error *ngIf="loginForm.controls.pesel.invalid">Wprowadź poprawny pesel</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="standard">
-          <mat-label>Haslo</mat-label>
+          <mat-label>Hasło</mat-label>
           <input matInput type="password" placeholder="dobryObywatel12" formControlName="password">
         </mat-form-field>
 
+        <mat-error *ngIf="errorMessage != null">{{errorMessage}}</mat-error>
 
       <button mat-raised-button color="primary" type="submit" value="prześlij">Zaloguj się</button>
-
 
 
     </form>
