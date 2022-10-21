@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import RegisterRequest from "../../../core/models/auth/register-request"
+import { Router } from '@angular/router';
+import RegisterRequest from '../../../core/models/auth/register-request';
 import { AuthService } from '../../../core/services/auth.service';
 @Component({
   selector: 'app-add-admin-panel',
   templateUrl: './add-admin-panel.component.html',
-  styleUrls: ['./add-admin-panel.component.scss']
+  styleUrls: ['./add-admin-panel.component.scss'],
 })
 export class AddAdminPanelComponent implements OnInit {
   registerForm = new FormGroup({
@@ -19,11 +20,10 @@ export class AddAdminPanelComponent implements OnInit {
     password: new FormControl('', Validators.required),
     passwordConfirm: new FormControl('', Validators.required),
   });
-  
-  constructor(private authService:AuthService) { }
 
-  ngOnInit(): void {
-  }
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {}
   onRegisterFormSubmit() {
     if (this.registerForm.invalid || !this.passwordsMatch()) {
       console.warn('invalid form data');
@@ -40,7 +40,9 @@ export class AddAdminPanelComponent implements OnInit {
       phoneNumber: parseInt(this.registerForm.value.phoneNumber!),
       password: this.registerForm.value.password!,
     };
-    this.authService.registerAdmin(requestData).subscribe()
+    this.authService.registerAdmin(requestData).subscribe(() => {
+      this.router.navigate(['/admin/civic-projects']);
+    });
   }
 
   private passwordsMatch() {
