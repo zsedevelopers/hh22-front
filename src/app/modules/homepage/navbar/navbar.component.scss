@@ -11,9 +11,13 @@ button{
   background-color: rgba(0,0,0,0);
   font-size:25px;
   color:white;
+  min-height: 50px;
+  min-width: 120px;
 }
 .register{
-  font-size:25px
+  font-size:25px;
+  min-height: 50px;
+  min-width: 120px;
 }
 .user-info{
   background-color: rgba(0,0,0,0);
@@ -50,8 +54,9 @@ a:hover{
 
 }
 .logo{
+  z-index: 20;
   font-size: 60px;
-  width: auto;
+  width: 500px;
 }
 .logo:hover{
   font-size: 59px;
