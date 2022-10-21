@@ -78,17 +78,11 @@
         </mat-select>
     </mat-form-field>
     </div>
+
   <div class="inputField">
-    Numer CAN
+    Data urodzenia
     <mat-form-field appearance="fill">
-        <mat-label>Numer CAN</mat-label>
-        <input matInput type="text" placeholder="Numer CAN" formControlName="CAN">
-    </mat-form-field>
-    </div>
-  <div class="inputField">
-    Miejsce urodzenia
-    <mat-form-field appearance="fill">
-      <mat-label>Miejsce urodzenia</mat-label>
+      <mat-label>Data urodzenia</mat-label>
       <input matInput type="date" placeholder="dd-mm--yyyy" formControlName="dateOfBirth">
     </mat-form-field>
   </div>
@@ -106,6 +100,27 @@
         <input matInput type="text" placeholder="12345678901" formControlName="pesel">
     </mat-form-field>
     </div>
+  <div class="inputField">
+    Organ wydający
+    <mat-form-field appearance="fill">
+      <mat-label>    Organ wydający</mat-label>
+      <input matInput type="text" placeholder="np. Prezydent rp" formControlName="issuingAuthority">
+    </mat-form-field>
+  </div>
+  <div class="inputField">
+    Data wydania
+    <mat-form-field appearance="fill">
+      <mat-label>    Data wydania</mat-label>
+      <input matInput type="date" placeholder="data" formControlName="issueDate">
+    </mat-form-field>
+  </div>
+  <div class="inputField">
+    Numer CAN
+    <mat-form-field appearance="fill">
+      <mat-label>Numer CAN</mat-label>
+      <input matInput type="text" placeholder="Numer CAN" formControlName="CAN">
+    </mat-form-field>
+  </div>
   <div class="inputField">
     Nazwisko rodowe
     <mat-form-field appearance="fill">
@@ -127,20 +142,7 @@
         <input matInput type="text" placeholder="np. Janusz" formControlName="fatherName">
     </mat-form-field>
   </div>
-  <div class="inputField">
-    Organ wydający
-    <mat-form-field appearance="fill">
-        <mat-label>    Organ wydający</mat-label>
-        <input matInput type="text" placeholder="np. Prezydent rp" formControlName="issuingAuthority">
-    </mat-form-field>
-    </div>
-  <div class="inputField">
-    Data wydania
-    <mat-form-field appearance="fill">
-        <mat-label>    Data wydania</mat-label>
-        <input matInput type="date" placeholder="data" formControlName="issueDate">
-    </mat-form-field>
-  </div>
+
 </form>
 <button mat-raised-button color="primary" (click)="submitForm()">Dodaj dowód</button>
 

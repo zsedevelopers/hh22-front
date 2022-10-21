@@ -1,71 +1,112 @@
-<form style="display: flex; flex-direction: column; width:400px" [formGroup]="addPassportForm">
-    <mat-form-field>
-        <mat-label>Pikczur</mat-label>
-        <input matInput type="url" formControlName="picture">
+<form style="display: flex; justify-content: space-around;flex-wrap: wrap; width:100%" [formGroup]="addPassportForm">
+
+  <a class="header">Dodaj dowód osobisty</a>
+  <div class="inputField">
+    Zdjecie portretowe
+    <mat-form-field appearance="fill">
+      <mat-label>Portret</mat-label>
+      <input matInput type="url" placeholder="link do zdjęcia" formControlName="pictureUrl">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>frontside image</mat-label>
-        <input matInput type="url" placeholder="image link" formControlName="frontImageUrl">
+  </div>
+  <div class="inputField">
+    Zdjęcie przodu
+    <mat-form-field appearance="fill">
+      <mat-label>    Zdjęcie przodu</mat-label>
+      <input matInput type="url" placeholder="link do zdjęcia" formControlName="frontImageUrl">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>backside image</mat-label>
-        <input matInput type="url" placeholder="image link" formControlName="backImageUrl">
+  </div>
+  <div class="inputField">
+    Zdjęcie tyłu (link)
+    <mat-form-field appearance="fill">
+      <mat-label>Zdjęcie tyłu</mat-label>
+      <input matInput type="url" placeholder="link do zdjęcia" formControlName="backImageUrl">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>first name</mat-label>
-        <input matInput type="text" placeholder="first name" formControlName="firstName">
+  </div>
+  <div class="inputField">
+    Imie
+    <mat-form-field appearance="fill">
+      <mat-label>Imię</mat-label>
+      <input matInput type="text" placeholder="np. Jan" formControlName="firstName">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>second name</mat-label>
-        <input matInput type="text" placeholder="second name" formControlName="secondName">
+  </div>
+  <div class="inputField">
+    Drugie imię
+    <mat-form-field appearance="fill">
+      <mat-label>Drugię imię</mat-label>
+      <input matInput type="text" placeholder="nie obowiązkowe" formControlName="secondName">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>surname</mat-label>
-        <input matInput type="text" placeholder="surname" formControlName="surname">
+  </div>
+  <div class="inputField">
+    Nazwisko
+    <mat-form-field appearance="fill">
+      <mat-label>Nazwisko</mat-label>
+      <input matInput type="text" placeholder="np. Kowalski" formControlName="surname">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>nationality</mat-label>
-        <input matInput type="text" placeholder="nationality" formControlName="nationality">
+  </div>
+  <div class="inputField">
+    Obywatelstwo
+    <mat-form-field appearance="fill">
+      <mat-label>Obywatelstwo</mat-label>
+      <input matInput type="text" placeholder="Np. Polskie" formControlName="nationality">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>document number</mat-label>
-        <input matInput type="text" placeholder="document number" formControlName="documentNumber">
+  </div>
+  <div class="inputField">
+    Numer dokumentu
+    <mat-form-field appearance="fill">
+      <mat-label>Numer dokumentu</mat-label>
+      <input matInput type="text" placeholder="DER000000" formControlName="documentNumber">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>expiration date</mat-label>
-        <input matInput type="date" placeholder="expiration date" formControlName="expirationDate">
+  </div>
+  <div class="inputField">
+    Termin wygaśnięcia ważności
+    <mat-form-field appearance="fill">
+      <mat-label>Termin wygaśniecia ważności</mat-label>
+      <input matInput type="date" placeholder="dd-mm-yyyy" formControlName="expirationDate">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>date of birth</mat-label>
-        <input matInput type="date" formControlName="dateOfBirth">
+  </div>
+  <div class="inputField">
+    Płeć
+    <mat-form-field appearance="fill">
+      <mat-label>Płeć</mat-label>
+      <mat-select formControlName="sex">
+        <mat-option value="MAN" >
+          Mężczyzna
+        </mat-option>
+        <mat-option value="WOMAN" >
+          Kobieta
+        </mat-option>
+      </mat-select>
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>sex</mat-label>
-        <mat-select formControlName="sex">
-            <mat-option value="MAN">
-                Man
-            </mat-option>
-            <mat-option value="WOMAN">
-                Woman
-            </mat-option>
-        </mat-select>
+  </div>
+
+  <div class="inputField">
+    Data urodzenia
+    <mat-form-field appearance="fill">
+      <mat-label>Data urodzenia</mat-label>
+      <input matInput type="date" placeholder="dd-mm--yyyy" formControlName="dateOfBirth">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>place of birth</mat-label>
-        <input matInput type="text" placeholder="place of birth" formControlName="placeOfBirth">
+  </div>
+  <div class="inputField">
+    Miejsce urodzenia
+    <mat-form-field appearance="fill">
+      <mat-label>    Miejsce urodzenia</mat-label>
+      <input matInput type="text" placeholder="np Warszawa" formControlName="placeOfBirth">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>pesel</mat-label>
-        <input matInput type="text" placeholder="pesel" formControlName="pesel">
+  </div>
+  <div class="inputField">
+    Pesel
+    <mat-form-field appearance="fill">
+      <mat-label>Pesel</mat-label>
+      <input matInput type="text" placeholder="12345678901" formControlName="pesel">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>issuing authority</mat-label>
-        <input matInput type="text" placeholder="issuing authority" formControlName="issuingAuthority">
+  </div>
+  <div class="inputField">
+    Organ wydający
+    <mat-form-field appearance="fill">
+      <mat-label>    Organ wydający</mat-label>
+      <input matInput type="text" placeholder="np. Prezydent rp" formControlName="issuingAuthority">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>issue date</mat-label>
-        <input matInput type="date" placeholder="issue date" formControlName="issueDate">
-    </mat-form-field>
+  </div>
+
 </form>
-<button (click)="submitForm()">submit</button>
-<button (click)="dummySubmit()">dummy data</button>
+<button mat-raised-button color="primary" (click)="submitForm()">Dodaj paszport</button>
