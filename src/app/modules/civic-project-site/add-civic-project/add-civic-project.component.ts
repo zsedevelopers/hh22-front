@@ -14,6 +14,7 @@ import { ProjectCategory } from '../../../core/models/civil projects/project-cat
 import AddEstimateDto from '../../../core/models/civil projects/add-estimate-dto';
 import UserDto from '../../../core/models/common/user-dto';
 import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-add-civic-project',
@@ -74,11 +75,21 @@ export class AddCivicProjectComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.authService.getUserData().subscribe((data) => {
-      this.userData = data;
-      this.addProjectForm.value.city = this.userData.city;
-      this.userCity = this.userData.city;
-    });
+    this.authService
+      .getUserData()
+      .pipe(
+        catchError((err) => {
+          alert('you have to be logged in to access this feature');
+          this.router.navigate(['/'])
+          
+          return throwError(err);
+        })
+      )
+      .subscribe((data) => {
+        this.userData = data;
+        this.addProjectForm.value.city = this.userData.city;
+        this.userCity = this.userData.city;
+      });
   }
 
   get estimates(): FormArray<FormGroup> {

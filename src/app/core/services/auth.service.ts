@@ -47,15 +47,12 @@ export class AuthService {
   }
 
   login(requestData: LoginRequest) {
-    return this.apiService
-      .login(requestData).pipe(tap((res) => {
+    return this.apiService.login(requestData).pipe(
+      tap((res) => {
         this.setJwt(res.access_token);
-          this.router.navigate(['/']);
-      }))
-      // .pipe((res: LoginResponse) => {
-      //   this.setJwt(res.access_token);
-      //   this.router.navigate(['/']);
-      // });
+        this.router.navigate(['/']);
+      })
+    );
   }
 
   register(requestData: RegisterRequest) {
@@ -69,7 +66,7 @@ export class AuthService {
   }
 
   logout() {
-    console.log('logged out');
+    // console.log('logged out');
     localStorage.removeItem('jwt');
     localStorage.removeItem('refreshToken');
     this.router.navigate(['/']);
@@ -84,13 +81,7 @@ export class AuthService {
   }
 
   getUserData() {
-    return this.apiService.getUserData(this.getJwt()!).pipe(
-      catchError((err) => {
-        this.logout();
-        alert('you have to be logged in to access this feature')
-        return throwError(err);
-      })
-    );
+    return this.apiService.getUserData(this.getJwt()!);
   }
 
   //#region Jwt
