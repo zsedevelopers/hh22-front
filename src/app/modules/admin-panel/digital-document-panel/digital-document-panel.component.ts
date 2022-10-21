@@ -41,11 +41,8 @@ export class DigitalDocumentPanelComponent implements OnInit {
       });
   }
   verifyDocument(document: DocumentEntityDto) {
-    const requestData: VerifyDocumentDto = {
-      documentType: document.documentType as unknown as string,
-      pesel: document.pesel!,
-    };
-    this.documentService.verifyDocument(requestData).subscribe();
+
+    this.documentService.verifyDocument(document.id).subscribe();
   }
 
   isDocumentVerified(document: DocumentEntityDto) {
