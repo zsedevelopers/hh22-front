@@ -16,16 +16,16 @@ export class AuthService {
     console.log(this.getJwt());
     console.log(this.isLogged());
     if (this.isLogged()) {
-      this.getUserData().subscribe(
-        (data) => {
+      this.getUserData().subscribe({
+        next: (data) => {
           if (data == null) {
             this.logout();
           }
         },
-        (error) => {
+        error: (error) => {
           this.logout();
-        }
-      );
+        },
+      });
     }
     // if (this.getJwt() != null) {
     //   console.log('a');
@@ -88,6 +88,7 @@ export class AuthService {
     return this.apiService.getUserData(this.getJwt()!).pipe(
       catchError((err) => {
         this.logout();
+        alert('you have to be logged in to access this feature')
         return throwError(err);
       })
     );
