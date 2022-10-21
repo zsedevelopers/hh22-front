@@ -11,20 +11,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./show-documents.component.scss'],
 })
 export class ShowDocumentsComponent implements OnInit {
+
   hasWallet: boolean = false;
   wallet: WalletDto | null = null;
-
-  driverDetails:boolean = false
-
-  showDriverDetails(){
-    this.driverDetails = !this.driverDetails
-  }
-
-  idDetails:boolean = false
-
-  showIdDetails(){
-    this.idDetails = !this.idDetails
-  }
 
   constructor(private documentService: DigitalDocumentService, public router:Router) {}
 

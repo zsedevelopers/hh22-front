@@ -1,80 +1,120 @@
-<form style="display: flex; flex-direction: column; width:400px" [formGroup]="addDriverLicenceForm">
-    <mat-form-field>
-        <mat-label>portrait photo link</mat-label>
-        <input matInput type="url" placeholder="image link" formControlName="pictureUrl">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>frontside link</mat-label>
-        <input matInput type="url" placeholder="image link" formControlName="frontImageUrl">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>backside link</mat-label>
-        <input matInput type="url" placeholder="image link" formControlName="backImageUrl">
-    </mat-form-field>
+<form style="display: flex; justify-content: space-around;flex-wrap: wrap; width:100%" [formGroup]="addDriverLicenceForm">
 
-    <mat-form-field>
-        <mat-label>first name</mat-label>
-        <input matInput type="text" placeholder="first name" formControlName="firstName">
+  <a class="header">Dodaj prawo jazdy</a>
+  <div class="inputField">
+    Zdjecie portretowe
+    <mat-form-field appearance="fill">
+      <mat-label>Portret</mat-label>
+      <input matInput type="url" placeholder="link do zdjęcia" formControlName="pictureUrl">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>second name</mat-label>
-        <input matInput type="text" placeholder="second name" formControlName="secondName">
+  </div>
+  <div class="inputField">
+    Zdjęcie przodu
+    <mat-form-field appearance="fill">
+      <mat-label>    Zdjęcie przodu</mat-label>
+      <input matInput type="url" placeholder="link do zdjęcia" formControlName="frontImageUrl">
     </mat-form-field>
-    <mat-form-field>
-        <mat-label>surname</mat-label>
-        <input matInput type="text" placeholder="surname" formControlName="surname">
+  </div>
+  <div class="inputField">
+    Zdjęcie tyłu (link)
+    <mat-form-field appearance="fill">
+      <mat-label>Zdjęcie tyłu</mat-label>
+      <input matInput type="url" placeholder="link do zdjęcia" formControlName="backImageUrl">
     </mat-form-field>
+  </div>
+  <div class="inputField">
+    Imie
+    <mat-form-field appearance="fill">
+      <mat-label>Imię</mat-label>
+      <input matInput type="text" placeholder="np. Jan" formControlName="firstName">
+    </mat-form-field>
+  </div>
+  <div class="inputField">
+    Drugie imię
+    <mat-form-field appearance="fill">
+      <mat-label>Drugię imię</mat-label>
+      <input matInput type="text" placeholder="nie obowiązkowe" formControlName="secondName">
+    </mat-form-field>
+  </div>
+  <div class="inputField">
+    Nazwisko
+    <mat-form-field appearance="fill">
+      <mat-label>Nazwisko</mat-label>
+      <input matInput type="text" placeholder="np. Kowalski" formControlName="surname">
+    </mat-form-field>
+  </div>
+  <div class="inputField">
+    Numer dokumentu
+    <mat-form-field appearance="fill">
+      <mat-label>Numer dokumentu</mat-label>
+      <input matInput type="text" placeholder="DER000000" formControlName="documentNumber">
+    </mat-form-field>
+  </div>
+  <div class="inputField">
+    Miejsce urodzenia
+    <mat-form-field appearance="fill">
+      <mat-label>Miejsce urodzenia</mat-label>
+      <input matInput type="date" placeholder="dd-mm--yyyy" formControlName="dateOfBirth">
+    </mat-form-field>
+  </div>
+  <div class="inputField">
+    Miejsce urodzenia
+    <mat-form-field appearance="fill">
+      <mat-label>    Miejsce urodzenia</mat-label>
+      <input matInput type="text" placeholder="np Warszawa" formControlName="placeOfBirth">
+    </mat-form-field>
+  </div>
+  <div class="inputField">
+    Organ wydający
+    <mat-form-field appearance="fill">
+      <mat-label>    Organ wydający</mat-label>
+      <input matInput type="text" placeholder="np. Prezydent rp" formControlName="issuingAuthority">
+    </mat-form-field>
+  </div>
+  <div class="inputField">
+    Data wydania
+    <mat-form-field appearance="fill">
+      <mat-label>    Data wydania</mat-label>
+      <input matInput type="date" placeholder="data" formControlName="issueDate">
+    </mat-form-field>
+  </div>
 
-    <mat-form-field>
-        <mat-label>document number</mat-label>
-        <input matInput type="text" placeholder="document number" formControlName="documentNumber">
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>date of birth</mat-label>
-        <input matInput type="date" placeholder="date of birth" formControlName="dateOfBirth">
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>place of birth</mat-label>
-        <input matInput type="text" placeholder="place of birth" formControlName="placeOfBirth">
-    </mat-form-field>
-
-    <mat-form-field>
-        <mat-label>issuing authority</mat-label>
-        <input matInput type="text" placeholder="issuing authority" formControlName="issuingAuthority">
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>issue date</mat-label>
-        <input matInput type="date" placeholder="issue date" formControlName="issueDate">
-    </mat-form-field>
     <div class="permission-container">
-        <div>
-            <span>Permissions</span>
-            <button (click)="addPermission()">add new</button>
-        </div>
-        <ng-container formArrayName="permissions">
-            <ng-container *ngFor="let permissionForm of permissions.controls; let i=index" class="schedule-block">
-                <div [formGroup]="permissionForm">
-                    <h3>permission {{i+1}}</h3>
-                    <mat-form-field>
-                        <mat-label>type</mat-label>
-                        <mat-select formControlName="type">
-                            <mat-option *ngFor="let type of driverLicenceTypes" [value]="type">
-                                {{type}}
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
+        <mat-card class="permissionHeader">
+          <div style="display: flex;justify-content: space-between;width: 100%">
+            <mat-card-title style="width: 45%">Uprawnienia</mat-card-title>
+            <button style="width: 15%; height: 45px" mat-flat-button color="primary" (click)="addPermission()">Dodaj nowe</button>
+          </div>
+            <mat-card-content style="width: 100%">
+            <ng-container formArrayName="permissions">
+              <ng-container  *ngFor="let permissionForm of permissions.controls; let i=index" class="schedule-block">
+                <div style="display: flex;justify-content: space-between;width: 100%; margin-top: 20px" [formGroup]="permissionForm">
+                  <h3>{{i+1}}.</h3>
+                  <mat-form-field style="width: 40%">
+                    <mat-label>type</mat-label>
+                    <mat-select formControlName="type">
+                      <mat-option *ngFor="let type of driverLicenceTypes" [value]="type">
+                        {{type}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
 
-                    <label>issue date</label>
-                    <input type="date" formControlName="issueDate" />
-                    <button (click)="deletePermission(i)">X</button>
-                    <hr>
+                  <mat-form-field appearance="fill" style="width: 40%">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput formControlName="issueDate" [matDatepicker]="picker">
+                    <mat-hint>MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                  <button style="height: 45px" mat-raised-button color="primary" (click)="deletePermission(i)">Usuń uprawnienia</button>
                 </div>
+              </ng-container>
             </ng-container>
-        </ng-container>
+          </mat-card-content>
+        </mat-card>
+
     </div>
 
 </form>
-<button (click)="submitForm()">submit</button>
-<button (click)="dummySubmit()">dummy data</button>
+<button mat-raised-button color="primary" style="margin-top: 20px" (click)="submitForm()">Wyślij</button>
+

@@ -1,0 +1,40 @@
+:host{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.inputField{
+  width: 40%;
+  float: left;
+}
+.mat-form-field{
+  width: 100%;
+}
+.header{
+  text-decoration: none;
+  width: 100%;
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+button{
+  width: 15%;
+  font-size: 15px;
+  padding: 4px;
+}
+.permission-container{
+  width: 80%;
+}
+.permissionHeader{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.schedule-block{
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
