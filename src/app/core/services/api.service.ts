@@ -187,13 +187,10 @@ export class ApiService {
     });
   }
 
-  verifyDocument(
-    data: VerifyDocumentDto,
-    token: string
-  ): Observable<HttpResponse<null>> {
+  verifyDocument(id: number, token: string): Observable<HttpResponse<null>> {
     return this.http.patch<HttpResponse<null>>(
-      `${this.baseUrl}/api/v1/wallet/verification`,
-      data,
+      `${this.baseUrl}/api/v1/wallet/verification/${id}`,
+      null,
       {
         headers: {
           Authorization: `Bearer ${token}`,
