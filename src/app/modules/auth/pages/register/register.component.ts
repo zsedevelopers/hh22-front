@@ -24,7 +24,7 @@ export class RegisterComponent implements OnInit {
     city: new FormControl('', Validators.required),
     pesel: new FormControl('', [
       Validators.required,
-      Validators.pattern('[0-9]{11}'),
+      Validators.pattern('^[\d]{11}$'),
     ]),
     phoneNumber: new FormControl('', [
       Validators.required,

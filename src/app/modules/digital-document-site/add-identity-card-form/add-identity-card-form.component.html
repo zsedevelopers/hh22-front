@@ -6,6 +6,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Portret</mat-label>
       <input matInput type="url" placeholder="link do zdjęcia" formControlName="pictureUrl">
+      <mat-error *ngIf="addIdForm.controls.pictureUrl">Podaj poprawny link</mat-error>
+
     </mat-form-field>
   </div>
   <div class="inputField">
@@ -13,6 +15,8 @@
     <mat-form-field appearance="fill">
         <mat-label>    Zdjęcie przodu</mat-label>
         <input matInput type="url" placeholder="link do zdjęcia" formControlName="frontImageUrl">
+      <mat-error *ngIf="addIdForm.controls.frontImageUrl">Podaj poprawny link</mat-error>
+
     </mat-form-field>
     </div>
   <div class="inputField">
@@ -20,6 +24,8 @@
     <mat-form-field appearance="fill">
         <mat-label>Zdjęcie tyłu</mat-label>
         <input matInput type="url" placeholder="link do zdjęcia" formControlName="backImageUrl">
+      <mat-error *ngIf="addIdForm.controls.backImageUrl">Podaj poprawny link</mat-error>
+
     </mat-form-field>
   </div>
   <div class="inputField">
@@ -62,6 +68,8 @@
     <mat-form-field appearance="fill">
         <mat-label>Termin wygaśniecia ważności</mat-label>
         <input matInput type="date" placeholder="dd-mm-yyyy" formControlName="expirationDate">
+      <mat-error *ngIf="addIdForm.controls.expirationDate.invalid">Podaj poprawną datę</mat-error>
+
     </mat-form-field>
   </div>
   <div class="inputField">
@@ -84,6 +92,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Data urodzenia</mat-label>
       <input matInput type="date" placeholder="dd-mm--yyyy" formControlName="dateOfBirth">
+      <mat-error *ngIf="addIdForm.controls.dateOfBirth.invalid">Podaj poprawną datę</mat-error>
+
     </mat-form-field>
   </div>
   <div class="inputField">
@@ -98,6 +108,8 @@
     <mat-form-field appearance="fill">
         <mat-label>Pesel</mat-label>
         <input matInput type="text" placeholder="12345678901" formControlName="pesel">
+      <mat-error *ngIf="addIdForm.controls.pesel.invalid">Podaj prawidłowy PESEL</mat-error>
+
     </mat-form-field>
     </div>
   <div class="inputField">
@@ -112,6 +124,8 @@
     <mat-form-field appearance="fill">
       <mat-label>    Data wydania</mat-label>
       <input matInput type="date" placeholder="data" formControlName="issueDate">
+      <mat-error *ngIf="addIdForm.controls.issueDate.invalid">Podaj poprawną datę</mat-error>
+
     </mat-form-field>
   </div>
   <div class="inputField">
@@ -119,6 +133,8 @@
     <mat-form-field appearance="fill">
       <mat-label>Numer CAN</mat-label>
       <input matInput type="text" placeholder="Numer CAN" formControlName="CAN">
+      <mat-error *ngIf="addIdForm.controls.CAN.invalid">Podaj poprawny numer CAN</mat-error>
+
     </mat-form-field>
   </div>
   <div class="inputField">
@@ -143,6 +159,6 @@
     </mat-form-field>
   </div>
 
+  <button mat-raised-button color="primary" (click)="submitForm()">Dodaj dowód</button>
 </form>
-<button mat-raised-button color="primary" (click)="submitForm()">Dodaj dowód</button>
 

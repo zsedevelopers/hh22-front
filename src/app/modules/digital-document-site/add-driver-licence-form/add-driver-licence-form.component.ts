@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
+import {
+  Validators,
+  FormBuilder,
+  FormArray,
+  FormGroup,
+  ValidatorFn,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import UserDto from 'src/app/core/models/common/user-dto';
 import CreateDriverLicenceDto from 'src/app/core/models/digital documents/create-driver-licence-dto';
@@ -38,18 +46,34 @@ export class AddDriverLicenceFormComponent implements OnInit {
     'T',
     'TRAM',
   ];
+  private imageUrlRegex = '(http(s?):)([/|.|w|s|-])*.(?:jpg|png)';
   addDriverLicenceForm = this.fb.group({
-    pictureUrl: this.fb.control('', Validators.required),
-    frontImageUrl: this.fb.control('', Validators.required),
-    backImageUrl: this.fb.control('', Validators.required),
+    pictureUrl: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.imageUrlRegex),
+    ]),
+    frontImageUrl: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.imageUrlRegex),
+    ]),
+    backImageUrl: this.fb.control('', [
+      Validators.required,
+      Validators.pattern(this.imageUrlRegex),
+    ]),
     firstName: this.fb.control('', Validators.required),
-    secondName: this.fb.control('', Validators.required),
+    secondName: this.fb.control(''),
     surname: this.fb.control('', Validators.required),
     documentNumber: this.fb.control('', Validators.required),
-    dateOfBirth: this.fb.control(new Date(Date.now()), Validators.required),
+    dateOfBirth: this.fb.control(new Date(), [
+      Validators.required,
+      this.dateLesserThanTodayValidator,
+    ]),
     placeOfBirth: this.fb.control('', Validators.required),
     issuingAuthority: this.fb.control('', Validators.required),
-    issueDate: this.fb.control(new Date(Date.now()), Validators.required),
+    issueDate: this.fb.control(new Date(), [
+      Validators.required,
+      this.dateLesserThanTodayValidator,
+    ]),
     permissions: this.fb.array([]),
   });
 
@@ -77,6 +101,7 @@ export class AddDriverLicenceFormComponent implements OnInit {
     }
     if (this.addDriverLicenceForm.invalid) {
       console.warn('invalid form data');
+      return;
     }
 
     const formData = this.addDriverLicenceForm.value;
@@ -163,5 +188,23 @@ export class AddDriverLicenceFormComponent implements OnInit {
         });
       });
     }
+  }
+
+  private dateLesserThanTodayValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const formDate = this.addDriverLicenceForm.controls.dateOfBirth;
+      console.log('form:');
+      console.log(formDate.value);
+      console.log('now:');
+      console.log(new Date(Date.now()));
+      console.log('is lesser:');
+      console.log(formDate.value! < new Date(Date.now()));
+
+      if (formDate.value! < new Date(Date.now())) {
+        return null;
+      } else {
+        return { dateIsGreaterThanToday: true };
+      }
+    };
   }
 }
