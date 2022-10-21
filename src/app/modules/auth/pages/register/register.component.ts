@@ -16,6 +16,8 @@ import { AuthService } from 'src/app/core/services/auth.service';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
+
+  peselRegex = '^[0-9]{11}$'
   registerForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     secondName: new FormControl(''),
@@ -24,7 +26,7 @@ export class RegisterComponent implements OnInit {
     city: new FormControl('', Validators.required),
     pesel: new FormControl('', [
       Validators.required,
-      Validators.pattern('^[\d]{11}$'),
+      Validators.pattern(this.peselRegex),
     ]),
     phoneNumber: new FormControl('', [
       Validators.required,

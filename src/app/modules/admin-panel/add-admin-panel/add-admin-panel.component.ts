@@ -9,14 +9,19 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrls: ['./add-admin-panel.component.scss'],
 })
 export class AddAdminPanelComponent implements OnInit {
+  errorMessage: string | null = null;
+  peselRegex = '^[0-9]{11}$';
   registerForm = new FormGroup({
     firstName: new FormControl('', Validators.required),
     secondName: new FormControl(''),
     surname: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
     city: new FormControl('', Validators.required),
-    pesel: new FormControl('', Validators.required),
-    phoneNumber: new FormControl('', Validators.required),
+    pesel: new FormControl('', [
+      Validators.required,
+      Validators.pattern(this.peselRegex),
+    ]),
+    phoneNumber: new FormControl('', [Validators.required]),
     password: new FormControl('', Validators.required),
     passwordConfirm: new FormControl('', Validators.required),
   });
@@ -25,8 +30,14 @@ export class AddAdminPanelComponent implements OnInit {
 
   ngOnInit(): void {}
   onRegisterFormSubmit() {
-    if (this.registerForm.invalid || !this.passwordsMatch()) {
+    if (this.registerForm.invalid) {
       console.warn('invalid form data');
+      return;
+    }
+
+    if (!this.passwordsMatch) {
+      this.errorMessage = 'Hasła muszą być identyczne';
+      // console.log(this.errorMessage);
       return;
     }
 
@@ -45,7 +56,7 @@ export class AddAdminPanelComponent implements OnInit {
     });
   }
 
-  private passwordsMatch() {
+  get passwordsMatch() {
     return (
       this.registerForm.value.password ===
       this.registerForm.value.passwordConfirm

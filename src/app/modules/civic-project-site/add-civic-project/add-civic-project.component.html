@@ -48,10 +48,8 @@
         <textarea class="long-desc" matInput type="text" placeholder="Tutaj zamieść uzasadnienie dla projektu"
           formControlName="justification"></textarea>
         <mat-error *ngIf="addProjectForm.controls.justification.invalid">Uzasadnienie musi mieć od 50 do 4096 znaków ({{addProjectForm.controls.justification.value!.length}})</mat-error>
-
       </mat-form-field>
     </div>
-
 
   </form>
 
