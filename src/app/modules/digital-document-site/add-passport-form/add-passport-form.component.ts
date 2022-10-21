@@ -95,7 +95,7 @@ export class AddPassportFormComponent implements OnInit {
       return;
     }
     const data: CreatePassportDto = {
-      picture: 'a',
+      picture: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg/220px-Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg",
       frontOfDocumentImage: 'a',
       backOfDocumentImage: 'a',
       firstName: this.userData?.firstName!,

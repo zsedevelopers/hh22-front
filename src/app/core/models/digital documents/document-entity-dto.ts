@@ -1,21 +1,23 @@
 import { DocumentStatus } from './enums/document-status';
 import { DocumentType } from './enums/document-type';
-import { Sex } from './enums/sex';
+import ImageDto from './image-dto';
 
-export default interface PassportDto {
+export default interface DocumentEntityDto {
+  id: number;
   documentStatus: DocumentStatus;
   documentType: DocumentType;
-  picture: { link: string };
+  picture: ImageDto;
   firstName: string;
-  secondName: string  | null;
+  secondName: string;
   surname: string;
-  nationality: string;
   documentNumber: string;
-  expiryDate: Date;
-  birthDate: Date;
-  sex: Sex;
+  frontOfDocumentImage: ImageDto;
+  backOfDocumentImage: ImageDto;
   placeOfBirth: string;
-  pesel: string;
+  birthDate: Date;
+  expiryDate: Date;
   issuingAuthority: string;
   dateOfIssue: Date;
+  nationality?: string;
+  pesel?: string;
 }

@@ -12,6 +12,9 @@ import CreatePassportDto from '../models/digital documents/create-passport-dto';
 import WalletDto from '../models/digital documents/wallet-dto';
 import { Sex } from '../models/digital documents/enums/sex';
 import CreateDriverLicenceDto from '../models/digital documents/create-driver-licence-dto';
+import DocumentEntityDto from '../models/digital documents/document-entity-dto';
+import { DriverLicenceType } from '../models/digital documents/enums/driver-licence-type';
+import VerifyDocumentDto from '../models/digital documents/verifyDocumentDto';
 @Injectable({
   providedIn: 'root',
 })
@@ -61,28 +64,15 @@ export class ApiService {
     );
   }
 
-  getAllCivilProjects(token: string): Observable<CivilProjectDto[]> {
+  getAllCivilProjects(): Observable<CivilProjectDto[]> {
     return this.http.get<CivilProjectDto[]>(
-      `${this.baseUrl}/api/v1/civicproject`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      `${this.baseUrl}/api/v1/civicproject`
     );
   }
 
-  getCivilProjectsByCity(
-    city: string,
-    token: string
-  ): Observable<CivilProjectDto[]> {
+  getCivilProjectsByCity(city: string): Observable<CivilProjectDto[]> {
     return this.http.get<CivilProjectDto[]>(
-      `${this.baseUrl}/api/v1/civicproject/city/${city}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      `${this.baseUrl}/api/v1/civicproject/city/${city}`
     );
   }
 
@@ -172,9 +162,15 @@ export class ApiService {
     data: CreateDriverLicenceDto,
     token: string
   ): Observable<HttpResponse<null>> {
+    let parsedData: any = data;
+    console.log(data);
+    parsedData.permissions.map((p: any) => {
+      return p.driverLicenceType as string;
+    });
+    console.log(parsedData);
     return this.http.post<HttpResponse<null>>(
       `${this.baseUrl}/api/v1/document/driver-licence`,
-      data,
+      parsedData,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -189,6 +185,42 @@ export class ApiService {
         Authorization: `Bearer ${token}`,
       },
     });
+  }
+
+  verifyDocument(
+    data: VerifyDocumentDto,
+    token: string
+  ): Observable<HttpResponse<null>> {
+    return this.http.patch<HttpResponse<null>>(
+      `${this.baseUrl}/api/v1/wallet/verification`,
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+
+  getUnverifiedDocuments(token: string): Observable<DocumentEntityDto[]> {
+    return this.http.get<DocumentEntityDto[]>(
+      `${this.baseUrl}/api/v1/documents/unverified`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+  }
+  getVerifiedDocuments(token: string): Observable<DocumentEntityDto[]> {
+    return this.http.get<DocumentEntityDto[]>(
+      `${this.baseUrl}/api/v1/documents/verified`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
   }
   //#endregion
 }

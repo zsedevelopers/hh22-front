@@ -1,5 +1,5 @@
 <div class="container" [style.height]="height">
-  <mat-grid-list cols="100" gutterSize="0" [rowHeight]="height/10">
+  <mat-grid-list style="min-height: 150px" cols="100" gutterSize="0" [rowHeight]="height/10">
     <mat-grid-tile rowspan="8" colspan="25"></mat-grid-tile>
     <mat-grid-tile rowspan="8" colspan="25" routerLink="" [style.color]="'white'" [style.font-size]="'60px'"><a
         class="logo">ProjectName</a></mat-grid-tile>
@@ -29,9 +29,8 @@
     <mat-grid-tile *ngIf="router.url!='/'" rowspan="2" colspan="25"></mat-grid-tile>
     <mat-grid-tile *ngIf="router.url!='/'" rowspan="2" colspan="50">
       <div class="nav-buttons">
-        <a [routerLink]="['/civicProject']" >Projekty</a>
-        <a [routerLink]="['/wallet']">Portfel</a>
-        <a *ngIf="isAdmin" [routerLink]="['/admin']">Panel admina</a>
+        <a style="color: white" [routerLink]="['']">Wróć do strony głównej</a>
+        <a style="color: white" *ngIf="isAdmin" [routerLink]="['/admin/civic-projects']">Panel admina</a>
       </div>
     </mat-grid-tile>
   </mat-grid-list>

@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import CreateDriverLicenceDto from '../models/digital documents/create-driver-licence-dto';
 import CreateIdentityCardDto from '../models/digital documents/create-identity-card-dto';
 import CreatePassportDto from '../models/digital documents/create-passport-dto';
+import DocumentEntityDto from '../models/digital documents/document-entity-dto';
+import VerifyDocumentDto from '../models/digital documents/verifyDocumentDto';
 import WalletDto from '../models/digital documents/wallet-dto';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
@@ -12,20 +14,10 @@ import { AuthService } from './auth.service';
   providedIn: 'root',
 })
 export class DigitalDocumentService {
-  // wallet: WalletDto | null = null;
-
   constructor(
     private apiService: ApiService,
     private authService: AuthService
-  ) {
-    // console.log('is logged: ');
-    // console.log(authService.isLogged());
-    // if (authService.isLogged()) {
-      // this.getWallet().subscribe((data: WalletDto) => {
-        // this.wallet = data;
-      // });
-    // }
-  }
+  ) {}
 
   createWallet(): Observable<HttpResponse<null>> {
     return this.apiService.createWallet(this.authService.getJwt()!);
@@ -35,21 +27,29 @@ export class DigitalDocumentService {
     return this.apiService.getWallet(this.authService.getJwt()!);
   }
 
-  // private refreshWallet() {
-  //   return this.apiService
-  //     .getWallet(this.authService.getJwt()!)
-  //     .subscribe((data) => this.wallet);
-  // }
-
   addIdentityCard(data: CreateIdentityCardDto): Observable<HttpResponse<null>> {
     return this.apiService.addIdentityCard(data, this.authService.getJwt()!);
   }
+
   addPassport(data: CreatePassportDto): Observable<HttpResponse<null>> {
     return this.apiService.addPassport(data, this.authService.getJwt()!);
   }
+
   addDriverLicence(
     data: CreateDriverLicenceDto
   ): Observable<HttpResponse<null>> {
     return this.apiService.addDriverLicence(data, this.authService.getJwt()!);
+  }
+
+  getUnverifiedDocuments(): Observable<DocumentEntityDto[]> {
+    return this.apiService.getUnverifiedDocuments(this.authService.getJwt()!);
+  }
+
+  getVerifiedDocuments(): Observable<DocumentEntityDto[]> {
+    return this.apiService.getVerifiedDocuments(this.authService.getJwt()!);
+  }
+
+  verifyDocument(data:VerifyDocumentDto){
+    return this.apiService.verifyDocument(data, this.authService.getJwt()!)
   }
 }

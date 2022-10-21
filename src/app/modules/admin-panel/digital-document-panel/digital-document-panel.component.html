@@ -1,1 +1,106 @@
-<p>digital-document-panel works!</p>
+<div class="container">
+    <div class="checkbox-container">
+        <mat-checkbox [(ngModel)]="showDrivingLicences" (change)="onCheckboxChange()">prawa jazdy
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="showPassports" (change)="onCheckboxChange()">paszporty</mat-checkbox>
+        <mat-checkbox [(ngModel)]="showIdCards" (change)="onCheckboxChange()">dowody osobiste</mat-checkbox>
+        <mat-checkbox [(ngModel)]="showOnlyUnverified" (change)="onCheckboxChange()">pokaż tylko niezweryfikowane
+        </mat-checkbox>
+    </div>
+
+    <h2>Prawa jazdy</h2>
+    <!-- <div *ngIf="showDrivingLicences" class="document-list-container">
+        <div *ngFor="let licence of drivingLicences" class="driving-licence-container">
+            <span>{{licence.firstName}}</span>
+            <span>{{licence.surname}}</span>
+            <span>{{licence.documentType}}</span>
+        </div>
+
+    </div> -->
+    <div class="cardContainer" *ngIf="showDrivingLicences">
+        <mat-card class="card" *ngFor="let drivingLicence of drivingLicences; let i = index">
+            <mat-card-title>{{drivingLicence.firstName}} {{drivingLicence?.secondName}} {{drivingLicence.surname}}
+            </mat-card-title>
+            <!-- <img class="icon" mat-card-image [src]="icons[project.category]"> -->
+            <mat-card-subtitle>{{formatStatus(drivingLicence.documentStatus)}}</mat-card-subtitle>
+            <mat-card-content>
+                <div class="left">
+                    <span>ważny do: {{drivingLicence.expiryDate}}</span>
+                    <span>numer dokumentu: {{drivingLicence.documentNumber}}</span>
+                    <!-- <span>narodowość: {{drivingLicence?.nationality}}</span> -->
+                </div>
+                <div class="right">
+                    <img class="icon" mat-card-image [src]="drivingLicence.picture.link" alt="zdjecie">
+                </div>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button class="showButton" mat-raised-button color="primary"
+                (click)="verifyDocument(drivingLicence)">Zweryfikuj</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <h2>Paszporty</h2>
+    <!-- <div *ngIf="showPassports" class="document-list-container">
+
+        <div *ngFor="let passport of passports" class="passport-container">
+            <span>{{passport.firstName}}</span>
+            <span>{{passport.surname}}</span>
+            <span>{{passport.documentType}}</span>
+        </div>
+
+    </div> -->
+    <div class="cardContainer" *ngIf="showPassports">
+        <mat-card class="card" *ngFor="let passport of passports; let i = index">
+            <mat-card-title>{{passport.firstName}} {{passport?.secondName}} {{passport.surname}}</mat-card-title>
+            <mat-card-subtitle>{{formatStatus(passport.documentStatus)}}</mat-card-subtitle>
+            <mat-card-content>
+                <div class="left">
+                    <span>ważny do: {{passport.expiryDate}}</span>
+                    <span>numer dokumentu: {{passport.documentNumber}}</span>
+                    <span>narodowość: {{passport?.nationality}}</span>
+                </div>
+                <div class="right">
+                    <img class="icon" mat-card-image [src]="passport.picture.link" alt="zdjecie">
+                </div>
+
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button class="showButton" mat-raised-button color="primary"
+                (click)="verifyDocument(passport)">Zweryfikuj</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <h2>Dowody osobiste</h2>
+    <!-- <div *ngIf="showIdCards" class="document-list-container">
+        <div *ngFor="let identityCard of identityCards" class="id-card-container">
+            <span>{{identityCard.firstName}}</span>
+            <span>{{identityCard.surname}}</span>
+            <span>{{identityCard.documentType}}</span>
+        </div>
+    </div> -->
+    <div class="cardContainer" *ngIf="showIdCards">
+        <mat-card class="card" *ngFor="let identityCard of identityCards; let i = index">
+            <mat-card-title>{{identityCard.firstName}} {{identityCard?.secondName}} {{identityCard.surname}}
+            </mat-card-title>
+            <!-- <img class="icon" mat-card-image [src]="icons[project.category]"> -->
+            <mat-card-subtitle>{{formatStatus(identityCard.documentStatus)}}</mat-card-subtitle>
+            <mat-card-content>
+                <div class="left">
+                    <span>ważny do: {{identityCard.expiryDate}}</span>
+                    <span>numer dokumentu: {{identityCard.documentNumber}}</span>
+                    <!-- <span>narodowość: {{identityCard?.nationality}}</span> -->
+                </div>
+                <div class="right">
+                    <img class="icon" mat-card-image [src]="identityCard.picture.link" alt="zdjecie">
+                </div>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button class="showButton" mat-raised-button color="primary"
+                (click)="verifyDocument(identityCard)">Zweryfikuj</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

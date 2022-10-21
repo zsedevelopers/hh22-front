@@ -12,9 +12,13 @@ import { AuthService } from 'src/app/core/services/auth.service';
 export class AdminPanelContainerComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
+  navbarLinks = ['civic-projects', 'documents', 'add-admin'];
+  navbarTabTitles:Record<string, string> = {
+    'civic-projects': 'projekty obywatelskie',
+    'documents': 'dokumenty',
+    'add-admin': 'dodawanie administratorów',
+  };
   ngOnInit(): void {
-    //TODO: uncomment later !VERY IMPORTANT!
-
     // if (!this.authService.isLogged()) {
     //   console.warn('you have to be logged in to access this page')
     //   this.router.navigate(['/']);
@@ -26,5 +30,15 @@ export class AdminPanelContainerComponent implements OnInit {
     //     }
     //   });
     // }
+
+    //to check if user is logged in and navigate to homepage if not
+    this.authService.getUserData().subscribe({
+      next: (data:UserDto) => {
+        if(data.role == null || data.role != UserRole[UserRole.ROLE_ADMIN] as unknown as UserRole){
+          this.router.navigate(['/'])
+          alert('you have to be an admin to access this feature')
+        }
+      }
+    })
   }
 }

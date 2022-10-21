@@ -3,10 +3,10 @@ import { DocumentType } from './enums/document-type';
 import { Sex } from './enums/sex';
 export default interface IdentityCardDto {
   documentStatus: DocumentStatus;
-  picture: { link: string };
   documentType: DocumentType;
+  picture: { link: string };
   firstName: string;
-  secondName: string;
+  secondName: string  | null;
   surname: string;
   nationality: string;
   documentNumber: string;

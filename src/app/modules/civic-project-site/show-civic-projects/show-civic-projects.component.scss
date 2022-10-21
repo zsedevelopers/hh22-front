@@ -67,14 +67,21 @@
   box-sizing: border-box;
 }
 .showButton{
-  width: 498px;
+  width: 70%;
   height: 17%;
   left: 0;
   bottom: -1%;
   position: absolute;
   border-top-right-radius:0;
 }
-
+.voteButton{
+  width: 30%;
+  height: 17%;
+  right: 0;
+  bottom: -1%;
+  position: absolute;
+  border-top-right-radius:0;
+}
 
 
 

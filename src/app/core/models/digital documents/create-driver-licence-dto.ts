@@ -5,7 +5,7 @@ export default interface CreateDriverLicenceDto {
   frontOfDocumentImage: string;
   backOfDocumentImage: string;
   firstName: string;
-  secondName: string;
+  secondName: string  | null;
   surname: string;
   placeOfBirth: string;
   birthDate: Date;

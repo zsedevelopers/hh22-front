@@ -1,8 +1,114 @@
-<h1>Projekty:</h1>
-<mat-checkbox [(ngModel)]="shouldFilterProjects" (change)="onCheckboxChange()">show only unverified</mat-checkbox>
-<div *ngFor="let project of filteredProjects; let i = index;"
-    style="color:white; border: 1px solid white;display: flex; flex-direction: column; width: 400px;">
-    <span>{{project.title}}</span>
-    <span>{{project.status}}</span>
-    <button (click)="onVerifyProject(project.title)">Verify</button>
+<div class="container">
+
+    <div class="header" *ngIf="currentProjectIndex==null">
+        <mat-form-field appearance="standard">
+            <mat-label class="cityChoose">Miasto</mat-label>
+            <mat-select [(ngModel)]="selectedCity" (selectionChange)="onCitySelectChange()">
+                <mat-option *ngFor="let city of cities" [value]="city">
+                    {{city.charAt(0).toUpperCase()+city.toLowerCase().slice(1)}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-checkbox [(ngModel)]="shouldFilterProjects" (change)="onCheckboxChange()">pokaż tylko niezweryfikowane
+        </mat-checkbox>
+
+        <div class="headerText">{{selectedCity.charAt(0).toUpperCase()+selectedCity.toLowerCase().slice(1)}}</div>
+    </div>
+
+    <div *ngIf="currentProjectIndex!=null" class="projectDetails">
+        <div class="detailsTitle">{{projects[this.currentProjectIndex].title}}</div>
+        <div class="detailsDesc">
+            <div class="detailsContentTitle">Opis</div>
+            <div class="detailsContent">{{projects[this.currentProjectIndex].description}}</div>
+        </div>
+
+        <div class="detailsJust">
+            <div class="detailsContentTitle">Uzasadnienie</div>
+            <div class="detailsContent">{{projects[this.currentProjectIndex].justification}}</div>
+        </div>
+
+        <p *ngIf="projects[currentProjectIndex].schedulesOfActivities.length>0" style="font-size: 27px">Harmonogram</p>
+        <table mat-table *ngIf="projects[currentProjectIndex].schedulesOfActivities.length>0"
+            [dataSource]="projects[currentProjectIndex].schedulesOfActivities" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell class="tableHeader" *matHeaderCellDef> Nazwa </th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="description">
+                <th mat-header-cell class="tableHeader" *matHeaderCellDef> Opis </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="cost">
+                <th mat-header-cell class="tableHeader" *matHeaderCellDef> Data </th>
+                <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <p *ngIf="projects[currentProjectIndex].schedulesOfActivities.length>0" style="font-size: 27px">Kosztorys</p>
+        <table mat-table *ngIf="projects[currentProjectIndex].estimates.length>0"
+            [dataSource]="projects[currentProjectIndex].estimates" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell class="tableHeader" *matHeaderCellDef> Nazwa </th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="description">
+                <th mat-header-cell class="tableHeader" *matHeaderCellDef> Opis </th>
+                <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="cost">
+                <th mat-header-cell class="tableHeader" *matHeaderCellDef> Koszt </th>
+                <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <button *ngIf="!isProjectVerified(projects[currentProjectIndex])" mat-raised-button color="primary"
+            (click)="onVerifyProject(projects[currentProjectIndex].title)">Zweryfikuj</button>
+        <button class="detailsHide" mat-raised-button color="primary" (click)="hideProject()">Ukryj szczegóły</button>
+    </div>
+
+    <div class="cardContainer" *ngIf="currentProjectIndex==null">
+        <mat-card class="card" *ngFor="let project of filteredProjects; let i = index">
+            <mat-card-title>{{project.title}}</mat-card-title>
+            <img class="icon" mat-card-image [src]="icons[project.category]">
+            <mat-card-subtitle> {{formatStatus(project.status)}}</mat-card-subtitle>
+            <mat-card-content>
+                <span>miasto: {{formatCity(project.city)}}</span>
+                <span *ngIf="isProjectVerified(project)">głosy: {{project.likedBy.length}}</span>
+                <span class="short-description-label">opis:</span>
+                <p>{{project.shortDescription}}</p>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button class="showButton" mat-raised-button color="primary"
+                    (click)="showProject(getProjectIndex(project))">Zobacz szczegóły</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
 </div>

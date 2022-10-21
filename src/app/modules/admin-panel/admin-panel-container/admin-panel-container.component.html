@@ -1,5 +1,16 @@
-<p>admin-panel-container works!</p>
-<button [routerLink]="['civic-projects']" >Projekty obywatelskie</button>
-<button [routerLink]="['documents']" >Dokumenty</button>
-<button [routerLink]="['add-admin']" >Dodaj admina</button>
+<!-- <button [routerLink]="['civic-projects']">Projekty obywatelskie</button>
+<button [routerLink]="['documents']">Dokumenty</button>
+<button [routerLink]="['add-admin']">Dodaj admina</button> -->
+<nav mat-tab-nav-bar class="tab-bar">
+    <a *ngFor="let link of navbarLinks" mat-tab-link [routerLink]="[link]" routerLinkActive #rla="routerLinkActive"
+        [active]="rla.isActive">{{navbarTabTitles[link]}}</a>
+    <!-- <a mat-tab-link [routerLink]="['documents']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+        dokumenty
+    </a>
+    <a mat-tab-link [routerLink]="['add-admin']" routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+        dodawanie administratorów
+    </a> -->
+</nav>
+
+
 <router-outlet></router-outlet>

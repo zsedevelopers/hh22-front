@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
+import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
   selector: 'app-document-container',
@@ -7,9 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DocumentContainerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService:AuthService, public router:Router) { }
 
   ngOnInit(): void {
+    //to check if user is logged in and navigate to homepage if not
+    this.authService.getUserData().subscribe()
   }
 
 }

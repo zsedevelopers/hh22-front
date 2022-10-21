@@ -21,15 +21,12 @@ export class CivilProjectService {
     return this.apiService.addCivilProject(data, this.authService.getJwt()!);
   }
   getAllCivilProjects(): Observable<CivilProjectDto[]> {
-    return this.apiService.getAllCivilProjects(this.authService.getJwt()!);
+    return this.apiService.getAllCivilProjects();
   }
 
   getCivilProjectsByCity(city: string): Observable<CivilProjectDto[]> {
-    console.log('szczur');
-    return this.apiService.getCivilProjectsByCity(
-      city,
-      this.authService.getJwt()!
-    );
+    // console.log('szczur');
+    return this.apiService.getCivilProjectsByCity(city);
   }
 
   getCivilProjectByTitle(title: string): Observable<CivilProjectDto> {
@@ -44,6 +41,9 @@ export class CivilProjectService {
   }
 
   verifyCivilProject(title: string) {
-    return this.apiService.verifyCivilProject(title, this.authService.getJwt()!);
+    return this.apiService.verifyCivilProject(
+      title,
+      this.authService.getJwt()!
+    );
   }
 }

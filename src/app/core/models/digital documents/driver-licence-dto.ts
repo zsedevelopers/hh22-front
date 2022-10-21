@@ -4,13 +4,13 @@ import { DocumentType } from './enums/document-type';
 import ImageDto from './image-dto';
 
 export default interface DriverLicenceDto {
-  documentType: DocumentType;
   documentStatus: DocumentStatus;
-  picture: ImageDto;
+  documentType: DocumentType;
+  picture: { link: string };
   frontOfDocumentImage: ImageDto;
   backOfDocumentImage: ImageDto;
   firstName: string;
-  secondName: string;
+  secondName: string | null;
   surname: string;
   placeOfBirth: string;
   birthDate: Date;
