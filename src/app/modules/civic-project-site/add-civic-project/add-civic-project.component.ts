@@ -21,7 +21,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-civic-project.component.scss'],
 })
 export class AddCivicProjectComponent implements OnInit {
-  userCity:string = "";
+  userCity: string = '';
   userData: UserDto | null = null;
 
   listOfCategories: ProjectCategory[] = [
@@ -38,13 +38,27 @@ export class AddCivicProjectComponent implements OnInit {
 
   addProjectForm = this.fb.group({
     title: this.fb.control('', Validators.required),
-    city: [{
-      value: this.userCity,
-      disabled:true
-    }],
-    shortDescription: this.fb.control('', Validators.required),
-    description: this.fb.control('', Validators.required),
-    justification: this.fb.control('', Validators.required),
+    city: [
+      {
+        value: this.userCity,
+        disabled: true,
+      },
+    ],
+    shortDescription: this.fb.control('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(255),
+    ]),
+    description: this.fb.control('', [
+      Validators.required,
+      Validators.minLength(255),
+      Validators.maxLength(4096),
+    ]),
+    justification: this.fb.control('', [
+      Validators.required,
+      Validators.minLength(50),
+      Validators.maxLength(4096),
+    ]),
     estimates: this.fb.array([]),
     schedules: this.fb.array([]),
     category: new FormControl<ProjectCategory>(ProjectCategory.OTHER, {
@@ -56,14 +70,14 @@ export class AddCivicProjectComponent implements OnInit {
     private civilProjectService: CivilProjectService,
     private authService: AuthService,
     private fb: FormBuilder,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.authService.getUserData().subscribe((data) => {
       this.userData = data;
-      this.addProjectForm.value.city = this.userData.city
-      this.userCity = this.userData.city
+      this.addProjectForm.value.city = this.userData.city;
+      this.userCity = this.userData.city;
     });
   }
 
@@ -104,7 +118,7 @@ export class AddCivicProjectComponent implements OnInit {
 
   onFormSubmit() {
     console.log(this.userData);
-    console.log('form:')
+    console.log('form:');
     console.log(this.addProjectForm.value);
     if (!this.authService.isLogged()) {
       console.warn(`you're not logged in`);
@@ -154,9 +168,9 @@ export class AddCivicProjectComponent implements OnInit {
       };
       data.schedulesOfActivities.push(schedule);
     });
-    if(this.authService.isLogged()){
+    if (this.authService.isLogged()) {
       this.civilProjectService.addCivilProject(data).subscribe(() => {
-        this.router.navigate(['/civicProject/show'])
+        this.router.navigate(['/civicProject/show']);
       });
     }
   }
