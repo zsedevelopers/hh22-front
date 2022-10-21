@@ -68,28 +68,15 @@ export class ApiService {
     );
   }
 
-  getAllCivilProjects(token: string): Observable<CivilProjectDto[]> {
+  getAllCivilProjects(): Observable<CivilProjectDto[]> {
     return this.http.get<CivilProjectDto[]>(
-      `${this.baseUrl}/api/v1/civicproject`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      `${this.baseUrl}/api/v1/civicproject`
     );
   }
 
-  getCivilProjectsByCity(
-    city: string,
-    token: string
-  ): Observable<CivilProjectDto[]> {
+  getCivilProjectsByCity(city: string): Observable<CivilProjectDto[]> {
     return this.http.get<CivilProjectDto[]>(
-      `${this.baseUrl}/api/v1/civicproject/city/${city}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
+      `${this.baseUrl}/api/v1/civicproject/city/${city}`
     );
   }
 
@@ -180,13 +167,11 @@ export class ApiService {
     token: string
   ): Observable<HttpResponse<null>> {
     let parsedData: any = data;
-    console.log(data)
-    parsedData.permissions.map(
-      (p: any) => {
-        return p.driverLicenceType as string
-      }
-    );
-    console.log(parsedData)
+    console.log(data);
+    parsedData.permissions.map((p: any) => {
+      return p.driverLicenceType as string;
+    });
+    console.log(parsedData);
     return this.http.post<HttpResponse<null>>(
       `${this.baseUrl}/api/v1/document/driver-licence`,
       parsedData,

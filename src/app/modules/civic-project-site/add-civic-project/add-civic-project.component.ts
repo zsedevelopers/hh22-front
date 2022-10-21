@@ -63,6 +63,7 @@ export class AddCivicProjectComponent implements OnInit {
       this.addProjectForm.value.city = this.userData.city
       this.userCity = this.userData.city
     });
+    
   }
 
   get estimates(): FormArray<FormGroup> {
