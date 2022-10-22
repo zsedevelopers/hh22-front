@@ -1,13 +1,13 @@
 
 
-<mat-grid-list  cols="4" [rowHeight]="height/100" gutterSize="0">
-  <mat-grid-tile [rowspan]="55" [colspan]="4"><div class="maintext">ProjectName to system w którym obywatel moze znależć
+<mat-grid-list  cols="15" [rowHeight]="height/100" gutterSize="0">
+  <mat-grid-tile [rowspan]="55" [colspan]="15"><div class="maintext">ProjectName to system w którym obywatel moze znależć
     potrzebne mu  informacje uurzędowe i administracyjne
   </div></mat-grid-tile>
+  <mat-grid-tile [rowspan]="43" [colspan]="2"></mat-grid-tile>
 
-
-  <mat-grid-tile [style.overflow]="'visible'" [rowspan]="43" [colspan]="1">
-    <mat-card class="dark" routerLink="civicProject/show">
+  <mat-grid-tile [style.overflow]="'visible'" [rowspan]="43" [colspan]="4">
+    <mat-card style="min-height: 330px;z-index: 100" class="dark" routerLink="civicProject/show">
       <mat-card-title [style.margin-bottom]="'20px'">Budżet obywatelski</mat-card-title>
       <mat-card-content [style.font-size]="'18px'">
         Aplikacja zbierająca w jendym między wszystkie budżety obywatelskie w poslce, możesz znalezć szybko swój,
@@ -17,16 +17,17 @@
     </mat-card>
   </mat-grid-tile>
 
-  <mat-grid-tile [style.overflow]="'visible'" [rowspan]="43" [colspan]="1">
+  <mat-grid-tile [style.overflow]="'visible'" [rowspan]="43" [colspan]="3">
 
   </mat-grid-tile>
 
-  <mat-grid-tile routerLink="wallet/showWallet" [style.overflow]="'visible'" [rowspan]="43" [colspan]="1">
+  <mat-grid-tile routerLink="wallet/showWallet" [style.overflow]="'visible'" [rowspan]="43" [colspan]="4">
     <mat-card class="dark">
       <mat-card-title>Portfel na E-dokumenty</mat-card-title>
 
     </mat-card>
   </mat-grid-tile>
+  <mat-grid-tile [rowspan]="43" [colspan]="2"></mat-grid-tile>
 
   <mat-grid-tile [style.overflow]="'visible'" [rowspan]="43" [colspan]="1">
   </mat-grid-tile>
