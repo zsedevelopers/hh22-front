@@ -12,9 +12,6 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 })
 export class AuthService {
   constructor(private apiService: ApiService, private router: Router) {
-    console.log('jwt:');
-    console.log(this.getJwt());
-    console.log(this.isLogged());
     if (this.isLogged()) {
       this.getUserData().subscribe({
         next: (data) => {
@@ -27,23 +24,6 @@ export class AuthService {
         },
       });
     }
-    // if (this.getJwt() != null) {
-    //   console.log('a');
-    //   if (this.isJwtExpired()) {
-    //     this.logout();
-    //   } else {
-    //     console.log('b');
-    //     // if (this.userData == null) {
-    //     //   console.log('c');
-
-    //     //   this.getUserData().subscribe((data: UserDto) => {
-    //     //     this.userData = data;
-    //     //     console.log('user data 2:')
-    //     //     console.log(this.userData)
-    //     //   });
-    //     // }
-    //   }
-    // }
   }
 
   login(requestData: LoginRequest) {

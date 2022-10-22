@@ -69,11 +69,9 @@ export class AddPassportFormComponent implements OnInit {
 
   submitForm() {
     if (!this.authService.isLogged()) {
-      console.warn('you have to log in');
       return;
     }
     if (this.addPassportForm.invalid) {
-      console.warn('invalid form data');
       return;
     }
 
@@ -107,33 +105,6 @@ export class AddPassportFormComponent implements OnInit {
     this.addPassportWithWalletCheck(data);
   }
 
-  dummySubmit() {
-    if (!this.authService.isLogged()) {
-      console.warn('you have to log in');
-      return;
-    }
-    const data: CreatePassportDto = {
-      picture:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg/220px-Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg',
-      frontOfDocumentImage: 'a',
-      backOfDocumentImage: 'a',
-      firstName: this.userData?.firstName!,
-      secondName: 'dobrze',
-      surname: this.userData?.surname!,
-      nationality: 'arabia saudyjska',
-      documentNumber: '123456',
-      expiryDate: new Date(Date.now()),
-      birthDate: new Date(Date.now()),
-      sex: Sex.MAN,
-      placeOfBirth: 'mozambik',
-      pesel: this.userData?.pesel!,
-      issuingAuthority: 'IDzD',
-      dateOfIssue: new Date(Date.now()),
-    };
-    // this.digitalDocumentService.createWallet().subscribe(() => {
-    // });
-    this.addPassportWithWalletCheck(data);
-  }
 
   private addPassportWithWalletCheck(data: CreatePassportDto) {
     if (this.wallet != null) {

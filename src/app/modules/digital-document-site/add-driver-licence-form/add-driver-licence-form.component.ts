@@ -96,11 +96,9 @@ export class AddDriverLicenceFormComponent implements OnInit {
 
   submitForm() {
     if (!this.authService.isLogged()) {
-      console.warn('you have to log in');
       return;
     }
     if (this.addDriverLicenceForm.invalid) {
-      console.warn('invalid form data');
       return;
     }
 
@@ -193,12 +191,7 @@ export class AddDriverLicenceFormComponent implements OnInit {
   private dateLesserThanTodayValidator(): ValidatorFn {
     return (control: AbstractControl): ValidationErrors | null => {
       const formDate = this.addDriverLicenceForm.controls.dateOfBirth;
-      console.log('form:');
-      console.log(formDate.value);
-      console.log('now:');
-      console.log(new Date(Date.now()));
-      console.log('is lesser:');
-      console.log(formDate.value! < new Date(Date.now()));
+
 
       if (formDate.value! < new Date(Date.now())) {
         return null;

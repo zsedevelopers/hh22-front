@@ -6,7 +6,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Portret</mat-label>
       <input matInput type="url" placeholder="link do zdjęcia" formControlName="picture">
-      <mat-error *ngIf="addPassportForm.controls.picture">Podaj poprawny link</mat-error>
+      <mat-error *ngIf="addPassportForm.controls.picture">Podaj poprawny link (.png / .jpg)</mat-error>
 
     </mat-form-field>
   </div>
@@ -15,7 +15,7 @@
     <mat-form-field appearance="fill">
       <mat-label>    Zdjęcie przodu</mat-label>
       <input matInput type="url" placeholder="link do zdjęcia" formControlName="frontImageUrl">
-      <mat-error *ngIf="addPassportForm.controls.frontImageUrl">Podaj poprawny link</mat-error>
+      <mat-error *ngIf="addPassportForm.controls.frontImageUrl">Podaj poprawny link (.png / .jpg)</mat-error>
 
     </mat-form-field>
   </div>
@@ -24,7 +24,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Zdjęcie tyłu</mat-label>
       <input matInput type="url" placeholder="link do zdjęcia" formControlName="backImageUrl">
-      <mat-error *ngIf="addPassportForm.controls.backImageUrl">Podaj poprawny link</mat-error>
+      <mat-error *ngIf="addPassportForm.controls.backImageUrl">Podaj poprawny link (.png / .jpg)</mat-error>
 
     </mat-form-field>
   </div>
