@@ -9,7 +9,5 @@ export enum Icons {
   INFRASTRUCTURE = "/assets/infrastruktura.svg",
   NATURE ="/assets/natura.svg",
   COMMUNITY ="/assets/spolecznosc.svg",
-  OTHER ="/assets/natura.svg",
-
-
+  OTHER ="/assets/inne.svg",
 }
