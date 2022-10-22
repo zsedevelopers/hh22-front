@@ -28,7 +28,7 @@
     <mat-grid-tile *ngIf="router.url!='/'" rowspan="2" colspan="25"></mat-grid-tile>
     <mat-grid-tile *ngIf="router.url!='/'" rowspan="2" colspan="50">
       <div class="nav-buttons">
-        <a style="color: white" [routerLink]="['']">Wróć do strony głównej</a>
+        <a style="color: white; min-height: 35px; z-index: 5" [routerLink]="['']">Wróć do strony głównej</a>
         <a style="color: white" *ngIf="isAdmin" [routerLink]="['/admin/civic-projects']">Panel admina</a>
       </div>
     </mat-grid-tile>
