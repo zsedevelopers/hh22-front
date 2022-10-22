@@ -89,7 +89,7 @@
 <div class="cardContainer" *ngIf="currentProjectIndex==null">
   <mat-card class="card" *ngFor="let project of projects; let i = index">
     <div class="contentContainer">
-      <mat-card-title>{{project.title}} głosy: {{project.likedBy.length}}</mat-card-title>
+      <mat-card-title>{{project.title}} <b>Głosy:</b> {{project.likedBy.length}}</mat-card-title>
       <mat-card-content>{{project.shortDescription}}</mat-card-content>
     </div>
     <img class="icon" mat-card-image [src]="icons[project.category]">
