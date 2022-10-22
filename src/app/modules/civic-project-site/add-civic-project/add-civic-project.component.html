@@ -56,8 +56,8 @@
   <div class="listContainer" id="listContainers">
     <mat-expansion-panel style="width: 100%">
       <mat-expansion-panel-header>
-        <mat-panel-title>Harmonogram</mat-panel-title>
-        <mat-panel-description>Harmonogram realizacji projektu</mat-panel-description>
+        <mat-panel-title>Kosztorys</mat-panel-title>
+        <mat-panel-description>Kosztorys projektu</mat-panel-description>
       </mat-expansion-panel-header>
 
       <ng-container formArrayName="estimates">
@@ -92,8 +92,8 @@
   <div class="listContainer">
     <mat-expansion-panel style="width: 100%">
       <mat-expansion-panel-header>
-        <mat-panel-title>Kosztorys</mat-panel-title>
-        <mat-panel-description>Kosztorys projektu</mat-panel-description>
+        <mat-panel-title>Harmonogram</mat-panel-title>
+        <mat-panel-description>Harmonogram realizacji projektu</mat-panel-description>
       </mat-expansion-panel-header>
 
       <ng-container formArrayName="schedules">
@@ -111,7 +111,7 @@
 
             <mat-form-field class="scheduleThird" appearance="fill">
               <mat-label>Data</mat-label>
-              <input matInput type="month" formControlName="date" />
+              <input matInput type="date" formControlName="date" />
 
             </mat-form-field>
 
