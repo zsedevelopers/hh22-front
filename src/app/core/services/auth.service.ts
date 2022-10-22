@@ -46,7 +46,6 @@ export class AuthService {
   }
 
   logout() {
-    // console.log('logged out');
     localStorage.removeItem('jwt');
     localStorage.removeItem('refreshToken');
     this.router.navigate(['/']);

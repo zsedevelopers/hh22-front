@@ -33,7 +33,6 @@ export class NavbarComponent implements OnInit {
   @HostListener('window:resize')
   resize() {
     this.height = (window.innerHeight / 100) * 15;
-    console.log(this.height);
   }
 
   ngOnInit(): void {

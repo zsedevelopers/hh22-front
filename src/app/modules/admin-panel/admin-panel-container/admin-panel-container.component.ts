@@ -20,17 +20,7 @@ export class AdminPanelContainerComponent implements OnInit {
     'add-admin': 'dodawanie administratorów',
   };
   ngOnInit(): void {
-    // if (!this.authService.isLogged()) {
-    //   console.warn('you have to be logged in to access this page')
-    //   this.router.navigate(['/']);
-    // } else {
-    //   this.authService.getUserData().subscribe((data: UserDto) => {
-    //     if (data == null || data.role != UserRole.ROLE_ADMIN) {
-    //       console.warn(`you're not an admin!`)
-    //       this.router.navigate(['/']);
-    //     }
-    //   });
-    // }
+
 
     //to check if user is logged in and navigate to homepage if not
     this.authService

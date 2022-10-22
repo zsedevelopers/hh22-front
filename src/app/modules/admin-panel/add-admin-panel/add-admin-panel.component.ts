@@ -31,13 +31,11 @@ export class AddAdminPanelComponent implements OnInit {
   ngOnInit(): void {}
   onRegisterFormSubmit() {
     if (this.registerForm.invalid) {
-      console.warn('invalid form data');
       return;
     }
 
     if (!this.passwordsMatch) {
       this.errorMessage = 'Hasła muszą być identyczne';
-      // console.log(this.errorMessage);
       return;
     }
 

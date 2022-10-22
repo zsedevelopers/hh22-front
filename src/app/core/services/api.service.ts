@@ -163,11 +163,9 @@ export class ApiService {
     token: string
   ): Observable<HttpResponse<null>> {
     let parsedData: any = data;
-    console.log(data);
     parsedData.permissions.map((p: any) => {
       return p.driverLicenceType as string;
     });
-    console.log(parsedData);
     return this.http.post<HttpResponse<null>>(
       `${this.baseUrl}/api/v1/document/driver-licence`,
       parsedData,
