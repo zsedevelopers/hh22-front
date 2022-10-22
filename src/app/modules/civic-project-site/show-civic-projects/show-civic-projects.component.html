@@ -9,6 +9,13 @@
     </mat-form-field>
 
     <div class="headerText">{{selectedCity.charAt(0).toUpperCase()+selectedCity.toLowerCase().slice(1)}}</div>
+    
+    <mat-form-field appearance="standard">
+      <mat-label class="categoryChoose">Kategoria</mat-label>
+      <mat-select [(ngModel)]="selectedCategory" (selectionChange)="onCitySelectChange()">
+        <mat-option *ngFor="let category of categories" [value]="category">{{getCategoryTranslated(category)}}</mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
 <div *ngIf="currentProjectIndex!=null" class="projectDetails">

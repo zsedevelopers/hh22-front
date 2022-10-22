@@ -5,7 +5,7 @@ import CivilProjectDto from '../../../core/models/civil projects/civil-project-d
 import { ProjectCategory } from '../../../core/models/civil projects/project-category';
 import { Icons } from '../../../core/models/civil projects/icons';
 import { CivilProjectService } from '../../../core/services/civil-project.service';
-import UserDto from "../../../core/models/common/user-dto";
+import UserDto from '../../../core/models/common/user-dto';
 
 @Component({
   selector: 'app-show-civic-projects',
@@ -33,6 +33,8 @@ export class ShowCivicProjectsComponent implements OnInit {
 
   currentProjectIndex: number | null = null;
 
+  hasVoted: boolean = false;
+
   showProject(index: number) {
     this.currentProjectIndex = index;
   }
@@ -44,64 +46,118 @@ export class ShowCivicProjectsComponent implements OnInit {
   displayedColumns: string[] = ['name', 'description', 'cost'];
 
   selectedCity: string = '';
-  cities: string[] = ['OLSZTYN', 'RADOM', 'SOSNOWIEC'];
+  cities: string[] = [];
+  selectedCategory: string = '';
+  categories: string[] = [];
+
   projects: CivilProjectDto[] = [];
 
-  currentUser:UserDto | null = null
+  currentUser: UserDto | null = null;
 
   onCitySelectChange() {
     this.loadProjects(this.selectedCity);
   }
 
-  likeProject(title:string){
+  likeProject(title: string) {
     if (!this.authService.isLogged()) {
       return;
     }
-    this.civilProjectService.likeCivilProject(title).subscribe()
+    this.civilProjectService.likeCivilProject(title).subscribe();
   }
 
-  isLiked():boolean{
-    if(this.currentUser==null){
+  isLiked(): boolean {
+    if (this.currentUser == null) {
       return true;
     }
-    for(let i=0;i<this.projects.length;i++){
-      for(let j=0;j<this.projects[i].likedBy.length;j++){
-        if(this.projects[i].likedBy[j].pesel==this.currentUser.pesel){
-          return true
-        }
-      }
-    }
-    return false
+    // for (let i = 0; i < this.projects.length; i++) {
+    //   for (let j = 0; j < this.projects[i].likedBy.length; j++) {
+    //     if (this.projects[i].likedBy[j].pesel == this.currentUser.pesel) {
+    //       return true;
+    //     }
+    //   }
+    // }
+    return this.hasVoted;
   }
 
   loadProjects(city: string) {
-    if (!this.authService.isLogged()) {
-      return;
-    }
-    this.civilProjectService
-      .getCivilProjectsByCity(city)
-      .subscribe((data) => (this.projects = data));
+    this.civilProjectService.getCivilProjectsByCity(city).subscribe((data) => {
+      if (this.currentUser != null) {
+        data.forEach((p) => {
+          if (
+            p.likedBy.filter((u) => u.pesel == this.currentUser!.pesel).length >
+            0
+          ) {
+            this.hasVoted = true;
+          }
+        });
+      }
+      return (this.projects = data.filter(
+        (p) =>
+          p.category == this.selectedCategory.toUpperCase() ||
+          this.selectedCategory == 'Dowolna'
+      ));
+    });
+  }
 
+  getCategoryTranslated(category: string) {
+    switch (category) {
+      case 'SPORT':
+        return 'Sport';
+        break;
+      case 'EDUCATION':
+        return 'Edukacja';
+        break;
+      case 'CULTURE':
+        return 'Kultura';
+        break;
+      case 'HEALTH':
+        return 'Zdrowie';
+        break;
+      case 'ENVIRONMENT':
+        return 'Środowisko';
+        break;
+      case 'INFRASTRUCTURE':
+        return 'Infrastruktura';
+        break;
+      case 'NATURE':
+        return 'Natura';
+        break;
+      case 'COMMUNITY':
+        return 'Społeczność';
+        break;
+      case 'OTHER':
+        return 'Inne';
+      case 'Dowolna':
+        return 'Dowolna';
+      default:
+        return 'Inne';
+        break;
+    }
   }
 
   ngOnInit(): void {
-    this.authService.getUserData().subscribe(user=>{this.currentUser = user})
-    this.selectedCity = this.cities[0];
-    this.loadProjects(this.selectedCity);
+    // this.authService.getUserData().subscribe(user=>{this.currentUser = user})
     this.civilProjectService.getAllCivilProjects().subscribe((data) => {
       const uniqueCities = [...new Set(data.map((p) => p.city))];
       this.cities = uniqueCities;
+
+      const uniqueCategories = [...new Set(data.map((p) => p.category))];
+      this.categories = uniqueCategories;
+      this.categories.push('Dowolna');
+
+      if (this.categories.length > 0) {
+        this.selectedCategory = this.categories[0];
+      }
       if (this.cities.length > 0) {
         this.selectedCity = this.cities[0];
         this.loadProjects(this.selectedCity);
       }
     });
 
-    if(this.authService.isLogged()){
-      this.authService.getUserData().subscribe(user=>{
+    if (this.authService.isLogged()) {
+      this.authService.getUserData().subscribe((user) => {
         this.currentUser = user;
-      })
-
+      });
     }
   }
 }
