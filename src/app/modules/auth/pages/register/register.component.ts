@@ -47,7 +47,6 @@ export class RegisterComponent implements OnInit {
   }
   onRegisterFormSubmit() {
     if (this.registerForm.invalid) {
-      console.warn('invalid form data');
       return;
     }
     if (!this.passwordsMatch) {
@@ -69,12 +68,7 @@ export class RegisterComponent implements OnInit {
   }
 
   get passwordsMatch() {
-    console.log(this.registerForm.value.password);
-    console.log(this.registerForm.value.passwordConfirm);
-    console.log(
-      this.registerForm.value.password ==
-        this.registerForm.value.passwordConfirm
-    );
+
     return (
       this.registerForm.value.password ==
       this.registerForm.value.passwordConfirm

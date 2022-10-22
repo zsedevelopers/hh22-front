@@ -34,9 +34,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(requestData).subscribe({
       error: (error) => {
-        console.log(error.status);
-        if (error.status == 401) {
-          console.log('a')
+        if (error.status == 401 || error.status == 404) {
           this.errorMessage = 'niepoprawne dane logowania';
         }
       },

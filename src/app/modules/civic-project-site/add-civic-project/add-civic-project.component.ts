@@ -128,25 +128,17 @@ export class AddCivicProjectComponent implements OnInit {
   }
 
   onFormSubmit() {
-    console.log(this.userData);
-    console.log('form:');
-    console.log(this.addProjectForm.value);
+
     if (!this.authService.isLogged()) {
-      console.warn(`you're not logged in`);
       return;
     }
 
     if (this.addProjectForm.invalid) {
-      console.warn('invalid form input');
       return;
     }
 
     const formData = this.addProjectForm.value;
 
-    // if (formData.city?.toUpperCase() != this.userData?.city.toUpperCase()) {
-    //   console.warn(`input city doesn't match user's city`);
-    //   return;
-    // }
 
     const data: AddCivilProjectRequest = {
       title: formData.title!,

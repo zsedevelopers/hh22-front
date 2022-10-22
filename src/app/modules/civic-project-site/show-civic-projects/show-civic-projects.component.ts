@@ -62,7 +62,6 @@ export class ShowCivicProjectsComponent implements OnInit {
 
   isLiked():boolean{
     if(this.currentUser==null){
-      console.log('niezalogowany')
       return true;
     }
     for(let i=0;i<this.projects.length;i++){
@@ -101,8 +100,6 @@ export class ShowCivicProjectsComponent implements OnInit {
     if(this.authService.isLogged()){
       this.authService.getUserData().subscribe(user=>{
         this.currentUser = user;
-        console.log(this.currentUser);
-        console.log(this.isLiked())
       })
 
     }
