@@ -15,6 +15,7 @@ import { DetailsContainerComponent } from './details-container/details-container
 import { DetailsDriverLicenceComponent } from './details-driver-licence/details-driver-licence.component';
 import { DetailsPassportComponent } from './details-passport/details-passport.component';
 import { DetailsIdentityCardComponent } from './details-identity-card/details-identity-card.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { DetailsIdentityCardComponent } from './details-identity-card/details-id
     MatInputModule,
     MatSelectModule,
     ReactiveFormsModule,
+    MatDialogModule
   ],
 })
 export class DigitalDocumentSiteModule {}

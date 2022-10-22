@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddAdminPanelComponent } from './add-admin-panel/add-admin-panel.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AdminPanelContainerComponent,
@@ -26,6 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
     ReactiveFormsModule,
     MatTabsModule,
     MatSelectModule,
+    MatDialogModule
   ],
 })
 export class AdminPanelModule {}

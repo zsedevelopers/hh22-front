@@ -15,6 +15,8 @@ import AddEstimateDto from '../../../core/models/civil projects/add-estimate-dto
 import UserDto from '../../../core/models/common/user-dto';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupDialogComponent } from 'src/app/popup-dialog/popup-dialog.component';
 
 @Component({
   selector: 'app-add-civic-project',
@@ -71,17 +73,27 @@ export class AddCivicProjectComponent implements OnInit {
     private civilProjectService: CivilProjectService,
     private authService: AuthService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) {}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PopupDialogComponent, {
+      backdropClass: 'dialog-backdrop',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      this.router.navigate(['/']);
+    });
+  }
 
   ngOnInit(): void {
     this.authService
       .getUserData()
       .pipe(
         catchError((err) => {
-          alert('you have to be logged in to access this feature');
-          this.router.navigate(['/'])
-          
+          // alert('you have to be logged in to access this feature');
+          // this.router.navigate(['/'])
+          this.openDialog();
           return throwError(err);
         })
       )
@@ -128,7 +140,6 @@ export class AddCivicProjectComponent implements OnInit {
   }
 
   onFormSubmit() {
-
     if (!this.authService.isLogged()) {
       return;
     }
@@ -138,7 +149,6 @@ export class AddCivicProjectComponent implements OnInit {
     }
 
     const formData = this.addProjectForm.value;
-
 
     const data: AddCivilProjectRequest = {
       title: formData.title!,

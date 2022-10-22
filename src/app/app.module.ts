@@ -11,9 +11,11 @@ import { CivicProjectSiteModule } from './modules/civic-project-site/civic-proje
 import { DigitalDocumentSiteModule } from './modules/digital-document-site/digital-document-site.module';
 import { MaterialModule } from './modules/material/material.module';
 import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { PopupDialogComponent } from './popup-dialog/popup-dialog.component';
+import { NotAnAdminDialogComponent } from './not-an-admin-dialog/not-an-admin-dialog.component'; 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PopupDialogComponent, NotAnAdminDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,7 +26,8 @@ import { AdminPanelModule } from './modules/admin-panel/admin-panel.module';
     CivicProjectSiteModule,
     DigitalDocumentSiteModule,
     MaterialModule,
-    AdminPanelModule
+    AdminPanelModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
