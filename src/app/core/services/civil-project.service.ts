@@ -17,7 +17,6 @@ export class CivilProjectService {
   addCivilProject(
     data: AddCivilProjectRequest
   ): Observable<HttpResponse<null>> {
-    console.log('nietoperz');
     return this.apiService.addCivilProject(data, this.authService.getJwt()!);
   }
   getAllCivilProjects(): Observable<CivilProjectDto[]> {
@@ -25,7 +24,6 @@ export class CivilProjectService {
   }
 
   getCivilProjectsByCity(city: string): Observable<CivilProjectDto[]> {
-    // console.log('szczur');
     return this.apiService.getCivilProjectsByCity(city);
   }
 

@@ -48,7 +48,6 @@ export class CivicProjectPanelComponent implements OnInit {
   }
 
   onVerifyProject(title: string) {
-    // console.log('zweryfikowano projekt ' + title);
     this.civilProjectService.verifyCivilProject(title).subscribe(() => {
       this.fetchCivilProjects();
       this.filterProjects();

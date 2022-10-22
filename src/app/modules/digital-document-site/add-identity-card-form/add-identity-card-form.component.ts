@@ -74,11 +74,9 @@ export class AddIdentityCardFormComponent implements OnInit {
 
   submitForm() {
     if (!this.authService.isLogged()) {
-      console.warn('you have to log in');
       return;
     }
     if (this.addIdForm.invalid) {
-      console.warn('invalid form data');
       return;
     }
 
@@ -117,38 +115,8 @@ export class AddIdentityCardFormComponent implements OnInit {
     this.addIdWithWalletCheck(data);
   }
 
-  dummySubmit() {
-    if (!this.authService.isLogged()) {
-      console.warn('you have to log in');
-      return;
-    }
-
-    const data: CreateIdentityCardDto = {
-      picture:
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg/220px-Prezydent_Rzeczypospolitej_Polskiej_Andrzej_Duda.jpg',
-      frontOfDocumentImage: 'a',
-      backOfDocumentImage: 'a',
-      firstName: this.userData!.firstName!,
-      secondName: 'dobrze',
-      surname: this.userData!.surname!,
-      nationality: 'arabia saudyjska',
-      documentNumber: '123456',
-      expiryDate: new Date(Date.now()),
-      birthDate: new Date(Date.now()),
-      sex: Sex.MAN,
-      CAN: null,
-      placeOfBirth: 'mozambik',
-      pesel: this.userData?.pesel!,
-      familyName: this.userData?.surname!,
-      motherName: 'ewa',
-      fatherName: 'adam',
-      issuingAuthority: 'IDzD',
-      dateOfIssue: new Date(Date.now()),
-    };
-    this.addIdWithWalletCheck(data);
-  }
+  
   addIdWithWalletCheck(data: CreateIdentityCardDto) {
-    console.log(this.wallet);
     if (this.wallet != null) {
       this.digitalDocumentService.addIdentityCard(data).subscribe(() => {
         this.router.navigate(['/wallet/showWallet']);
