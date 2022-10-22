@@ -2,11 +2,11 @@
 
 <mat-grid-list  cols="15" [rowHeight]="height/150" gutterSize="0">
   <mat-grid-tile [rowspan]="60" [colspan]="15"><div class="maintext">E=obywatel to system w którym obywatel moze znależć
-    potrzebne mu  informacje uurzędowe i administracyjne
+    potrzebne mu  informacje urzędowe i administracyjne
   </div></mat-grid-tile>
   <mat-grid-tile [rowspan]="40" [colspan]="2"></mat-grid-tile>
 
-  <mat-grid-tile [style.overflow]="'visible'" [rowspan]="43" [colspan]="4">
+  <mat-grid-tile class="onhover" [style.overflow]="'visible'" [rowspan]="43" [colspan]="4">
     <mat-card style="min-height: 330px;z-index: 100" class="dark" routerLink="civicProject/show">
       <mat-card-title [style.margin-bottom]="'20px'">Budżet obywatelski</mat-card-title>
       <mat-card-content [style.font-size]="'18px'">
@@ -21,7 +21,7 @@
 
   </mat-grid-tile>
 
-  <mat-grid-tile routerLink="wallet/showWallet" [style.overflow]="'visible'" [rowspan]="43" [colspan]="4">
+  <mat-grid-tile class="onhover" routerLink="wallet/showWallet" [style.overflow]="'visible'" [rowspan]="43" [colspan]="4">
     <mat-card style="min-height: 330px;z-index: 100" class="dark">
       <mat-card-title>Portfel na E-dokumenty</mat-card-title>
       <mat-card-content [style.font-size]="'18px'">
