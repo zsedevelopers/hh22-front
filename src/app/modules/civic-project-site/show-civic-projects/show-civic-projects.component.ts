@@ -6,6 +6,7 @@ import { ProjectCategory } from '../../../core/models/civil projects/project-cat
 import { Icons } from '../../../core/models/civil projects/icons';
 import { CivilProjectService } from '../../../core/services/civil-project.service';
 import UserDto from '../../../core/models/common/user-dto';
+import { CivilProjectStatus } from 'src/app/core/models/civil projects/civil-project-status';
 
 @Component({
   selector: 'app-show-civic-projects',
@@ -83,6 +84,13 @@ export class ShowCivicProjectsComponent implements OnInit {
 
   loadProjects(city: string) {
     this.civilProjectService.getCivilProjectsByCity(city).subscribe((data) => {
+      data = data.filter(
+        (p) =>
+          p.status ==
+          (CivilProjectStatus[
+            CivilProjectStatus.VERIFIED
+          ] as unknown as CivilProjectStatus)
+      );
       if (this.currentUser != null) {
         data.forEach((p) => {
           if (
@@ -140,6 +148,13 @@ export class ShowCivicProjectsComponent implements OnInit {
   ngOnInit(): void {
     // this.authService.getUserData().subscribe(user=>{this.currentUser = user})
     this.civilProjectService.getAllCivilProjects().subscribe((data) => {
+      data = data.filter(
+        (p) =>
+          p.status ==
+          (CivilProjectStatus[
+            CivilProjectStatus.VERIFIED
+          ] as unknown as CivilProjectStatus)
+      );
       const uniqueCities = [...new Set(data.map((p) => p.city))];
       this.cities = uniqueCities;
 
