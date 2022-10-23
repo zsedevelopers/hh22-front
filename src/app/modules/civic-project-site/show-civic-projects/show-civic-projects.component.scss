@@ -98,7 +98,7 @@
 .showButton{
   width: 334px;
   height: 51px;
-  border-bottom-left-radius: 7px;
+  border-bottom-left-radius: 7px!important;
   border-radius:0;
   margin: 0!important;
   padding: 0!important;
@@ -108,7 +108,7 @@
   height: 51px;
   margin: 0!important;
   border-radius:0;
-  border-bottom-right-radius: 7px;
+  border-bottom-right-radius: 7px!important;
   padding: 0!important;
 }
 .disabled{

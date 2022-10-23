@@ -9,7 +9,7 @@
     </mat-form-field>
 
     <div class="headerText">{{selectedCity.charAt(0).toUpperCase()+selectedCity.toLowerCase().slice(1)}}</div>
-    
+
     <mat-form-field appearance="standard">
       <mat-label class="categoryChoose">Kategoria</mat-label>
       <mat-select [(ngModel)]="selectedCategory" (selectionChange)="onCitySelectChange()">
@@ -104,7 +104,7 @@
 
     <mat-card-actions class="buttons">
       <button class="showButton" mat-raised-button color="primary" (click)="showProject(i)">Zobacz szczegóły</button>
-      <button [ngClass]="isLiked()?'disabled':''" class="showButton"  mat-raised-button color="warn" (click)="likeProject(project.title)">+</button>
+      <button [ngClass]="isLiked()?'disabled':''" class="voteButton"  mat-raised-button color="warn" (click)="likeProject(project.title)">+</button>
     </mat-card-actions>
   </mat-card>
 </div>
