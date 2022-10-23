@@ -62,7 +62,9 @@ export class ShowCivicProjectsComponent implements OnInit {
     if (!this.authService.isLogged()) {
       return;
     }
-    this.civilProjectService.likeCivilProject(title).subscribe();
+    this.civilProjectService.likeCivilProject(title).subscribe(() => {
+      this.loadProjects(this.selectedCity);
+    });
   }
 
   isLiked(): boolean {
